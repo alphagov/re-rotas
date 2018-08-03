@@ -1,0 +1,11 @@
+<h1>
+  <%= @team.name %>
+</h1>
+
+<% @team.calendars.each do |calendar| %>
+  <div>
+    <%= link_to pagerduty_calendar_path(calendar) do %>
+      <%= calendar.name %>
+    <% end %>
+  </div>
+<% end %>
