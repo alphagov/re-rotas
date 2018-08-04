@@ -9,7 +9,7 @@ class TeamsController < ApplicationController
     @events_by_calendar = {}
     @team_members = []
 
-    @team.calendars.each do |calendar|
+    @team.pagerduty_calendars.each do |calendar|
       events = calendar.events.select { |e| e.date >= Date.today }
 
       @team_members += events.flat_map(&:email)

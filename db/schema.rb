@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_03_225322) do
+ActiveRecord::Schema.define(version: 2018_08_04_123150) do
 
-  create_table "pager_duty_calendars", force: :cascade do |t|
+  create_table "manual_calendars", id: false, force: :cascade do |t|
+    t.string "id"
+    t.string "name"
+    t.integer "team_id"
+    t.string "clock_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_manual_calendars_on_team_id"
+  end
+
+  create_table "pager_duty_calendars", id: false, force: :cascade do |t|
+    t.string "id"
     t.integer "team_id"
     t.string "name"
     t.string "url"

@@ -1,4 +1,4 @@
-<h1 class="govuk-heading-xl">PagerDuty Calendars</h1>
+<h1 class="govuk-heading-xl">Calendars</h1>
 
 <% @calendars.group_by(&:team).each do |team, calendars| %>
   <div>
@@ -6,7 +6,7 @@
     <ul class="govuk-list govuk-list--bullet">
       <% calendars.each do |cal| %>
         <li>
-          <%= link_to pagerduty_calendar_path(cal), class: 'govuk-link' do %>
+          <%= link_to calendar_path(cal), class: 'govuk-link' do %>
             <%= cal.name %>
           <% end %>
         </li>

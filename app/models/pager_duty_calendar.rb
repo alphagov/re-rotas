@@ -1,7 +1,10 @@
 require 'http'
 require 'icalendar'
+require 'securerandom'
 
 class PagerDutyCalendar < ApplicationRecord
+  self.primary_key = 'id'
+
   belongs_to :team
 
   validates :name, presence: true
@@ -29,5 +32,11 @@ class PagerDutyCalendar < ApplicationRecord
           end
         end
       end
+  end
+
+  before_create :generate_pd_id
+
+  def generate_pd_id
+    self.id = "pagerduty:#{SecureRandom.uuid}"
   end
 end
