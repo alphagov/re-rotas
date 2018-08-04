@@ -1,11 +1,16 @@
-<% @calendars.each do |calendar| %>
+<h1 class="govuk-heading-xl">PagerDuty Calendars</h1>
+
+<% @calendars.group_by(&:team).each do |team, calendars| %>
   <div>
-    <%= link_to team_path(calendar.team) do %>
-      <%= calendar.team.name %>
-    <% end %>
-    /
-    <%= link_to pagerduty_calendar_path(calendar) do %>
-      <%= calendar.name %>
-    <% end %>
+    <h2 class="govuk-heading-l"><%= team.name %></h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <% calendars.each do |cal| %>
+        <li>
+          <%= link_to pagerduty_calendar_path(cal), class: 'govuk-link' do %>
+            <%= cal.name %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 <% end %>

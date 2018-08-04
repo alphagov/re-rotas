@@ -1,49 +1,62 @@
-<h1>
+<h1 class="govuk-heading-xl">
   <%= @team.name %>
 </h1>
 
 <div>
-  <h2>Calendars</h2>
-  <% @team.calendars.each do |calendar| %>
-    <div>
-      <%= link_to pagerduty_calendar_path(calendar) do %>
-        <%= calendar.name %>
-      <% end %>
-    </div>
-  <% end %>
+  <h2 class="govuk-heading-l">Calendars</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <% @team.calendars.each do |calendar| %>
+      <li>
+        <%= link_to pagerduty_calendar_path(calendar), class: 'govuk-link' do %>
+          <%= calendar.name %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
 <div>
-  <h2>Team members</h2>
-  <% @team_members.each do |email| %>
-    <div>
-      <%= link_to "mailto:#{email}" do %>
-        <%= email %>
-      <% end %>
-    </div>
-  <% end %>
+  <h2 class="govuk-heading-l">Team members</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <% @team_members.each do |email| %>
+      <li>
+        <%= link_to "mailto:#{email}", class: 'govuk-link' do %>
+          <%= email %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
 <div>
-  <h2>Schedule</h2>
-  <table>
-    <tr>
-      <td>Date</td>
-      <% @team.calendars.each do |team| %>
-        <td><%= team.name %></td>
-      <% end %>
-    </tr>
-    <% @events_by_calendar.each do |date, calendars_and_events| %>
-      <tr>
-        <td>
-          <%= date.strftime '%Y %b %d' %>
-        </td>
+  <h2 class="govuk-heading-l">Schedule</h2>
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header">Date</th>
         <% @team.calendars.each do |team| %>
-          <td>
-            <%= calendars_and_events.fetch(team, []).map { |e| e.email }.join(' ') %>
-          </td>
+          <th class="govuk-table__header"><%= team.name %></th>
         <% end %>
       </tr>
-    <% end %>
+    </thead>
+    <tbody class="govuk-table__body">
+      <% @events_by_calendar.each do |date, calendars_and_events| %>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header">
+            <%= date.strftime '%Y %b %d' %>
+          </th>
+          <% @team.calendars.each do |team| %>
+            <td class="govuk-table__cell">
+              <% calendars_and_events.fetch(team, []).map { |e| e.email }.each_with_index do |email, index| %>
+                <% unless index.zero? %><br><% end %>
+                <%= link_to "mailto:#{email}", class: 'govuk-link' do %>
+                  <%= gds_email_fmt(email) %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>

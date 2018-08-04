@@ -1,34 +1,49 @@
-<div>
-  <h1>
-    <%= link_to team_path(@calendar.team) do %>
-      <%= @calendar.team.name %>
-    <% end %>
-    /
-    <%= @calendar.name %>
-  </h1>
-</div>
-
-<div>
-  <h2>Calendar team members</h2>
-  <% @team_members.each do |email| %>
-    <div>
-      <%= link_to "mailto:#{email}" do %>
-        <%= email %>
-      <% end %>
-    </div>
+<h1 class="govuk-heading-xl">
+  <%= link_to team_path(@calendar.team), class: 'govuk-link' do %>
+    <%= @calendar.team.name %>
   <% end %>
-</div>
+  /
+  <%= @calendar.name %>
+</h1>
 
 <div>
-  <h2>Schedule</h2>
-  <% @events_by_date.each do |date, events| %>
-    <% events.each do |event| %>
-      <div>
-        <%= event.date.strftime '%Y %b %d' %>
-        <%= link_to "mailto:#{event.email}" do %>
-          <%= event.email %>
+  <h2 class="govuk-heading-l">Calendar members</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <% @team_members.each do |email| %>
+      <li>
+        <%= link_to "mailto:#{email}", class: 'govuk-link' do %>
+          <%= email %>
         <% end %>
-      </div>
+      </li>
     <% end %>
-  <% end %>
+  </ul>
+</div>
+
+<div>
+  <h2 class="govuk-heading-l">Schedule</h2>
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header">Date</th>
+        <th class="govuk-table__header">Name</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <% @events_by_date.each do |date, events| %>
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header">
+            <%= date.strftime '%Y %b %d' %>
+          </th>
+          <td class="govuk-table__cell">
+            <% events.map { |e| e.email }.each_with_index do |email, index| %>
+              <% unless index.zero? %><br><% end %>
+              <%= link_to "mailto:#{email}", class: 'govuk-link' do %>
+                <%= gds_email_fmt(email) %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

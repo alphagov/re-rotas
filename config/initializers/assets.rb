@@ -12,3 +12,11 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+# This is to get govuk-frontend fonts
+Rails.application.config.assets.paths << Rails.root.join(
+  'node_modules/govuk-frontend/assets/'
+)
+
+# Rails needs to know about the file extensions for our fonts
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)\z/

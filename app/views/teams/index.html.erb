@@ -1,7 +1,11 @@
-<h1>Teams</h1>
+<h1 class="govuk-heading-xl">Teams</h1>
 
-<% @teams.each do |team| %>
-  <%= link_to team_path(team) do %>
-    <%= team.name %> (<%= team.calendars.length %>)
+<ul class="govuk-list govuk-list--bullet">
+  <% @teams.each do |team| %>
+    <li>
+    <%= link_to team_path(team), class: 'govuk-link' do %>
+      <%= team.name %> (<%= team.calendars.length %>)
+    <% end %>
+    </li>
   <% end %>
-<% end %>
+</ul>

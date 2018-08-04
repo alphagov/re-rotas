@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GdsWhoIsOnCall</title>
+    <title>GDS Who Is On Call</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,7 +9,14 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="govuk-template__body app-body-class">
+    <%= render partial: 'layouts/header' %>
+
+    <div class="govuk-width-container">
+      <%= render partial: 'layouts/phase' %>
+      <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>
