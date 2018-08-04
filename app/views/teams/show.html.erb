@@ -2,10 +2,48 @@
   <%= @team.name %>
 </h1>
 
-<% @team.calendars.each do |calendar| %>
-  <div>
-    <%= link_to pagerduty_calendar_path(calendar) do %>
-      <%= calendar.name %>
+<div>
+  <h2>Calendars</h2>
+  <% @team.calendars.each do |calendar| %>
+    <div>
+      <%= link_to pagerduty_calendar_path(calendar) do %>
+        <%= calendar.name %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <h2>Team members</h2>
+  <% @team_members.each do |email| %>
+    <div>
+      <%= link_to "mailto:#{email}" do %>
+        <%= email %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div>
+  <h2>Schedule</h2>
+  <table>
+    <tr>
+      <td>Date</td>
+      <% @team.calendars.each do |team| %>
+        <td><%= team.name %></td>
+      <% end %>
+    </tr>
+    <% @events_by_calendar.each do |date, calendars_and_events| %>
+      <tr>
+        <td>
+          <%= date.strftime '%Y %b %d' %>
+        </td>
+        <% @team.calendars.each do |team| %>
+          <td>
+            <%= calendars_and_events.fetch(team, []).map { |e| e.email }.join(' ') %>
+          </td>
+        <% end %>
+      </tr>
     <% end %>
-  </div>
-<% end %>
+  </table>
+</div>

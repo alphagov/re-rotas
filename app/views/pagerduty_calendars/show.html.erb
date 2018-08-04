@@ -1,7 +1,34 @@
 <div>
-  <%= link_to team_path(@calendar.team) do %>
-    <%= @calendar.team.name %>
+  <h1>
+    <%= link_to team_path(@calendar.team) do %>
+      <%= @calendar.team.name %>
+    <% end %>
+    /
+    <%= @calendar.name %>
+  </h1>
+</div>
+
+<div>
+  <h2>Calendar team members</h2>
+  <% @team_members.each do |email| %>
+    <div>
+      <%= link_to "mailto:#{email}" do %>
+        <%= email %>
+      <% end %>
+    </div>
   <% end %>
-  /
-  <%= @calendar.name %>
+</div>
+
+<div>
+  <h2>Schedule</h2>
+  <% @events_by_date.each do |date, events| %>
+    <% events.each do |event| %>
+      <div>
+        <%= event.date.strftime '%Y %b %d' %>
+        <%= link_to "mailto:#{event.email}" do %>
+          <%= event.email %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

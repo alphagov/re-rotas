@@ -18,13 +18,15 @@ class PagerDutyCalendar < ApplicationRecord
     calendar
       .flat_map(&:events)
       .flat_map do |icalendar_event|
-        (icalendar_event.dtstart..icalendar_event.dtend).map do |date|
-          WhoIsOnCall::Event.new(
-            @team,
-            self,
-            icalendar_event.attendee.to_s,
-            date
-          )
+        (icalendar_event.dtstart..icalendar_event.dtend).flat_map do |date|
+          icalendar_event.attendee.flat_map do |attendee|
+            WhoIsOnCall::Event.new(
+              @team,
+              self,
+              attendee.to_s,
+              date.to_date
+            )
+          end
         end
       end
   end
