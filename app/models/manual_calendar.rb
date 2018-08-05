@@ -5,6 +5,10 @@ class ManualCalendar < ApplicationRecord
 
   belongs_to :team
 
+  def person_day_events
+    []
+  end
+
   def events
     []
   end

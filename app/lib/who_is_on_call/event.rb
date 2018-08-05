@@ -1,13 +1,14 @@
 module WhoIsOnCall
   class Event
 
-    attr_reader :team, :calendar, :email, :date
+    attr_reader :team, :calendar, :emails, :start_date, :end_date
 
-    def initialize(team, calendar, email, date)
-      @team = team
-      @calendar = calendar
-      @email = email
-      @date = date
+    def initialize(team, calendar, emails, start_date, end_date)
+      @team       = team
+      @calendar   = calendar
+      @emails     = emails
+      @start_date = start_date
+      @end_date   = end_date
     end
   end
 end

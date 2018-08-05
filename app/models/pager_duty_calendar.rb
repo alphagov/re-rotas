@@ -12,25 +12,31 @@ class PagerDutyCalendar < ApplicationRecord
 
   validates :clock_type,
             presence: true,
-            inclusion: { in: %w( in_hours out_of_hours in_and_out_of_hours ) }
+            inclusion: { in: %w[in_hours out_of_hours in_and_out_of_hours] }
+
+  def person_day_events
+    # returns a flat list of PersonDayEvent
+    # i.e. <team, calendar, email, date>
+    events.flat_map do |event|
+      (event.start_date..event.end_date).flat_map do |date|
+        event.emails.flat_map do |email|
+          WhoIsOnCall::PersonDayEvent.new(event.team, self, email, date)
+        end
+      end
+    end
+  end
 
   def events
     contents  = HTTP.get(url).body
-    file      = StringIO.new(contents)
-    calendar  = Icalendar::Calendar.parse(file)
+    calendar  = Icalendar::Calendar.parse(StringIO.new(contents))
+
     calendar
       .flat_map(&:events)
-      .flat_map do |icalendar_event|
-        (icalendar_event.dtstart..icalendar_event.dtend).flat_map do |date|
-          icalendar_event.attendee.flat_map do |attendee|
-            WhoIsOnCall::Event.new(
-              @team,
-              self,
-              attendee.to_s,
-              date.to_date
-            )
-          end
-        end
+      .map do |icalendar_event|
+        start_date = icalendar_event.dtstart
+        end_date   = icalendar_event.dtend
+        emails     = icalendar_event.attendee.map(&:to_s)
+        WhoIsOnCall::Event.new(team, self, emails, start_date, end_date)
       end
   end
 

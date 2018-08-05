@@ -12,10 +12,10 @@ class CalendarsController < ApplicationController
       @calendar = ManualCalendar.find(id)
     end
 
-    events = @calendar.events
+    person_day_events = @calendar.person_day_events
 
-    @team_members = events.flat_map(&:email).uniq
-    @events_by_date = events
+    @team_members = person_day_events.flat_map(&:email).uniq
+    @events_by_date = person_day_events
       .select { |e| e.date >= Date.today }
       .group_by(&:date)
   end
