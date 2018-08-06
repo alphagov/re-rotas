@@ -47,6 +47,16 @@
               Annual leave
             <% end %>
           </li>
+          <li class="govuk-header__navigation-item">
+            <%= link_to('#', class: 'govuk-header__link') do %>
+              Sign out
+            <% end %>
+          </li>
+        </ul>
+        <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
+          <li class="govuk-header__navigation-item">
+            <%= current_user %>
+          </li>
         </ul>
       </nav>
     </div>

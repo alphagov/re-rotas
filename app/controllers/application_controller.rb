@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :gds_email_fmt
-  helper_method :gds_email_fmt
+  helper_method :current_user
 
   private
 
