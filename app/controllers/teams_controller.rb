@@ -20,6 +20,12 @@ class TeamsController < ApplicationController
       end
     end
 
+    unless params[:all]
+      @events_by_calendar = @events_by_calendar.reject do |d, _|
+        d < Date.today
+      end
+    end
+
     @team_members = @team_members.uniq
   end
 
