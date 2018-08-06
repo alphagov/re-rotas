@@ -21,7 +21,7 @@
     <% @team_members.each do |email| %>
       <li>
         <%= link_to "mailto:#{email}", class: 'govuk-link' do %>
-          <%= email %>
+          <%= gds_email_fmt(email) %>
         <% end %>
       </li>
     <% end %>

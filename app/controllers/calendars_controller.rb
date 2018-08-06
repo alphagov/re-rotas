@@ -16,7 +16,6 @@ class CalendarsController < ApplicationController
 
     @team_members = person_day_events.flat_map(&:email).uniq
     @events_by_date = person_day_events
-      .select { |e| e.date >= Date.today }
       .group_by(&:date)
   end
 end

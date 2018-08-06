@@ -7,12 +7,20 @@
 </h1>
 
 <div>
+  <% if @calendar.events_editable? %>
+    <%= link_to manual_calendar_events_path(@calendar.id), class: 'govuk-button' do %>
+      View, add, and edit events
+    <% end %>
+  <% end %>
+</div>
+
+<div>
   <h2 class="govuk-heading-l">Calendar members</h2>
   <ul class="govuk-list govuk-list--bullet">
     <% @team_members.each do |email| %>
       <li>
         <%= link_to "mailto:#{email}", class: 'govuk-link' do %>
-          <%= email %>
+          <%= gds_email_fmt(email) %>
         <% end %>
       </li>
     <% end %>

@@ -1,0 +1,49 @@
+<h1 class="govuk-heading-xl">
+  <%= @calendar.team.name %>
+  /
+  <%= @calendar.name %>
+</h1>
+
+<div>
+  <%= link_to new_manual_calendar_event_path(@calendar.id), class: 'govuk-button' do %>
+    Add new event
+  <% end %>
+</div>
+
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header">Start date</th>
+      <th class="govuk-table__header">End date</th>
+      <th class="govuk-table__header">Duration</th>
+      <th class="govuk-table__header">People</th>
+      <th class="govuk-table__header"></th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <% @events.each do |event| %>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <%= event.start_date %>
+        </td>
+        <td class="govuk-table__cell">
+          <%= event.end_date %>
+        </td>
+        <td class="govuk-table__cell">
+          <%= (event.end_date - event.start_date).to_i %> days
+        </td>
+        <td class="govuk-table__cell">
+          <% event.emails.each_with_index do |email, index| %>
+            <% unless index.zero? %><br><%end %>
+            <%= gds_email_fmt(email) %>
+          <% end %>
+        </td>
+        <td class="govuk-table__cell">
+          <%= link_to edit_manual_calendar_event_path(@calendar.id, event.id), class: 'govuk-button' do %>
+            Edit
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

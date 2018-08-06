@@ -1,10 +1,9 @@
 module WhoIsOnCall
   class PersonDayEvent
 
-    attr_reader :team, :calendar, :email, :date
+    attr_reader :calendar, :email, :date
 
-    def initialize(team, calendar, email, date)
-      @team     = team
+    def initialize(calendar, email, date)
       @calendar = calendar
       @email    = email
       @date     = date

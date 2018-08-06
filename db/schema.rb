@@ -10,12 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_04_123150) do
+ActiveRecord::Schema.define(version: 2018_08_05_223128) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "manual_calendar_events", force: :cascade do |t|
+    t.string "manual_calendar_id"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "emails", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "manual_calendars", id: false, force: :cascade do |t|
     t.string "id"
     t.string "name"
-    t.integer "team_id"
+    t.bigint "team_id"
     t.string "clock_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -24,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_08_04_123150) do
 
   create_table "pager_duty_calendars", id: false, force: :cascade do |t|
     t.string "id"
-    t.integer "team_id"
+    t.bigint "team_id"
     t.string "name"
     t.string "url"
     t.string "clock_type"
@@ -39,4 +51,6 @@ ActiveRecord::Schema.define(version: 2018_08_04_123150) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "manual_calendars", "teams"
+  add_foreign_key "pager_duty_calendars", "teams"
 end

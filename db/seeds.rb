@@ -7,7 +7,37 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Team.create(name: 'GOV.UK')
-Team.create(name: 'GOV.UK Verify')
+verify = Team.create(name: 'GOV.UK Verify')
 Team.create(name: 'GOV.UK Pay')
 Team.create(name: 'GOV.UK PaaS')
 Team.create(name: 'RE Observe')
+
+verify_escalation = ManualCalendar.create(
+  name: 'Escalation',
+  team: verify,
+  clock_type: 'in_and_out_of_hours'
+)
+
+verify_primary = ManualCalendar.create(
+  name: 'Primary',
+  team: verify,
+  clock_type: 'out_of_hours'
+)
+
+ManualCalendarEvent.create(
+  manual_calendar: verify_escalation,
+  emails: [
+    'toby.lornewelch-richards@digital.cabinet-office.gov.uk',
+  ],
+  start_date: Date.today,
+  end_date: Date.today + 7
+)
+
+ManualCalendarEvent.create(
+  manual_calendar: verify_primary,
+  emails: [
+    'toby.lornewelch-richards@digital.cabinet-office.gov.uk',
+  ],
+  start_date: Date.today + 4,
+  end_date: Date.today + 14
+)
