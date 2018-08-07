@@ -1,12 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :gds_email_fmt
-  helper_method :current_user
 
   private
-
-  def current_user
-    'toby.lornewelch-richards@digital.cabinet-office.gov.uk'
-  end
 
   def gds_email_fmt(email)
     return email unless email.end_with?('digital.cabinet-office.gov.uk')
@@ -17,9 +12,19 @@ class ApplicationController < ActionController::Base
       .map(&:capitalize)
       .join(' ')
 
-    return short unless email.casecmp(current_user).zero?
+    return short unless email.casecmp(google_auth_data.email).zero?
 
     '<strong class="govuk-tag">You</strong>'.html_safe
+  end
+
+  before_action :maybe_redirect_if_not_google_authenticated
+
+  def maybe_redirect_if_not_google_authenticated
+    puts params
+
+    unless params[:controller] == 'pages' && params[:action] == 'home'
+      redirect_if_not_google_authenticated unless ENV.fetch('DISABLE_AUTH', false)
+    end
   end
 
 end

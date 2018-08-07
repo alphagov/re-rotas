@@ -17,5 +17,16 @@ module GdsWhoIsOnCall
     # the framework and any gems in your application.
     #
     config.autoload_paths << config.root.join('lib')
+
+    unless ENV['DISABLE_AUTH']
+      SimpleGoogleAuth.configure do |config|
+        config.client_id     = ENV.fetch('CLIENT_ID')
+        config.client_secret = ENV.fetch('CLIENT_SECRET')
+        config.redirect_uri  = 'http://localhost:3000/google-callback'
+        config.authenticate  = lambda do |data|
+          data.email.ends_with?('@digital.cabinet-office.gov.uk')
+        end
+      end
+    end
   end
 end

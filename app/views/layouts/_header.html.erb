@@ -47,16 +47,20 @@
               Annual leave
             <% end %>
           </li>
-          <li class="govuk-header__navigation-item">
-            <%= link_to('#', class: 'govuk-header__link') do %>
-              Sign out
-            <% end %>
-          </li>
+          <% if google_auth_data %>
+            <li class="govuk-header__navigation-item">
+              <%= link_to(sign_out_path, class: 'govuk-header__link', method: :delete) do %>
+                Sign out
+              <% end %>
+            </li>
+          <% end %>
         </ul>
         <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
-          <li class="govuk-header__navigation-item">
-            <%= current_user %>
-          </li>
+          <% if google_auth_data %>
+            <li class="govuk-header__navigation-item">
+              <%= google_auth_data.email %>
+            </li>
+          <% end %>
         </ul>
       </nav>
     </div>
