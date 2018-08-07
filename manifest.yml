@@ -1,0 +1,6 @@
+---
+applications:
+  - name: oncall
+    buildpack: ruby_buildpack
+    services:
+      - oncall

@@ -4,5 +4,6 @@ class PagesController < ApplicationController
 
   def sign_out
     session.clear
+    redirect_to root_path
   end
 end
