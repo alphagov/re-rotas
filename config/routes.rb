@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :teams, only: %i( index show new create )
   resources :manual_calendars, only: %i() do
     resources :events,
-              only: %i( index new create edit update ),
+              only: %i( index new create edit update destroy ),
               controller: :manual_calendar_events
   end
 end

@@ -1,2 +1,44 @@
-<h1>ManualEventsController#new</h1>
-<p>Find me in app/views/manual_events_controller/new.html.erb</p>
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to teams_path, class: 'govuk-breadcrumbs__link' do %>
+        Teams
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to team_path(@calendar.team), class: 'govuk-breadcrumbs__link' do %>
+        <%= @calendar.team.name %>
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to calendar_path(@calendar), class: 'govuk-breadcrumbs__link' do %>
+        <%= @calendar.name %>
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to manual_calendar_events_path(@calendar), class: 'govuk-breadcrumbs__link' do %>
+        Events
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to new_manual_calendar_event_path(@calendar), class: 'govuk-breadcrumbs__link' do %>
+        Add event
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">
+  Add event
+</h1>
+
+<%= form_tag action: :create, method: :post do %>
+  <%= render partial: 'form' %>
+
+  <div class="govuk-form-group">
+    <%= submit_tag 'Create event', class: 'govuk-button' %>
+  </div>
+<% end %>

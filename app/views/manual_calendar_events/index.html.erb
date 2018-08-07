@@ -1,7 +1,33 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to teams_path, class: 'govuk-breadcrumbs__link' do %>
+        Teams
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to team_path(@calendar.team), class: 'govuk-breadcrumbs__link' do %>
+        <%= @calendar.team.name %>
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to calendar_path(@calendar), class: 'govuk-breadcrumbs__link' do %>
+        <%= @calendar.name %>
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to manual_calendar_events_path(@calendar), class: 'govuk-breadcrumbs__link' do %>
+        Events
+      <% end %>
+    </li>
+  </ol>
+</div>
+
 <h1 class="govuk-heading-xl">
-  <%= @calendar.team.name %>
-  /
-  <%= @calendar.name %>
+  Events
 </h1>
 
 <div>

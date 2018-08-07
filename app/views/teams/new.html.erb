@@ -20,19 +20,19 @@
   New team
 </h1>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-one-half">
-    <%= form_tag action: :create, method: :post do %>
+<%= form_tag action: :create, method: :post do %>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
       <div class="govuk-form-group">
         <%= label_tag :name, class: 'govuk-label' do %>
           Team name
         <% end %>
         <%= text_field_tag :name, '', class: 'govuk-input' %>
       </div>
-    <% end %>
-
-    <div class="govuk-form-group">
-      <%= submit_tag 'Create team', class: 'govuk-button' %>
     </div>
   </div>
-</div>
+
+  <div class="govuk-form-group">
+    <%= submit_tag 'Create team', class: 'govuk-button' %>
+  </div>
+<% end %>

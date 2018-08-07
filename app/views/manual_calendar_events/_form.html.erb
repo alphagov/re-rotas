@@ -1,0 +1,33 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-quarter">
+    <div class="govuk-form-group">
+      <%= label_tag :start_date, class: 'govuk-label' do %>
+        Start date
+      <% end %>
+      <%= date_field_tag :start_date, @event.start_date, class: 'govuk-input' %>
+    </div>
+  </div>
+
+  <div class="govuk-grid-column-one-quarter">
+    <div class="govuk-form-group">
+      <%= label_tag :end_date, class: 'govuk-label' do %>
+        End date
+      <% end %>
+      <%= date_field_tag :end_date, @event.end_date, class: 'govuk-input' %>
+    </div>
+  </div>
+
+  <div class="govuk-grid-column-one-half">
+    <div class="govuk-form-group">
+      <%= label_tag :end_date, class: 'govuk-label' do %>
+        Emails
+      <% end %>
+      <%= text_area_tag :emails, @event.emails.join("\n"), rows: 3, class: 'govuk-textarea' %>
+      <span class="govuk-hint">
+        One per line
+      </span>
+    </div>
+  </div>
+</div>
+
+<%= hidden_field_tag :manual_calendar_id, @calendar.id %>

@@ -15,7 +15,7 @@ class ManualCalendar < ApplicationRecord
   include WhoIsOnCall::Calendar
 
   def events
-    manual_calendar_events.order(:start_date)
+    manual_calendar_events.order(:start_date).order(:end_date)
   end
 
   def events_editable?
