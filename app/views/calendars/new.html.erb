@@ -1,0 +1,124 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to teams_path, class: 'govuk-breadcrumbs__link' do %>
+        Teams
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to team_path(@team.id), class: 'govuk-breadcrumbs__link' do %>
+        <%= @team.name %>
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to new_calendar_path(team_id: @team.id), class: 'govuk-breadcrumbs__link' do %>
+        New calendar
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">
+  New calendar
+</h1>
+
+<%= form_tag action: :create, method: :post do %>
+
+  <%= hidden_field_tag :team_id, @team.id %>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend">
+        <h3 class="govuk-heading-m">Calendar type</h3>
+      </legend>
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <%= radio_button_tag :type, :manual, true, class: 'govuk-radios__input' %>
+          <%= label_tag :type_manual, class: 'govuk-label govuk-radios__label' do %>
+            Manual calendar
+            <span class="govuk-hint">
+              A manual calendar is managed through this web app.
+            </span>
+          <% end %>
+        </div>
+        <div class="govuk-radios__item">
+          <%= radio_button_tag :type, :pagerduty, false, class: 'govuk-radios__input' %>
+          <%= label_tag :type_pagerduty, class: 'govuk-label govuk-radios__label' do %>
+            PagerDuty calendar
+            <span class="govuk-hint">
+              A PagerDuty calendar is managed through PagerDuty and the events are synced to this app.
+            </span>
+          <% end %>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="govuk-form-group">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend">
+        <h3 class="govuk-heading-m">Calendar clock</h3>
+      </legend>
+      <div class="govuk-radios">
+        <div class="govuk-radios__item">
+          <%= radio_button_tag :clock, :in_hours, true, class: 'govuk-radios__input' %>
+          <%= label_tag :clock_in_hours, class: 'govuk-label govuk-radios__label' do %>
+            In hours
+          <% end %>
+        </div>
+        <div class="govuk-radios__item">
+          <%= radio_button_tag :clock, :out_of_hours, false, class: 'govuk-radios__input' %>
+          <%= label_tag :clock_out_of_hours, class: 'govuk-label govuk-radios__label' do %>
+            Out of hours
+          <% end %>
+        </div>
+        <div class="govuk-radios__item">
+          <%= radio_button_tag :clock, :in_and_out_of_hours, false, class: 'govuk-radios__input' %>
+          <%= label_tag :clock_in_and_out_of_hours, class: 'govuk-label govuk-radios__label' do %>
+            In and out of hours
+          <% end %>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <h3 class="govuk-heading-m">Calendar information</h3>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <div class="govuk-form-group">
+        <%= label_tag :name, class: 'govuk-label' do %>
+          Calendar name
+        <% end %>
+        <%= text_field_tag :name, '', class: 'govuk-input' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <div class="govuk-form-group">
+        <%= label_tag :pagerduty_url, class: 'govuk-label' do %>
+          PagerDuty URL
+          <span class="govuk-hint">
+            This is only necessary for PagerDuty calendars.
+            It can be found by logging into PagerDuty,
+            going to &ldquo;Schedules&rdquo;,
+            finding the schedule you want (e.g. &ldquo;Escalation&rdquo;, etc),
+            clicking &ldquo;Export&rdquo;,
+            right-clicking the iCalendar file for &ldquo;Everyone&rdquo;
+            and clicking &ldquo;Copy Link Address&rdquo;.
+          </span>
+        <% end %>
+        <%= text_field_tag :pagerduty_url, '', class: 'govuk-input' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-form-group">
+    <%= submit_tag 'Create calendar', class: 'govuk-button' %>
+  </div>
+<% end %>

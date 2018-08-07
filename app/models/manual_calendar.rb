@@ -6,10 +6,16 @@ class ManualCalendar < ApplicationRecord
   has_many :manual_calendar_events, class_name: :ManualCalendarEvent
   belongs_to :team
 
+  validates :name, presence: true
+
+  validates :clock_type,
+            presence: true,
+            inclusion: { in: %w[in_hours out_of_hours in_and_out_of_hours] }
+
   include WhoIsOnCall::Calendar
 
   def events
-    manual_calendar_events
+    manual_calendar_events.order(:start_date)
   end
 
   def events_editable?

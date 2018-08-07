@@ -24,4 +24,37 @@ class CalendarsController < ApplicationController
       end
     end
   end
+
+  def new
+    @team = Team.find(params[:team_id])
+  end
+
+  def create
+    team = Team.find(params[:team_id])
+
+    name           = params[:name]
+    type           = params[:type].to_sym
+    clock          = params[:clock]
+    pagerduty_url  = params[:pagerduty_url]
+
+    case type
+    when :manual
+      ManualCalendar.create(
+        team: team,
+        name: name,
+        clock_type: clock,
+      )
+    when :pagerduty
+      PagerDutyCalendar.create(
+        team: team,
+        name: name,
+        url: pagerduty_url,
+        clock_type: clock,
+      )
+    else
+      raise "Unknown calendar type #{type}"
+    end
+
+    redirect_to team_path(team)
+  end
 end

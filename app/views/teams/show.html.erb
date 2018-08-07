@@ -21,6 +21,12 @@
 </h1>
 
 <div>
+  <%= link_to new_calendar_path(team_id: @team.id), class: 'govuk-button' do %>
+    New calendar
+  <% end %>
+</div>
+
+<div>
   <h2 class="govuk-heading-l">Calendars</h2>
   <ul class="govuk-list govuk-list--bullet">
     <% @team.calendars.each do |calendar| %>
