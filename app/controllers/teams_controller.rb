@@ -3,6 +3,14 @@ class TeamsController < ApplicationController
     @teams = Team.all
   end
 
+  def new
+  end
+
+  def create
+    Team.create(name: params[:name])
+    redirect_to teams_path
+  end
+
   def show
     @team = Team.find(params[:id])
 
@@ -27,11 +35,5 @@ class TeamsController < ApplicationController
     end
 
     @team_members = @team_members.uniq
-  end
-
-  def new
-  end
-
-  def create
   end
 end
