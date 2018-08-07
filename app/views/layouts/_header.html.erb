@@ -42,11 +42,6 @@
               Calendars
             <% end %>
           </li>
-          <li class="govuk-header__navigation-item">
-            <%= link_to('#', class: 'govuk-header__link') do %>
-              Annual leave
-            <% end %>
-          </li>
           <% if google_auth_data %>
             <li class="govuk-header__navigation-item">
               <%= link_to(sign_out_path, class: 'govuk-header__link', method: :delete) do %>
