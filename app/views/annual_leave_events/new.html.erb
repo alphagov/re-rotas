@@ -1,0 +1,29 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to annual_leave_events_path, class: 'govuk-breadcrumbs__link' do %>
+        Annual leave events
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to new_annual_leave_event_path, class: 'govuk-breadcrumbs__link' do %>
+        New annual leave event
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">
+  Add event
+</h1>
+
+<%= form_tag action: :create, method: :post do %>
+  <%= render partial: 'form' %>
+
+  <div class="govuk-form-group">
+    <%= submit_tag 'Create event', class: 'govuk-button' %>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to annual_leave_events_path, class: 'govuk-breadcrumbs__link' do %>
+        Annual leave events
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to edit_annual_leave_event_path(@event), class: 'govuk-breadcrumbs__link' do %>
+        Update annual leave event
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">
+  Update event
+</h1>
+
+<%= form_tag annual_leave_event_path(@event), method: :patch do %>
+  <%= render partial: 'form' %>
+
+  <div class="govuk-form-group">
+    <%= submit_tag 'Update event', class: 'govuk-button' %>
+  </div>
+<% end %>
+
+<%= button_to annual_leave_event_path(@event.id), method: :delete, class: 'govuk-button' do %>
+  Delete annual leave event
+<% end %>

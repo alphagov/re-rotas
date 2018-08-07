@@ -1,0 +1,57 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to annual_leave_events_path, class: 'govuk-breadcrumbs__link' do %>
+        Annual leave events
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">Annual leave</h1>
+
+<div>
+  <%= link_to new_annual_leave_event_path, class: 'govuk-button' do %>
+    New annual leave event
+  <% end %>
+</div>
+
+<div>
+  <%= link_to url_for(all: true), class: 'govuk-button' do %>
+    View historical events
+  <% end %>
+</div>
+
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header">Email</th>
+      <th class="govuk-table__header">Start date</th>
+      <th class="govuk-table__header">End date</th>
+      <th class="govuk-table__header"></th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <% @events.each do |event| %>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <%= event.email %>
+        </td>
+        <td class="govuk-table__cell">
+          <%= event.start_date %>
+        </td>
+        <td class="govuk-table__cell">
+          <%= event.end_date %>
+        </td>
+        <td class="govuk-table__cell">
+          <%= link_to edit_annual_leave_event_path(event.id), class: 'govuk-button' do %>
+            Edit
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
