@@ -1,5 +1,7 @@
 <% if google_auth_data %>
-  <%= image_tag 'finedog', style: 'width: 100%' %>
+  <% (1..4).each do |i| %>
+    <%= image_tag "on-call-life-#{i}" %>
+  <% end %>
 <% else %>
   <%= link_to teams_path, class: 'govuk-button govuk-button--start' do %>
     Sign in
