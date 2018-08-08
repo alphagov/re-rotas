@@ -51,3 +51,9 @@
     </tbody>
   </table>
 <% end %>
+
+<% if @conflicts.empty? %>
+  <p class="govuk-body">
+    There are no conflicts.
+  </p>
+<% end %>
