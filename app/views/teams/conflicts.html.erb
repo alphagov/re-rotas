@@ -1,0 +1,53 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to teams_path, class: 'govuk-breadcrumbs__link' do %>
+        Teams
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to team_path(@team), class: 'govuk-breadcrumbs__link' do %>
+        <%= @team.name %>
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to team_conflicts_path(@team), class: 'govuk-breadcrumbs__link' do %>
+        Conflicts
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">
+  Conflicts due to annual leave
+</h1>
+
+<% @conflicts.each do |calendar, dates_and_conflicts| %>
+  <h2 class="govuk-heading-l"><%= calendar.name %></h2>
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header">Date</th>
+        <th class="govuk-table__header">People</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <% dates_and_conflicts.each do |date, conflicts| %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <%= date %>
+          </td>
+          <td class="govuk-table__cell">
+            <% conflicts.each_with_index do |email, index| %>
+              <% unless index.zero? %><br><% end %>
+              <%= email %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

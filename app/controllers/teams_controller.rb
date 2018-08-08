@@ -36,4 +36,16 @@ class TeamsController < ApplicationController
 
     @team_members = @team_members.uniq
   end
+
+  def conflicts
+    @team = Team.find(params[:id])
+    annual_leave_events = AnnualLeaveEvent
+      .where('start_date >= :today', today: Date.today)
+    calendars = @team.calendars
+
+    @conflicts = WhoIsOnCall::Conflicts.find(
+      annual_leave_events,
+      calendars.map { |c| [c, c.person_day_events.group_by(&:date)] }
+    ).reject { |_, c| c.empty? }
+  end
 end

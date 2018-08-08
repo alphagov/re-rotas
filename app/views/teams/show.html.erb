@@ -28,6 +28,9 @@
   <%= link_to new_calendar_path(team_id: @team.id), class: 'govuk-button' do %>
     New calendar
   <% end %>
+  <%= link_to team_conflicts_path(@team), class: 'govuk-button' do %>
+    View conflicts
+  <% end %>
 </div>
 
 <div>
