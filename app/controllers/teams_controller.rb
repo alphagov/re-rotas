@@ -4,11 +4,30 @@ class TeamsController < ApplicationController
   end
 
   def new
+    @team = Team.new
+  end
+
+  def edit
+    @team = Team.find(params[:id])
   end
 
   def create
-    team = Team.create!(params.permit(:name, :description))
-    redirect_to team_path(team)
+    @team = Team.new(params.permit(:name, :description))
+
+    return render :new unless @team.valid?
+
+    @team.save
+    redirect_to team_path(@team)
+  end
+
+  def update
+    @team = Team.find(params[:id])
+    @team.assign_attributes(params.permit(:name, :description))
+
+    return render :edit unless @team.valid?
+
+    @team.save
+    redirect_to team_path(@team)
   end
 
   def show

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     controller: :pages,
     action: :sign_out
 
-  resources :teams, only: %i( index show new create )
+  resources :teams, only: %i( index show new create edit update )
   get 'team/:id/conflicts',
     as: 'team_conflicts',
     controller: :teams,
