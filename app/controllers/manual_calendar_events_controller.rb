@@ -41,6 +41,7 @@ class ManualCalendarEventsController < ApplicationController
 
   def create_or_update_params
     {
+      manual_calendar_id:   @calendar.id,
       start_date:           Date.parse(params[:start_date]),
       end_date:             Date.parse(params[:end_date]),
       emails:               params[:emails].lines
