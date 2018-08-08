@@ -20,6 +20,10 @@
   <%= @team.name %>
 </h1>
 
+<% unless @team.description.blank? %>
+  <p class="govuk-body" style="white-space: pre-wrap;"><%= @team.description %></p>
+<% end %>
+
 <div>
   <%= link_to new_calendar_path(team_id: @team.id), class: 'govuk-button' do %>
     New calendar
@@ -41,6 +45,7 @@
 
 <div>
   <h2 class="govuk-heading-l">Team members</h2>
+
   <ul class="govuk-list govuk-list--bullet">
     <% @team_members.each do |email| %>
       <li>

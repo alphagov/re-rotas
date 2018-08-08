@@ -29,6 +29,12 @@
         <% end %>
         <%= text_field_tag :name, '', class: 'govuk-input' %>
       </div>
+      <div class="govuk-form-group">
+        <%= label_tag :description, class: 'govuk-label' do %>
+          Description
+        <% end %>
+        <%= text_area_tag :description, '', rows: 5, class: 'govuk-textarea' %>
+      </div>
     </div>
   </div>
 

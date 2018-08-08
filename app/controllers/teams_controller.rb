@@ -7,8 +7,8 @@ class TeamsController < ApplicationController
   end
 
   def create
-    Team.create(name: params[:name])
-    redirect_to teams_path
+    team = Team.create!(params.permit(:name, :description))
+    redirect_to team_path(team)
   end
 
   def show
