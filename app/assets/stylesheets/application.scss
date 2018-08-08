@@ -15,3 +15,7 @@
  */
 
 @import "govuk-frontend/all";
+
+html {
+  cursor: asset-url("fire"), auto;
+}
