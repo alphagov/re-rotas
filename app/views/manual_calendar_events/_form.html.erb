@@ -1,3 +1,11 @@
+<% unless @event.errors.empty? %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% @event.errors.full_messages.each do |message| %>
+      <li><span class="govuk-error-message"><%= message %></span></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-quarter">
     <div class="govuk-form-group">

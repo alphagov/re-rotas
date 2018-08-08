@@ -10,13 +10,12 @@ class AnnualLeaveEventsController < ApplicationController
   end
 
   def create
-    event = params.permit(:email, :start_date, :end_date)
-    event[:start_date] = Date.parse(event[:start_date])
-    event[:end_date] = Date.parse(event[:end_date])
+    event  = params.permit(:email, :start_date, :end_date)
+    @event = AnnualLeaveEvent.new(event)
 
-    puts event.inspect
+    return render :new unless @event.valid?
 
-    AnnualLeaveEvent.create(event)
+    @event.save
     redirect_to annual_leave_events_path
   end
 
@@ -25,9 +24,12 @@ class AnnualLeaveEventsController < ApplicationController
   end
 
   def update
-    AnnualLeaveEvent
-      .find(params[:id])
-      .update(params.permit(:email, :start_date, :end_date))
+    @event = AnnualLeaveEvent.find(params[:id])
+    @event.assign_attributes(params.permit(:email, :start_date, :end_date))
+
+    return render :edit unless @event.valid?
+    @event.save
+
     redirect_to annual_leave_events_path
   end
 
