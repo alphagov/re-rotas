@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#home'
 
-  delete '/sign_out',
+  delete '/sign-out',
     as: 'sign_out',
     controller: :pages,
     action: :sign_out
@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     controller: :teams,
     action: :conflicts
 
-
   resources :calendars, only: %i( index show new create)
   resources :manual_calendars, only: %i() do
     resources :events,
@@ -20,4 +19,6 @@ Rails.application.routes.draw do
               controller: :manual_calendar_events
   end
   resources :annual_leave_events, only: %i( index new create edit update destroy )
+
+  resources :users, only: %i( show ), id: /.*/
 end

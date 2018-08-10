@@ -1,0 +1,66 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      Users
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to user_path(@email), class: 'govuk-breadcrumbs__link' do %>
+        <%= @email %>
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-l">
+  Personal on-call timetable
+</h1>
+
+<% unless @on_call_calendars_by_date.empty? %>
+  <p class="govuk-body">
+    <%= gds_email_fmt(@email) %>
+    <%= current_user_is_email(@email) ? 'are' : 'is' %>
+    on-call for the following dates.
+  </p>
+
+  <table class="govuk-table">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header">Date</th>
+        <th class="govuk-table__header">Team</th>
+        <th class="govuk-table__header">Calendar</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <% @on_call_calendars_by_date.each do |date, calendars| %>
+        <% calendars.each_with_index do |calendar, index| %>
+          <tr class="govuk-table__row">
+            <% if index.zero? %>
+              <th rowspan="<%= calendars.length %>" class="govuk-table__header">
+                <%= date.strftime '%Y %b %d' %>
+              </th>
+            <% end %>
+            <td class="govuk-table__cell">
+              <%= link_to team_path(calendar.team), class: 'govuk-link' do %>
+                <%= calendar.team.name %>
+              <% end %>
+            </td>
+            <td class="govuk-table__cell">
+              <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
+                <%= calendar.name %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="govuk-body">
+    <%= gds_email_fmt(@email) %>
+    <%= current_user_is_email(@email) ? 'are' : 'is' %>
+    not on-call in the foreseeable future.
+  </p>
+<% end %>

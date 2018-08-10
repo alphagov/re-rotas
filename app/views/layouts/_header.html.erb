@@ -58,7 +58,9 @@
         <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
           <% if google_auth_data %>
             <li class="govuk-header__navigation-item">
-              <%= google_auth_data.email %>
+              <%= link_to(user_path(google_auth_data.email), class: 'govuk-header__link') do %>
+                <%= google_auth_data.email %>
+              <% end %>
             </li>
           <% end %>
         </ul>

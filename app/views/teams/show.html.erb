@@ -55,7 +55,7 @@
   <ul class="govuk-list govuk-list--bullet">
     <% @team_members.each do |email| %>
       <li>
-        <%= link_to "mailto:#{email}", class: 'govuk-link' do %>
+        <%= link_to user_path(email), class: 'govuk-link' do %>
           <%= gds_email_fmt(email) %>
         <% end %>
       </li>
@@ -89,7 +89,7 @@
             <td class="govuk-table__cell">
               <% calendars_and_events.fetch(team, []).map { |e| e.email }.each_with_index do |email, index| %>
                 <% unless index.zero? %><br><% end %>
-                <%= link_to "mailto:#{email}", class: 'govuk-link' do %>
+                <%= link_to user_path(email), class: 'govuk-link' do %>
                   <%= gds_email_fmt(email) %>
                 <% end %>
               <% end %>

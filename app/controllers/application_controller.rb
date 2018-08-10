@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :gds_email_fmt
+  helper_method :current_user_is_email
 
   private
 
@@ -27,4 +28,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def current_user_is_email(email)
+    email.casecmp(google_auth_data.email).zero?
+  end
 end
