@@ -21,8 +21,6 @@ class ApplicationController < ActionController::Base
   before_action :maybe_redirect_if_not_google_authenticated
 
   def maybe_redirect_if_not_google_authenticated
-    puts params
-
     unless params[:controller] == 'pages' && params[:action] == 'home'
       redirect_if_not_google_authenticated unless ENV.fetch('DISABLE_AUTH', false)
     end
