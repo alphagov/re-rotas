@@ -31,7 +31,7 @@
           <% events.group_by(&:calendar).each do |calendar, pdevents| %>
             <tr class="govuk-table__row">
               <td class="govuk-table__cell">
-                <%= link_to calendar_path(team), class: 'govuk-link' do %>
+                <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
                   <%= calendar.name %>
                 <% end %>
               </td>
