@@ -39,7 +39,7 @@
                 <% pdevents.each_with_index do |event, index| %>
                   <% unless index.zero? %><br><% end %>
                   <%= link_to user_path(event.email), class: 'govuk-link' do %>
-                    <%= gds_email_fmt(event.email) %>
+                    <%= email_fmt(event.email) %>
                   <% end %>
                 <% end %>
               </td>

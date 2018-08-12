@@ -39,7 +39,7 @@
     <% @team_members.each do |email| %>
       <li>
         <%= link_to user_path(email), class: 'govuk-link' do %>
-          <%= gds_email_fmt(email) %>
+          <%= email_fmt(email) %>
         <% end %>
       </li>
     <% end %>
@@ -70,7 +70,7 @@
             <% events.map { |e| e.email }.each_with_index do |email, index| %>
               <% unless index.zero? %><br><% end %>
               <%= link_to user_path(email), class: 'govuk-link' do %>
-                <%= gds_email_fmt(email) %>
+                <%= email_fmt(email) %>
               <% end %>
             <% end %>
           </td>

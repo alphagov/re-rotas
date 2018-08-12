@@ -61,7 +61,7 @@
         <td class="govuk-table__cell">
           <% event.emails.each_with_index do |email, index| %>
             <% unless index.zero? %><br><%end %>
-            <%= gds_email_fmt(email) %>
+            <%= email_fmt(email) %>
           <% end %>
         </td>
         <td class="govuk-table__cell">

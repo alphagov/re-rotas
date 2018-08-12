@@ -20,7 +20,7 @@
 
 <% unless @on_call_calendars_by_date.empty? %>
   <p class="govuk-body">
-    <%= gds_email_fmt(@email) %>
+    <%= email_fmt(@email) %>
     <%= current_user_is_email(@email) ? 'are' : 'is' %>
     on-call for the following dates.
   </p>
@@ -59,7 +59,7 @@
   </table>
 <% else %>
   <p class="govuk-body">
-    <%= gds_email_fmt(@email) %>
+    <%= email_fmt(@email) %>
     <%= current_user_is_email(@email) ? 'are' : 'is' %>
     not on-call in the foreseeable future.
   </p>
