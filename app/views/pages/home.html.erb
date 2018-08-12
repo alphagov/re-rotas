@@ -13,7 +13,7 @@
     Currently on-call
   </h1>
 
-  <% @teams_on_call.each do |team, events| %>
+  <% @teams_on_call.sort_by { |t, _| t.name }.each do |team, events| %>
     <div>
       <h2 class="govuk-heading-l">
         <%= link_to team_path(team), class: 'govuk-link' do %>
