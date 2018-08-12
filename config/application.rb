@@ -18,10 +18,21 @@ module GdsWhoIsOnCall
     #
     config.autoload_paths << config.root.join('lib')
 
+    google_client_id = ENV.fetch(
+      'GOOGLE_AUTH_CLIENT_ID',
+      CF::App::Credentials
+        .find_by_service_name('oncall-secrets')['google_client_id']
+    )
+    google_client_secret = ENV.fetch(
+      'GOOGLE_AUTH_CLIENT_SECRET',
+      CF::App::Credentials
+        .find_by_service_name('oncall-secrets')['google_client_secret']
+    )
+
     unless ENV['DISABLE_AUTH']
       SimpleGoogleAuth.configure do |config|
-        config.client_id     = ENV.fetch('GOOGLE_AUTH_CLIENT_ID')
-        config.client_secret = ENV.fetch('GOOGLE_AUTH_CLIENT_SECRET')
+        config.client_id     = google_client_id
+        config.client_secret = google_client_secret
         config.redirect_uri  = 'http://localhost:3000/google-callback'
         config.authenticate  = lambda do |data|
           data.email.ends_with?('@digital.cabinet-office.gov.uk')

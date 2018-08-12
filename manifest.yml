@@ -5,3 +5,4 @@ applications:
     services:
       - oncall-db
       - oncall-metrics
+      - oncall-secrets
