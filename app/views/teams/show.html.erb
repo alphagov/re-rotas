@@ -36,31 +36,31 @@
   <% end %>
 </div>
 
-<div>
-  <h2 class="govuk-heading-l">Calendars</h2>
-  <ul class="govuk-list govuk-list--bullet">
-    <% @team.calendars.each do |calendar| %>
-      <li>
-        <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
-          <%= calendar.name %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-l">Calendars</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <% @team.calendars.each do |calendar| %>
+        <li>
+          <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
+            <%= calendar.name %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="govuk-grid-column-one-half">
+      <h2 class="govuk-heading-l">Team members</h2>
+      <ul class="govuk-list govuk-list--bullet">
+        <% @team_members.sort.each do |email| %>
+          <li>
+            <%= link_to user_path(email), class: 'govuk-link' do %>
+              <%= email_fmt(email) %>
+            <% end %>
+          </li>
         <% end %>
-      </li>
-    <% end %>
-  </ul>
-</div>
-
-<div>
-  <h2 class="govuk-heading-l">Team members</h2>
-
-  <ul class="govuk-list govuk-list--bullet">
-    <% @team_members.each do |email| %>
-      <li>
-        <%= link_to user_path(email), class: 'govuk-link' do %>
-          <%= email_fmt(email) %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+      </ul>
+  </div>
 </div>
 
 <div>
