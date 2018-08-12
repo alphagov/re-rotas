@@ -15,7 +15,7 @@
 
 <% @calendars.group_by(&:team).each do |team, calendars| %>
   <div>
-    <h2 class="govuk-heading-l"><%= team.name %></h2>
+    <h2 class="govuk-heading-l"><%= link_to team.name, team_path(team), class: 'govuk-link' %></h2>
     <ul class="govuk-list govuk-list--bullet">
       <% calendars.each do |cal| %>
         <li>
