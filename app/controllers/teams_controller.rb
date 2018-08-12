@@ -57,10 +57,9 @@ class TeamsController < ApplicationController
   end
 
   def conflicts
-    @team = Team.find(params[:id])
-    annual_leave_events = AnnualLeaveEvent
-      .where('start_date >= :today', today: Date.today)
-    calendars = @team.calendars
+    @team               = Team.find(params[:id])
+    annual_leave_events = AnnualLeaveEvent.all
+    calendars           = @team.calendars
 
     @conflicts = WhoIsOnCall::Conflicts.find(
       annual_leave_events,
