@@ -43,7 +43,7 @@
           <td class="govuk-table__cell">
             <% conflicts.each_with_index do |email, index| %>
               <% unless index.zero? %><br><% end %>
-              <%= email %>
+              <%= gds_email_fmt(email) %>
             <% end %>
           </td>
         </tr>

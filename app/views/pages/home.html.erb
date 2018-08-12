@@ -37,9 +37,9 @@
               </td>
               <td class="govuk-table__cell">
                 <% pdevents.each_with_index do |event, index| %>
-                  <% if index.zero? %><br><% end %>
+                  <% unless index.zero? %><br><% end %>
                   <%= link_to user_path(event.email), class: 'govuk-link' do %>
-                    <%= event.email %>
+                    <%= gds_email_fmt(event.email) %>
                   <% end %>
                 <% end %>
               </td>
