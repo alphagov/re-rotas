@@ -4,3 +4,4 @@ applications:
     buildpack: ruby_buildpack
     services:
       - oncall
+      - oncall-metrics
