@@ -38,7 +38,7 @@
       <% dates_and_conflicts.each do |date, conflicts| %>
         <tr class="govuk-table__row">
           <td class="govuk-table__cell">
-            <%= date %>
+            <%= date.strftime '%Y %b %d' %>
           </td>
           <td class="govuk-table__cell">
             <% conflicts.each_with_index do |email, index| %>

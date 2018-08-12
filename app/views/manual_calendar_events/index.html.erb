@@ -50,10 +50,10 @@
     <% @events.each do |event| %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <%= event.start_date %>
+          <%= event.start_date.strftime '%Y %b %d' %>
         </td>
         <td class="govuk-table__cell">
-          <%= event.end_date %>
+          <%= event.end_date.strftime '%Y %b %d' %>
         </td>
         <td class="govuk-table__cell">
           <%= 1 + (event.end_date - event.start_date).to_i %> days
