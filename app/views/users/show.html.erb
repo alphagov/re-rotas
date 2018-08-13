@@ -31,6 +31,7 @@
         <th class="govuk-table__header">Date</th>
         <th class="govuk-table__header">Team</th>
         <th class="govuk-table__header">Calendar</th>
+        <th class="govuk-table__header">Status</th>
       </tr>
     </thead>
     <tbody class="govuk-table__body">
@@ -52,8 +53,9 @@
                 <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
                   <%= calendar.name %>
                 <% end %>
+              </td>
+              <td class="govuk-table__cell">
                 <% if @annual_leave.key? date %>
-                  &nbsp;
                   🔥
                   <%= link_to edit_annual_leave_event_path(@annual_leave[date]), class: 'govuk-link' do %>
                     Annual leave
@@ -68,10 +70,13 @@
               <%= date.strftime '%Y %b %d' %>
             </td>
             <td class="govuk-table__cell"></td>
+            <td class="govuk-table__cell"></td>
             <td class="govuk-table__cell">
               <% if @annual_leave.include? date %>
                 💤
-                Annual leave
+                <%= link_to edit_annual_leave_event_path(@annual_leave[date]), class: 'govuk-link' do %>
+                  Annual leave
+                <% end %>
               <% end %>
             </td>
           </tr>
