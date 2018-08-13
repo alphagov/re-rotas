@@ -43,7 +43,9 @@
           <td class="govuk-table__cell">
             <% conflicts.each_with_index do |email, index| %>
               <% unless index.zero? %><br><% end %>
-              <%= email_fmt(email) %>
+              <%= link_to user_path(email), class: 'govuk-link' do %>
+                <%= email_fmt(email) %>
+              <% end %>
             <% end %>
           </td>
         </tr>
