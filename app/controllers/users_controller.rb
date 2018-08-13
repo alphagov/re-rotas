@@ -12,6 +12,12 @@ class UsersController < ApplicationController
         acc[e.date] ||= Set.new; acc[e.date].add(e.calendar)
         acc
       end
-      .sort_by { |date, _calendars| date }
+
+    @annual_leave = AnnualLeaveEvent
+      .where(email: @email)
+      .flat_map { |e| (e.start_date..e.end_date).map { |d| [d, e] } }
+      .to_h
+
+    @earliest, @latest = @on_call_calendars_by_date.map(&:first).sort.values_at(0, -1)
   end
 end

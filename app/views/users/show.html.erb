@@ -34,22 +34,44 @@
       </tr>
     </thead>
     <tbody class="govuk-table__body">
-      <% @on_call_calendars_by_date.each do |date, calendars| %>
-        <% calendars.each_with_index do |calendar, index| %>
-          <tr class="govuk-table__row">
-            <% if index.zero? %>
-              <th rowspan="<%= calendars.length %>" class="govuk-table__header">
-                <%= date.strftime '%Y %b %d' %>
-              </th>
-            <% end %>
-            <td class="govuk-table__cell">
-              <%= link_to team_path(calendar.team), class: 'govuk-link' do %>
-                <%= calendar.team.name %>
+      <% (@earliest..@latest).each do |date| %>
+        <% if @on_call_calendars_by_date.key? date %>
+          <% @on_call_calendars_by_date.fetch(date).each_with_index do |calendar, index| %>
+            <tr class="govuk-table__row">
+              <% if index.zero? %>
+                <th rowspan="<%= @on_call_calendars_by_date.fetch(date).length %>" class="govuk-table__header">
+                  <%= date.strftime '%Y %b %d' %>
+                </th>
               <% end %>
-            </td>
+              <td class="govuk-table__cell">
+                <%= link_to team_path(calendar.team), class: 'govuk-link' do %>
+                  <%= calendar.team.name %>
+                <% end %>
+              </td>
+              <td class="govuk-table__cell">
+                <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
+                  <%= calendar.name %>
+                <% end %>
+                <% if @annual_leave.key? date %>
+                  &nbsp;
+                  🔥
+                  <%= link_to edit_annual_leave_event_path(@annual_leave[date]), class: 'govuk-link' do %>
+                    Annual leave
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
-                <%= calendar.name %>
+              <%= date.strftime '%Y %b %d' %>
+            </td>
+            <td class="govuk-table__cell"></td>
+            <td class="govuk-table__cell">
+              <% if @annual_leave.include? date %>
+                💤
+                Annual leave
               <% end %>
             </td>
           </tr>
