@@ -36,6 +36,8 @@ class TeamsController < ApplicationController
     @events_by_calendar = {}
     @team_members = []
 
+    @desc = WhoIsOnCall::MarkdownRenderer.render(@team.description || '')
+
     @team.calendars.each do |calendar|
       events = calendar.person_day_events
 

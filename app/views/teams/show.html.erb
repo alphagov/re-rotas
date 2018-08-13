@@ -21,7 +21,7 @@
 </h1>
 
 <% unless @team.description.blank? %>
-  <p class="govuk-body" style="white-space: pre-wrap;"><%= @team.description %></p>
+  <%= @desc.html_safe %>
 <% end %>
 
 <div>
