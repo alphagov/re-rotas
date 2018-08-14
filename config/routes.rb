@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
   root 'pages#home'
 
-  delete '/sign-out',
-    as: 'sign_out',
-    controller: :pages,
-    action: :sign_out
-
   resources :teams, only: %i( index show new create edit update )
   get 'team/:id/conflicts',
     as: 'team_conflicts',
@@ -21,4 +16,10 @@ Rails.application.routes.draw do
   resources :annual_leave_events, only: %i( index new create edit update destroy )
 
   resources :users, only: %i( show ), id: /.*/
+
+  resource :session, only: %i( new create destroy )
+  get 'session/callback',
+      controller: :sessions,
+      action: :callback,
+      as: 'callback_session'
 end

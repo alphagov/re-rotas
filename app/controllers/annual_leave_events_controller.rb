@@ -6,7 +6,7 @@ class AnnualLeaveEventsController < ApplicationController
 
   def new
     @event = AnnualLeaveEvent.new
-    @event.email = google_auth_data.email
+    @event.email = current_user
   end
 
   def create

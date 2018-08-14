@@ -1,52 +1,46 @@
-<% unless google_auth_data %>
-  <%= link_to teams_path, class: 'govuk-button govuk-button--start' do %>
-    Sign in
-  <% end %>
-<% else %>
-  <% (1..4).each do |i| %>
-    <%= image_tag "on-call-life-#{i}" %>
-  <% end %>
+<% (1..4).each do |i| %>
+  <%= image_tag "on-call-life-#{i}" %>
+<% end %>
 
-  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-  <h1 class="govuk-heading-xl">
-    Currently on-call
-  </h1>
+<h1 class="govuk-heading-xl">
+  Currently on-call
+</h1>
 
-  <% @teams_on_call.sort_by { |t, _| t.name }.each do |team, events| %>
-    <div>
-      <h2 class="govuk-heading-l">
-        <%= link_to team_path(team), class: 'govuk-link' do %>
-          <%= team.name %>
-        <% end %>
-      </h2>
-      <table class="govuk-table">
-        <thead class="govuk-table__head">
+<% @teams_on_call.sort_by { |t, _| t.name }.each do |team, events| %>
+  <div>
+    <h2 class="govuk-heading-l">
+      <%= link_to team_path(team), class: 'govuk-link' do %>
+        <%= team.name %>
+      <% end %>
+    </h2>
+    <table class="govuk-table">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th class="govuk-table__header" style="width: 50%;">Calendar</th>
+          <th class="govuk-table__header">People</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <% events.group_by(&:calendar).each do |calendar, pdevents| %>
           <tr class="govuk-table__row">
-            <th class="govuk-table__header" style="width: 50%;">Calendar</th>
-            <th class="govuk-table__header">People</th>
+            <td class="govuk-table__cell">
+              <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
+                <%= calendar.name %>
+              <% end %>
+            </td>
+            <td class="govuk-table__cell">
+              <% pdevents.each_with_index do |event, index| %>
+                <% unless index.zero? %><br><% end %>
+                <%= link_to user_path(event.email), class: 'govuk-link' do %>
+                  <%= email_fmt(event.email) %>
+                <% end %>
+              <% end %>
+            </td>
           </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <% events.group_by(&:calendar).each do |calendar, pdevents| %>
-            <tr class="govuk-table__row">
-              <td class="govuk-table__cell">
-                <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
-                  <%= calendar.name %>
-                <% end %>
-              </td>
-              <td class="govuk-table__cell">
-                <% pdevents.each_with_index do |event, index| %>
-                  <% unless index.zero? %><br><% end %>
-                  <%= link_to user_path(event.email), class: 'govuk-link' do %>
-                    <%= email_fmt(event.email) %>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 <% end %>

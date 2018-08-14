@@ -68,6 +68,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'http'
 gem 'icalendar'
-gem 'simple_google_auth'
 gem 'cf-app-utils'
 gem 'redcarpet'

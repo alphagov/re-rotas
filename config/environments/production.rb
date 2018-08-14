@@ -86,8 +86,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  SimpleGoogleAuth.configure do |config|
-    config.redirect_uri  = 'https://oncall.cloudapps.digital/google-callback'
-  end
 end
