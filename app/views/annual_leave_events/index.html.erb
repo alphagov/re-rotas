@@ -38,7 +38,9 @@
     <% @events.each do |event| %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
-          <%= event.email %>
+          <%= link_to user_path(event.email), class: 'govuk-email' do %>
+            <%= event.email %>
+          <% end %>
         </td>
         <td class="govuk-table__cell">
           <%= event.start_date.strftime '%Y %b %d' %>
