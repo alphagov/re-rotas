@@ -18,6 +18,12 @@ class UsersController < ApplicationController
       .flat_map { |e| (e.start_date..e.end_date).map { |d| [d, e] } }
       .to_h
 
-    @earliest, @latest = @on_call_calendars_by_date.map(&:first).sort.values_at(0, -1)
+    @earliest           = Date.today
+    @latest             = @on_call_calendars_by_date.keys.sort.last
+
+    unless @on_call_calendars_by_date.empty?
+      @next_on_call_date  = @on_call_calendars_by_date.keys.sort.first
+      @days_until_on_call = @next_on_call_date - Date.today
+    end
   end
 end

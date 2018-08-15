@@ -19,6 +19,25 @@
 </h1>
 
 <% unless @on_call_calendars_by_date.empty? %>
+  <% if @days_until_on_call > 0 %>
+    <p class="govuk-body">
+      Next on-call date for
+      <%= email_fmt(@email) %>
+      is in
+      <%= @days_until_on_call.to_i %> days
+      on
+      <%= @next_on_call_date.strftime '%d %b %Y' %>.
+    </p>
+  <% else %>
+    <p class="govuk-body">
+      <%= email_fmt(@email) %>
+      <%= current_user_is_email(@email) ? 'are' : 'is' %>
+      currently on call.
+    </p>
+  <% end %>
+
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
   <p class="govuk-body">
     <%= email_fmt(@email) %>
     <%= current_user_is_email(@email) ? 'are' : 'is' %>
