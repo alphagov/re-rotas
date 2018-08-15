@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
       .map(&:capitalize)
       .join(' ')
 
-    return short unless email.casecmp(current_user).zero?
+    return short unless email&.casecmp(current_user)&.zero?
 
     '<strong class="govuk-tag">You</strong>'.html_safe
   end
