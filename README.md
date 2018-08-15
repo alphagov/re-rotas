@@ -14,7 +14,7 @@ This is an app to aggregate all of the rotas that we have at GDS.
 - PagerDuty is not required/superfluous) Annual leave tracking Automatically
 - finds conflicts between annual leave and rotas
 
-## What are the user needs
+## What are the user needs
 
 As someone who is supporting multiple services in-hours and/or out-of-hours I
 need to know when I am expected to do so.
