@@ -27,7 +27,7 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-    <% @teams.each do |team| %>
+    <% @teams.sort_by(&:name).each do |team| %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
           <%= link_to team_path(team), class: 'govuk-link' do %>
