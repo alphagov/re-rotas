@@ -63,7 +63,14 @@ class SessionsController < ApplicationController
     session[:id_token]     = id_token
     session[:timestamp]    = Time.now
 
-    redirect_to root_path
+    if session.key? :redirect_path
+      redirect_path = session[:redirect_path]
+      session.delete(:redirect_path)
+      redirect_to(redirect_path)
+    else
+      redirect_to root_path
+    end
+
   end
 
   def destroy

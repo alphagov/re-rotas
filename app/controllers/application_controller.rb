@@ -42,6 +42,10 @@ class ApplicationController < ActionController::Base
     return if ENV.fetch('DISABLE_AUTH', nil)
     return if current_user
 
+    if request.method == 'GET'
+      session[:redirect_path] = request.fullpath
+    end
+
     redirect_to new_session_path
   end
 end
