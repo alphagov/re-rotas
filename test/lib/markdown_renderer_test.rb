@@ -63,4 +63,52 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
     html = WhoIsOnCall::MarkdownRenderer.render(markdown)
     assert_equal '', html
   end
+
+  test 'h1' do
+    markdown = <<~MD
+      # hello
+    MD
+    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    assert_same_no_ws('<h1 class="govuk-heading-xl">hello</h1>', html)
+  end
+
+  test 'h2' do
+    markdown = <<~MD
+      ## hello
+    MD
+    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    assert_same_no_ws('<h2 class="govuk-heading-l">hello</h2>', html)
+  end
+
+  test 'h3' do
+    markdown = <<~MD
+      ### hello
+    MD
+    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    assert_same_no_ws('<h3 class="govuk-heading-m">hello</h3>', html)
+  end
+
+  test 'h4' do
+    markdown = <<~MD
+      #### hello
+    MD
+    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    assert_same_no_ws('<h4 class="govuk-heading-s">hello</h4>', html)
+  end
+
+  test 'h5' do
+    markdown = <<~MD
+      ##### hello
+    MD
+    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    assert_same_no_ws('<h5 class="govuk-heading-s">hello</h5>', html)
+  end
+
+  test 'h6' do
+    markdown = <<~MD
+      ###### hello
+    MD
+    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    assert_same_no_ws('<h6 class="govuk-heading-s">hello</h6>', html)
+  end
 end

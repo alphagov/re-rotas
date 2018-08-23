@@ -37,6 +37,26 @@ module WhoIsOnCall
       %(<p class="govuk-body">#{text}</p>)
     end
 
+    def header(text, heading_level)
+      tag  = "h#{heading_level}"
+      size = case heading_level
+             when 1
+               'xl'
+             when 2
+               'l'
+             when 3
+               'm'
+             else
+               's'
+             end
+
+      <<~HTML
+        <#{tag} class="govuk-heading-#{size}">
+          #{text}
+        </#{tag}>
+      HTML
+    end
+
     def self.render(content)
       Redcarpet::Markdown.new(self).render(content)
     end
