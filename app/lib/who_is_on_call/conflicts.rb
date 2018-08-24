@@ -1,7 +1,7 @@
 module WhoIsOnCall::Conflicts
   def self.find(annual_leave_events, calendars_day_and_events)
     calendars_day_and_events
-      .map do |calendar, events_by_date|
+      .map { |calendar, events_by_date|
         [
           calendar,
           conflicts_for_calendar(
@@ -9,20 +9,13 @@ module WhoIsOnCall::Conflicts
             events_by_date,
           )
         ]
-      end
+      }
       .to_h
   end
 
   def self.conflicts_for_calendar(al_emails_by_day, cal_emails_by_day)
     (al_emails_by_day.keys | cal_emails_by_day.keys)
-      .map do |date|
-        leave_emails = al_emails_by_day.fetch(date, [])
-        cal_emails   = cal_emails_by_day.fetch(date, []).map(&:email)
-
-        intersection = leave_emails & cal_emails
-
-        [date, intersection]
-      end
+      .map { |date| get_conflicts(date, al_emails_by_day, cal_emails_by_day) }
       .reject { |_, intersection| intersection.empty? }
       .to_h
   end
@@ -34,4 +27,15 @@ module WhoIsOnCall::Conflicts
       .map { |d, pairs| [d, pairs.map { |_, v| v }] }
       .to_h
   end
+
+  def self.get_conflicts(date, al_emails_by_day, cal_emails_by_day)
+    leave_emails = al_emails_by_day.fetch(date, [])
+    cal_emails   = cal_emails_by_day.fetch(date, []).map(&:email)
+
+    intersection = leave_emails & cal_emails
+
+    [date, intersection]
+  end
+
+  private_class_method :get_conflicts
 end

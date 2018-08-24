@@ -13,7 +13,7 @@ class UrlFetcherJob < ActiveJob::Base
     logger.info "UrlFetcherJob Caching #{@url} "
     WhoIsOnCall::URL_CACHE.update(@url, response.body.to_s)
     logger.info "UrlFetcherJob Cached #{@url} "
-  rescue => e
+  rescue HTTP::Error => e
     logger.error e
   end
 

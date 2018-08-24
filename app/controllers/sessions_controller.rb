@@ -1,11 +1,10 @@
 class SessionsController < ApplicationController
   skip_before_action :maybe_redirect_if_not_signed_in,
-                     only: %i( new create callback)
+                     only: %i(new create callback)
   skip_before_action :maybe_expire_session,
-                     only: %i( new create callback)
+                     only: %i(new create callback)
 
-  def new
-  end
+  def new; end
 
   def create
     session[:state] = SecureRandom.hex
@@ -70,7 +69,6 @@ class SessionsController < ApplicationController
     else
       redirect_to root_path
     end
-
   end
 
   def destroy
@@ -78,7 +76,7 @@ class SessionsController < ApplicationController
     redirect_to new_session_path
   end
 
-  private
+private
 
   def callback_url
     case ENV['RAILS_ENV']

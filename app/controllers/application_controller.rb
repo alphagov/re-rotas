@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :maybe_expire_session
   before_action :maybe_redirect_if_not_signed_in
 
-  private
+private
 
   def email_fmt(email)
     return email unless email.end_with?('digital.cabinet-office.gov.uk')
