@@ -15,32 +15,38 @@
         <%= team.name %>
       <% end %>
     </h2>
-    <table class="govuk-table">
-      <thead class="govuk-table__head">
-        <tr class="govuk-table__row">
-          <th class="govuk-table__header" style="width: 50%;">Calendar</th>
-          <th class="govuk-table__header">People</th>
-        </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-        <% events.group_by(&:calendar).each do |calendar, pdevents| %>
+    <% if events.empty? %>
+      <p class="govuk-body">
+        There is currently no one on call for <%= team.name %>
+      </p>
+    <% else %>
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
           <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
-                <%= calendar.name %>
-              <% end %>
-            </td>
-            <td class="govuk-table__cell">
-              <% pdevents.each_with_index do |event, index| %>
-                <% unless index.zero? %><br><% end %>
-                <%= link_to user_path(event.email), class: 'govuk-link' do %>
-                  <%= email_fmt(event.email) %>
-                <% end %>
-              <% end %>
-            </td>
+            <th class="govuk-table__header" style="width: 50%;">Calendar</th>
+            <th class="govuk-table__header">People</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody class="govuk-table__body">
+          <% events.group_by(&:calendar).each do |calendar, pdevents| %>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">
+                <%= link_to calendar_path(calendar), class: 'govuk-link' do %>
+                  <%= calendar.name %>
+                <% end %>
+              </td>
+              <td class="govuk-table__cell">
+                <% pdevents.each_with_index do |event, index| %>
+                  <% unless index.zero? %><br><% end %>
+                  <%= link_to user_path(event.email), class: 'govuk-link' do %>
+                    <%= email_fmt(event.email) %>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  <% end %>
   </div>
 <% end %>
