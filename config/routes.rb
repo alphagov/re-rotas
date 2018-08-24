@@ -22,4 +22,8 @@ Rails.application.routes.draw do
       controller: :sessions,
       action: :callback,
       as: 'callback_session'
+
+  if %w(test development).include? Rails.env
+    post 'test_session_create', to: 'test_session#create', as: :test_session_create
+  end
 end
