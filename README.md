@@ -46,8 +46,7 @@ The data that is stored:
 Authentication is done via Google OAuth.
 
 ## How to run it locally
-```
-gem install bundler
-bundle install
-DISABLE_AUTH=yes bundle exec rails s
-```
+`./startup.sh`
+
+## How to test it locally
+`./pre-commit.sh`

@@ -4,3 +4,6 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
+
+task spec: ['lint:ruby', 'lint:sass']
+task default: [:spec, 'jasmine:ci']
