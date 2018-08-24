@@ -4,9 +4,7 @@ class CalendarsController < ApplicationController
   end
 
   def show
-    id = params[:id]
-
-    @calendar = id.start_with?('pagerduty') ? PagerDutyCalendar.find(id) : ManualCalendar.find(id)
+    @calendar = Calendar.find(params[:id])
 
     person_day_events = @calendar.person_day_events
 
