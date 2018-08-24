@@ -23,7 +23,9 @@ module WhoIsOnCall
   URL_CACHE = UrlCache.new
 end
 
-PagerDutyCalendar.all.each do |calendar|
-  Rails.logger.info "Starting url fetcher job for #{calendar.url}"
-  UrlFetcherJob.perform_later calendar.url
+unless $0.match(/rake/)
+  PagerDutyCalendar.all.each do |calendar|
+    Rails.logger.info "Starting url fetcher job for #{calendar.url}"
+    UrlFetcherJob.perform_later calendar.url
+  end
 end

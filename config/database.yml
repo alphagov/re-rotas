@@ -11,6 +11,7 @@ default: &default
   timeout: 5000
   host: localhost
   port: 5432
+  database: <%= ENV.fetch('DB_NAME', '') %>
 
 development:
   <<: *default
@@ -23,7 +24,6 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV.fetch('DB_NAME', '') %>
   host:     <%= ENV.fetch('DB_HOST', '') %>
   port:     <%= ENV.fetch('DB_PORT', '') %>
   username: <%= ENV.fetch('DB_USER', '') %>
