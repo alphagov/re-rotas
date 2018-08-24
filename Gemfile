@@ -54,6 +54,8 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'govuk-lint'
+  gem 'jasmine'
 end
 
 group :production do
