@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user_is_email(email)
-    email.casecmp(current_user).zero?
+    current_user&.casecmp(email)&.zero?
   end
 
   def current_user
