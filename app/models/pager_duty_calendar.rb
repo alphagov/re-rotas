@@ -18,9 +18,9 @@ class PagerDutyCalendar < ApplicationRecord
             inclusion: { in: %w[in_hours out_of_hours in_and_out_of_hours] }
 
   def events
-    calendar  = Icalendar::Calendar.parse(StringIO.new(
-      WhoIsOnCall::URL_CACHE.fetch(url)
-    ))
+    calendar = Icalendar::Calendar.parse(
+      StringIO.new(WhoIsOnCall::URL_CACHE.fetch(url))
+    )
 
     calendar
       .flat_map(&:events)

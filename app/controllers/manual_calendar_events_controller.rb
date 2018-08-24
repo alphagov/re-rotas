@@ -41,7 +41,7 @@ class ManualCalendarEventsController < ApplicationController
     redirect_to manual_calendar_events_path(@calendar)
   end
 
-  private
+private
 
   def create_or_update_params
     {

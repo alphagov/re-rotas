@@ -26,8 +26,7 @@ npm install
 
 bin/rake db:create db:migrate
 
-# disable linting for now
-# bundle exec rake
+bundle exec rake
 
 bin/rails t
 

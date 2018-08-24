@@ -1,5 +1,3 @@
-require 'thread'
-
 class UrlCache
   def initialize
     @cache = {}
@@ -23,7 +21,7 @@ module WhoIsOnCall
   URL_CACHE = UrlCache.new
 end
 
-unless $0.match(/rake/)
+unless $0.match?(/rake/)
   PagerDutyCalendar.all.each do |calendar|
     Rails.logger.info "Starting url fetcher job for #{calendar.url}"
     UrlFetcherJob.perform_later calendar.url

@@ -1,7 +1,7 @@
 module WhoIsOnCall::Conflicts
   def self.find(annual_leave_events, calendars_day_and_events)
     calendars_day_and_events
-      .map do |calendar, events_by_date|
+      .map { |calendar, events_by_date|
         [
           calendar,
           conflicts_for_calendar(
@@ -9,7 +9,7 @@ module WhoIsOnCall::Conflicts
             events_by_date,
           )
         ]
-      end
+      }
       .to_h
   end
 
