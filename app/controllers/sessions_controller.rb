@@ -90,14 +90,14 @@ private
   def google_client_id
     ENV.fetch('GOOGLE_AUTH_CLIENT_ID') do
       CF::App::Credentials
-        .find_by_service_name('oncall-secrets')['google_client_id']
+        .find_by_service_name('oncall-secrets')['google-client-id']
     end
   end
 
   def google_client_secret
     ENV.fetch('GOOGLE_AUTH_CLIENT_SECRET') do
       CF::App::Credentials
-        .find_by_service_name('oncall-secrets')['google_client_secret']
+        .find_by_service_name('oncall-secrets')['google-client-secret']
     end
   end
 end
