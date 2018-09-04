@@ -40,6 +40,6 @@ class IcalendarsController < ApplicationController
         end
       end
 
-    render plain: calendar.to_ical
+    send_data calendar.to_ical, filename: 'oncall.ics', type: 'text/calendar', disposition: 'attachment'
   end
 end
