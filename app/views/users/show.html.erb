@@ -38,10 +38,24 @@
 
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-  📅
-  <%= link_to @icalendar_url, class: 'govuk-link' do %>
-    Google Calendar
-  <% end %>
+  <h2 class="govuk-heading-m">
+    📅
+    Calendar integration
+  </h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>
+      Copy
+      <%= link_to @icalendar_url, class: 'govuk-link' do %>
+        this
+      <% end %>
+      link
+    </li>
+    <li>
+      Paste it into the
+      &ldquo;import from URL&rdquo;
+      functionality in either Google Calendar or the Mac Calendar app
+    </li>
+  </ul>
 
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
