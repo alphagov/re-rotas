@@ -12,7 +12,7 @@ class IcalendarsController < ApplicationController
 
     calendar = Icalendar::Calendar.new
 
-    events = [].concat(
+    [].concat(
       ManualCalendar.all.flat_map(&:person_day_events),
       PagerDutyCalendar.all.flat_map(&:person_day_events),
     )
@@ -26,6 +26,17 @@ class IcalendarsController < ApplicationController
           event.dtend   = e.date + 1
           event.summary = desc
           event.description = desc
+        end
+      end
+
+    AnnualLeaveEvent
+      .where(email: email)
+      .each do |e|
+        calendar.event do |event|
+          event.dtstart = e.start_date
+          event.dtend   = e.end_date
+          event.summary = 'Annual leave'
+          event.description = 'Annual leave'
         end
       end
 

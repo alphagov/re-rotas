@@ -2,9 +2,8 @@ class UsersController < ApplicationController
   def show
     @email = params[:id]
 
-    @icalendar_url = icalendar_path(WhoIsOnCall::CalendarUrl.generate_url(
-      @email
-    ))
+    @icalendar_url = icalendar_path(WhoIsOnCall::CalendarUrl
+      .generate_url(@email))
 
     @on_call_calendars_by_date = Team
       .all

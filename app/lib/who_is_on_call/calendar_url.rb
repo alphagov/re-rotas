@@ -20,7 +20,7 @@ module WhoIsOnCall::CalendarUrl
     ).values_at('email', 'hash')
 
     hash == Digest::SHA2.new(256).hexdigest("#{salt}:#{email}") ? email : nil
-  rescue
+  rescue # rubocop:disable Style/RescueStandardError
     nil
   end
 end
