@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     controller: :teams,
     action: :conflicts
 
+  resources :icalendars, only: %i(show), id: /.*/
   resources :calendars, only: %i(index show new create)
   resources :manual_calendars, only: %i() do
     resources :events,

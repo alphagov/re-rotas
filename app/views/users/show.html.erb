@@ -38,6 +38,13 @@
 
   <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
+  📅
+  <%= link_to @icalendar_url, class: 'govuk-link' do %>
+    Google Calendar
+  <% end %>
+
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
   <p class="govuk-body">
     <%= email_fmt(@email) %>
     <%= current_user_is_email(@email) ? 'are' : 'is' %>

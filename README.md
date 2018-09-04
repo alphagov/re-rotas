@@ -43,7 +43,8 @@ The data that is stored:
 - Email addresses and on-call dates (for manual calendars)
 - PagerDuty calendar links (link to iCalendar) (for PagerDuty calendars)
 
-Authentication is done via Google OAuth.
+Authentication is done via Google OAuth. With the exception of Icalendar
+exports which are long salted URLs (they are supposed to be "public").
 
 ## How to run it locally
 `./startup.sh`
