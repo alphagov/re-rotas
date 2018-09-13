@@ -11,8 +11,9 @@ This is an app to aggregate all of the rotas that we have at GDS.
 ### Features:
 
 - Aggregate calendars from PagerDuty Replacement for spreadsheet rotas (if
-- PagerDuty is not required/superfluous) Annual leave tracking Automatically
-- finds conflicts between annual leave and rotas
+  PagerDuty is not required/superfluous)
+- Annual leave tracking
+- Automatically finds conflicts between annual leave and rotas
 
 ## What are the user needs
 
