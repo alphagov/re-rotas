@@ -1,0 +1,7 @@
+---
+applications:
+  - name: oncall
+    buildpack: staticfile_buildpack
+    memory: 64M
+    routes:
+      - route: oncall.cloudapps.digital
