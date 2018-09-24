@@ -1,4 +1,4 @@
-module WhoIsOnCall
+module Rotas
   class PersonDayEvent
     attr_reader :calendar, :email, :date
 

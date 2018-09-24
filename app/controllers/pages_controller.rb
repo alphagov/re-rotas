@@ -8,6 +8,6 @@ class PagesController < ApplicationController
       .select { |e| e.date == Date.today }
       .group_by { |e| e.calendar.team }
 
-    @teams_on_call = teams_with_empty_events.merge(events_by_team)
+    @team_rotas = teams_with_empty_events.merge(events_by_team)
   end
 end

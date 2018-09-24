@@ -5,10 +5,10 @@
 <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
 <h1 class="govuk-heading-xl">
-  Currently on-call
+  Currently on rotas
 </h1>
 
-<% @teams_on_call.sort_by { |t, _| t.name }.each do |team, events| %>
+<% @team_rotas.sort_by { |t, _| t.name }.each do |team, events| %>
   <div>
     <h2 class="govuk-heading-l">
       <%= link_to team_path(team), class: 'govuk-link' do %>
@@ -17,7 +17,7 @@
     </h2>
     <% if events.empty? %>
       <p class="govuk-body">
-        There is currently no one on call for <%= team.name %>
+        There is currently no one on a rota for <%= team.name %>
       </p>
     <% else %>
       <table class="govuk-table">

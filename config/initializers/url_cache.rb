@@ -17,7 +17,7 @@ class UrlCache
   end
 end
 
-module WhoIsOnCall
+module Rotas
   URL_CACHE = UrlCache.new
 end
 

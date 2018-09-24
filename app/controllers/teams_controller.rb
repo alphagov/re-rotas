@@ -36,7 +36,7 @@ class TeamsController < ApplicationController
     @events_by_calendar = {}
     @team_members = []
 
-    @desc = WhoIsOnCall::MarkdownRenderer.render(@team.description || '')
+    @desc = Rotas::MarkdownRenderer.render(@team.description || '')
 
     @team.calendars.each do |calendar|
       events = calendar.person_day_events
@@ -63,7 +63,7 @@ class TeamsController < ApplicationController
     annual_leave_events = AnnualLeaveEvent.all
     calendars           = @team.calendars
 
-    @conflicts = WhoIsOnCall::Conflicts.find(
+    @conflicts = Rotas::Conflicts.find(
       annual_leave_events,
       calendars.map { |c| [c, c.person_day_events.group_by(&:date)] }
     ).reject { |_, c| c.empty? }

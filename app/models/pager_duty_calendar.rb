@@ -8,7 +8,7 @@ class PagerDutyCalendar < ApplicationRecord
 
   belongs_to :team
 
-  include WhoIsOnCall::Calendar
+  include Rotas::Calendar
 
   validates :name, presence: true
   validates :url,  presence: true
@@ -19,7 +19,7 @@ class PagerDutyCalendar < ApplicationRecord
 
   def events
     calendar = Icalendar::Calendar.parse(
-      StringIO.new(WhoIsOnCall::URL_CACHE.fetch(url))
+      StringIO.new(Rotas::URL_CACHE.fetch(url))
     )
 
     calendar
@@ -28,7 +28,7 @@ class PagerDutyCalendar < ApplicationRecord
         start_date = icalendar_event.dtstart.to_date
         end_date   = icalendar_event.dtend.to_date
         emails     = icalendar_event.attendee.map(&:to_s)
-        WhoIsOnCall::Event.new(self, emails, start_date, end_date)
+        Rotas::Event.new(self, emails, start_date, end_date)
       end
   end
 

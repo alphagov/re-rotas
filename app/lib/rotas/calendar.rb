@@ -1,4 +1,4 @@
-module WhoIsOnCall
+module Rotas
   module Calendar
     def person_day_events
       # returns a flat list of PersonDayEvent
@@ -12,7 +12,7 @@ module WhoIsOnCall
       end
 
       dates.flat_map do |date, emails|
-        emails.map { |e| WhoIsOnCall::PersonDayEvent.new(self, e, date) }
+        emails.map { |e| Rotas::PersonDayEvent.new(self, e, date) }
       end
     end
   end

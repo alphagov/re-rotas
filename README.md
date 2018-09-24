@@ -1,4 +1,4 @@
-# [Who Is On Call](https://oncall.cloudapps.digital)
+# [Rotas](https://rotas.cloudapps.digital)
 
 It might be you
 
@@ -41,7 +41,7 @@ as a replacement for a spreadsheet rota.
 
 The data that is stored:
 - Email addresses and annual leave dates
-- Email addresses and on-call dates (for manual calendars)
+- Email addresses and rota dates (for manual calendars)
 - PagerDuty calendar links (link to iCalendar) (for PagerDuty calendars)
 
 Authentication is done via Google OAuth. With the exception of Icalendar

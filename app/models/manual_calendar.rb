@@ -12,7 +12,7 @@ class ManualCalendar < ApplicationRecord
             presence: true,
             inclusion: { in: %w[in_hours out_of_hours in_and_out_of_hours] }
 
-  include WhoIsOnCall::Calendar
+  include Rotas::Calendar
 
   def events
     manual_calendar_events.order(:start_date).order(:end_date)

@@ -15,24 +15,24 @@
 </div>
 
 <h1 class="govuk-heading-l">
-  Personal on-call timetable
+  Personal timetable
 </h1>
 
-<% unless @on_call_calendars_by_date.empty? %>
-  <% if @days_until_on_call > 0 %>
+<% unless @rota_calendars_by_date.empty? %>
+  <% if @days_until_rota > 0 %>
     <p class="govuk-body">
-      Next on-call date for
+      Next rota date for
       <%= email_fmt(@email) %>
       is in
-      <%= @days_until_on_call.to_i %> days
+      <%= @days_until_rota.to_i %> days
       on
-      <%= @next_on_call_date.strftime '%d %b %Y' %>.
+      <%= @next_rota_date.strftime '%d %b %Y' %>.
     </p>
   <% else %>
     <p class="govuk-body">
       <%= email_fmt(@email) %>
       <%= current_user_is_email(@email) ? 'are' : 'is' %>
-      currently on call.
+      currently on a rota.
     </p>
   <% end %>
 
@@ -62,7 +62,7 @@
   <p class="govuk-body">
     <%= email_fmt(@email) %>
     <%= current_user_is_email(@email) ? 'are' : 'is' %>
-    on-call for the following dates:
+    on a rota for the following dates:
   </p>
 
   <table class="govuk-table">
@@ -76,11 +76,11 @@
     </thead>
     <tbody class="govuk-table__body">
       <% (@earliest..@latest).each do |date| %>
-        <% if @on_call_calendars_by_date.key? date %>
-          <% @on_call_calendars_by_date.fetch(date).each_with_index do |calendar, index| %>
+        <% if @rota_calendars_by_date.key? date %>
+          <% @rota_calendars_by_date.fetch(date).each_with_index do |calendar, index| %>
             <tr class="govuk-table__row">
               <% if index.zero? %>
-                <th rowspan="<%= @on_call_calendars_by_date.fetch(date).length %>" class="govuk-table__header">
+                <th rowspan="<%= @rota_calendars_by_date.fetch(date).length %>" class="govuk-table__header">
                   <%= date.strftime '%Y %b %d' %>
                 </th>
               <% end %>
@@ -128,6 +128,6 @@
   <p class="govuk-body">
     <%= email_fmt(@email) %>
     <%= current_user_is_email(@email) ? 'are' : 'is' %>
-    not on-call in the foreseeable future.
+    not on a rota in the foreseeable future.
   </p>
 <% end %>

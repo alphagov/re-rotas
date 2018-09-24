@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class WhoIsOnCallConflictTest < ActiveSupport::TestCase
+class RotasConflictTest < ActiveSupport::TestCase
   test 'annual_leave_emails_by_day' do
-    assert_equal WhoIsOnCall::Conflicts.annual_leave_emails_by_day([
+    assert_equal Rotas::Conflicts.annual_leave_emails_by_day([
       AnnualLeaveEvent.new(
         email: 'email',
         start_date: Date.parse('2018-01-01'),
@@ -12,7 +12,7 @@ class WhoIsOnCallConflictTest < ActiveSupport::TestCase
       Date.parse('2018-01-01') => ['email'],
     }
 
-    assert_equal WhoIsOnCall::Conflicts.annual_leave_emails_by_day([
+    assert_equal Rotas::Conflicts.annual_leave_emails_by_day([
       AnnualLeaveEvent.new(
         email: 'email',
         start_date: Date.parse('2018-01-01'),
@@ -30,25 +30,25 @@ class WhoIsOnCallConflictTest < ActiveSupport::TestCase
   end
 
   test 'calculate_conflicts_given_calendar' do
-    assert_equal WhoIsOnCall::Conflicts.conflicts_for_calendar(
+    assert_equal Rotas::Conflicts.conflicts_for_calendar(
       Hash.new,
       Hash.new,
     ), Hash.new
 
-    assert_equal WhoIsOnCall::Conflicts.conflicts_for_calendar(
+    assert_equal Rotas::Conflicts.conflicts_for_calendar(
       {
         Date.parse('2018-01-01') => ['email']
       },
       {
         Date.parse('2018-01-01') => [
-          WhoIsOnCall::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-01')),
+          Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-01')),
         ]
       }
     ), {
       Date.parse('2018-01-01') => ['email']
     }
 
-    assert_equal WhoIsOnCall::Conflicts.conflicts_for_calendar(
+    assert_equal Rotas::Conflicts.conflicts_for_calendar(
       {
         Date.parse('2018-01-01') => ['email'],
         Date.parse('2018-01-02') => ['another'],
@@ -56,14 +56,14 @@ class WhoIsOnCallConflictTest < ActiveSupport::TestCase
       },
       {
         Date.parse('2018-01-01') => [
-          WhoIsOnCall::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-01')),
+          Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-01')),
         ],
         Date.parse('2018-01-02') => [
-          WhoIsOnCall::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-02')),
-          WhoIsOnCall::PersonDayEvent.new(nil, 'another', Date.parse('2018-01-02')),
+          Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-02')),
+          Rotas::PersonDayEvent.new(nil, 'another', Date.parse('2018-01-02')),
         ],
         Date.parse('2018-01-03') => [
-          WhoIsOnCall::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-03')),
+          Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-03')),
         ],
       }
     ), {
@@ -74,11 +74,11 @@ class WhoIsOnCallConflictTest < ActiveSupport::TestCase
   end
 
   test 'find' do
-    assert_equal WhoIsOnCall::Conflicts.find(
+    assert_equal Rotas::Conflicts.find(
       Hash.new, Hash.new
     ), Hash.new
 
-    assert_equal WhoIsOnCall::Conflicts.find(
+    assert_equal Rotas::Conflicts.find(
       [
         AnnualLeaveEvent.new(
           email: 'email',
@@ -88,7 +88,7 @@ class WhoIsOnCallConflictTest < ActiveSupport::TestCase
       ], {
         'cal' => {
           Date.parse('2018-01-01') => [
-            WhoIsOnCall::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-01')),
+            Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-01')),
           ]
         },
      }), {

@@ -1,8 +1,8 @@
 ---
 applications:
-  - name: oncall
+  - name: rotas
     buildpack: ruby_buildpack
     services:
-      - oncall-db
-      - oncall-metrics
-      - oncall-secrets
+      - rotas-db
+      - rotas-metrics
+      - rotas-secrets

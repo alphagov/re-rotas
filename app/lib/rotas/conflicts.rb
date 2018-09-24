@@ -1,4 +1,4 @@
-module WhoIsOnCall::Conflicts
+module Rotas::Conflicts
   def self.find(annual_leave_events, calendars_day_and_events)
     calendars_day_and_events
       .map { |calendar, events_by_date|

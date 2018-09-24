@@ -2,7 +2,7 @@ require 'base64'
 require 'digest'
 require 'json'
 
-module WhoIsOnCall::CalendarUrl
+module Rotas::CalendarUrl
   def self.generate_url(email)
     salt = Rails.application.config.calendar_url_salt
 

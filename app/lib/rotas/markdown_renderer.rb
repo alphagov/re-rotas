@@ -1,4 +1,4 @@
-module WhoIsOnCall
+module Rotas
   class MarkdownRenderer < ::Redcarpet::Render::Safe
     def block_html(raw_html)
       # No user input HTML please

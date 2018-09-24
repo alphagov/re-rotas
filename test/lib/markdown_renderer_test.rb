@@ -5,14 +5,14 @@ def assert_same_no_ws(a, b)
                b.lines.map(&:strip).join('')
 end
 
-class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
+class RotasMarkdownRendererTest < ActiveSupport::TestCase
   test 'ul' do
     markdown = <<~MD
       - item
       - item
       - item
     MD
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
     expected_html = <<~HTML
       <ul class="govuk-list govuk-list--bullet">
         <li>item</li>
@@ -30,7 +30,7 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
       1. item
       1. item
     MD
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
     expected_html = <<~HTML
       <ol class="govuk-list govuk-list--number">
         <li>item</li>
@@ -51,7 +51,7 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
         <a href="https://href" title="" class="govuk-link">link</a>
       </p>
     HTML
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
 
     assert_same_no_ws(html, expected_html)
   end
@@ -60,7 +60,7 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
     markdown = <<~MD
       <script>alert(1);</script>
     MD
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
     assert_equal '', html
   end
 
@@ -68,7 +68,7 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
     markdown = <<~MD
       # hello
     MD
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
     assert_same_no_ws('<h1 class="govuk-heading-xl">hello</h1>', html)
   end
 
@@ -76,7 +76,7 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
     markdown = <<~MD
       ## hello
     MD
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
     assert_same_no_ws('<h2 class="govuk-heading-l">hello</h2>', html)
   end
 
@@ -84,7 +84,7 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
     markdown = <<~MD
       ### hello
     MD
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
     assert_same_no_ws('<h3 class="govuk-heading-m">hello</h3>', html)
   end
 
@@ -92,7 +92,7 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
     markdown = <<~MD
       #### hello
     MD
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
     assert_same_no_ws('<h4 class="govuk-heading-s">hello</h4>', html)
   end
 
@@ -100,7 +100,7 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
     markdown = <<~MD
       ##### hello
     MD
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
     assert_same_no_ws('<h5 class="govuk-heading-s">hello</h5>', html)
   end
 
@@ -108,7 +108,7 @@ class WhoIsOnCallMarkdownRendererTest < ActiveSupport::TestCase
     markdown = <<~MD
       ###### hello
     MD
-    html = WhoIsOnCall::MarkdownRenderer.render(markdown)
+    html = Rotas::MarkdownRenderer.render(markdown)
     assert_same_no_ws('<h6 class="govuk-heading-s">hello</h6>', html)
   end
 end

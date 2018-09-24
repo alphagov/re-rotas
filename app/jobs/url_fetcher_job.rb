@@ -11,7 +11,7 @@ class UrlFetcherJob < ActiveJob::Base
     logger.info "UrlFetcherJob Response #{response.code} #{@url}"
 
     logger.info "UrlFetcherJob Caching #{@url} "
-    WhoIsOnCall::URL_CACHE.update(@url, response.body.to_s)
+    Rotas::URL_CACHE.update(@url, response.body.to_s)
     logger.info "UrlFetcherJob Cached #{@url} "
   rescue HTTP::Error => e
     logger.error e

@@ -6,7 +6,7 @@ class IcalendarsController < ApplicationController
 
   def show
     fragment = params[:id]
-    email    = WhoIsOnCall::CalendarUrl.email_from_url_fragment(fragment)
+    email    = Rotas::CalendarUrl.email_from_url_fragment(fragment)
 
     raise ActionController::RoutingError.new('Not Found') if email.blank?
 
@@ -20,7 +20,7 @@ class IcalendarsController < ApplicationController
       .select { |e| e.date >= Date.today }
       .each do |e|
         calendar.event do |event|
-          desc = "Oncall #{e.calendar.team.name} | #{e.calendar.name}"
+          desc = "Rota #{e.calendar.team.name} | #{e.calendar.name}"
 
           event.dtstart = e.date
           event.dtend   = e.date + 1
@@ -40,6 +40,6 @@ class IcalendarsController < ApplicationController
         end
       end
 
-    send_data calendar.to_ical, filename: 'oncall.ics', type: 'text/calendar', disposition: 'attachment'
+    send_data calendar.to_ical, filename: 'rotas.ics', type: 'text/calendar', disposition: 'attachment'
   end
 end

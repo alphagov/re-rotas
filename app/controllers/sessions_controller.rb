@@ -53,7 +53,7 @@ class SessionsController < ApplicationController
     me_parsed = JSON.parse(me_response)
     email     = me_parsed['email']
 
-    unless WhoIsOnCall::Authorisation.email_authorised?(email)
+    unless Rotas::Authorisation.email_authorised?(email)
       raise ActionController::RoutingError.new('Forbidden')
     end
 
@@ -81,7 +81,7 @@ private
   def callback_url
     case ENV['RAILS_ENV']
     when 'production'
-      'https://oncall.cloudapps.digital/session/callback'
+      'https://rotas.cloudapps.digital/session/callback'
     else
       'http://localhost:3000/session/callback'
     end
@@ -90,14 +90,14 @@ private
   def google_client_id
     ENV.fetch('GOOGLE_AUTH_CLIENT_ID') do
       CF::App::Credentials
-        .find_by_service_name('oncall-secrets')['google-client-id']
+        .find_by_service_name('rotas-secrets')['google-client-id']
     end
   end
 
   def google_client_secret
     ENV.fetch('GOOGLE_AUTH_CLIENT_SECRET') do
       CF::App::Credentials
-        .find_by_service_name('oncall-secrets')['google-client-secret']
+        .find_by_service_name('rotas-secrets')['google-client-secret']
     end
   end
 end

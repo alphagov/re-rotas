@@ -1,4 +1,4 @@
-module WhoIsOnCall
+module Rotas
   class Event
     attr_reader :calendar, :emails, :start_date, :end_date
 

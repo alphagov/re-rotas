@@ -3,7 +3,7 @@ set -eu
 
 export RAILS_ENV='test'
 export DB_USER='postgres'
-DB_CONTAINER_NAME='who-is-on-call-pre-commit-postgres'
+DB_CONTAINER_NAME='rotas-pre-commit-postgres'
 
 echo '🕵️   checking your horrible code'
 

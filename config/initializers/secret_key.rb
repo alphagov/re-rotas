@@ -3,7 +3,7 @@ random_token = SecureRandom.base64(128)
 
 secret_key_base = if ENV.key?('VCAP_SERVICES')
                     CF::App::Credentials
-                      .find_by_service_name('oncall-secrets')
+                      .find_by_service_name('rotas-secrets')
                       &.fetch('secret-key-base', nil)
                   else
                     ENV.fetch('SECRET_KEY_BASE', nil)
@@ -11,7 +11,7 @@ secret_key_base = if ENV.key?('VCAP_SERVICES')
 
 secret_token = if ENV.key?('VCAP_SERVICES')
                  CF::App::Credentials
-                   .find_by_service_name('oncall-secrets')
+                   .find_by_service_name('rotas-secrets')
                    &.fetch('secret-token', nil)
                else
                  ENV.fetch('SECRET_TOKEN', nil)
