@@ -17,7 +17,7 @@ module GdsRotas
       'X-XSS-Protection' => '1; mode=block',
       'X-Content-Type-Options' => 'nosniff',
       'Content-Security-Policy' => "default-src 'self'; " +
-        "font-src data:; " +
+        "font-src 'self' data:; " +
         "img-src 'self'; " +
         "object-src 'none'; " +
         # the script digests are for the inline script in govuk-frontend/template.njk
