@@ -30,6 +30,7 @@ class ManualCalendarEventsController < ApplicationController
     @event.assign_attributes(create_or_update_params)
 
     return render :edit unless @event.valid?
+
     @event.save
 
     redirect_to manual_calendar_events_path(@calendar)

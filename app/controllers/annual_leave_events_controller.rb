@@ -28,6 +28,7 @@ class AnnualLeaveEventsController < ApplicationController
     @event.assign_attributes(params.permit(:email, :start_date, :end_date))
 
     return render :edit unless @event.valid?
+
     @event.save
 
     redirect_to annual_leave_events_path

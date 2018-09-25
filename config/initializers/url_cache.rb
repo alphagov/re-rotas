@@ -12,6 +12,7 @@ class UrlCache
     loop do
       result = @mutex.synchronize { @cache.fetch(url, nil) }
       return result unless result.nil?
+
       sleep 1
     end
   end
