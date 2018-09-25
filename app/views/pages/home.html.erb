@@ -4,6 +4,12 @@
 
 <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
+<% if flash[:alert] %>
+  <div class="govuk-error-message"><%= flash[:alert] %></div>
+
+  <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+<% end %>
+
 <h1 class="govuk-heading-xl">
   Currently on rotas
 </h1>
