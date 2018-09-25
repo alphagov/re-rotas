@@ -10,6 +10,7 @@ private
 
   def email_fmt(email)
     return email unless email.end_with?('digital.cabinet-office.gov.uk')
+
     short = email
       .split('@')
       .first.tr('.', ' ')

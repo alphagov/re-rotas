@@ -22,10 +22,10 @@ class UsersController < ApplicationController
       .to_h
 
     @earliest           = Date.today
-    @latest             = @rota_calendars_by_date.keys.sort.last
+    @latest             = @rota_calendars_by_date.keys.max
 
     unless @rota_calendars_by_date.empty?
-      @next_rota_date  = @rota_calendars_by_date.keys.sort.first
+      @next_rota_date  = @rota_calendars_by_date.keys.min
       @days_until_rota = @next_rota_date - Date.today
     end
   end
