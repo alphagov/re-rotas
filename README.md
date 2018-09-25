@@ -52,3 +52,9 @@ exports which are long salted URLs (they are supposed to be "public").
 
 ## How to test it locally
 `./pre-commit.sh`
+
+## How to install `pg` gem on Mac OS X using Postgres.app
+
+```
+gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/9.6/bin/pg_config
+```
