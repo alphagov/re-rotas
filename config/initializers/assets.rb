@@ -19,4 +19,4 @@ Rails.application.config.assets.paths << Rails.root.join(
 )
 
 # Rails needs to know about the file extensions for our fonts
-Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)\z/
+Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf|ico)\z/
