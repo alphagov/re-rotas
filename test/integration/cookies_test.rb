@@ -9,12 +9,12 @@ class CookiesTest < ActionDispatch::IntegrationTest
 
     assert_response :success
 
-    assert_not_nil cookies[CookieNames::SESSION_COOKIE_NAME]
+    assert_not_nil cookies[Rotas::CookieNames::SESSION_COOKIE_NAME]
 
     # need to use response.headers to verify that SameSite and expiry are set :/
-    assert_match /^#{CookieNames::SESSION_COOKIE_NAME}=.+$/, response.headers["Set-Cookie"]
+    assert_match /^#{Rotas::CookieNames::SESSION_COOKIE_NAME}=.+$/, response.headers["Set-Cookie"]
 
-    assert_match /SameSite=Strict/, response.headers["Set-Cookie"], "SameSite=Strict not enabled for this app!"
+    assert_match /SameSite=Lax/, response.headers["Set-Cookie"], "SameSite=Strict not enabled for this app!"
 
     assert_match /HttpOnly/, response.headers["Set-Cookie"], "HttpOnly not enabled for this app!"
 
