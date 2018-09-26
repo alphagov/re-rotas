@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :maybe_expire_session
   before_action :maybe_redirect_if_not_signed_in
 
-  rescue_from ActionController::RoutingError do
-    redirect_to root_path, alert: 'Login failed. Did you use a GDS Google account?'
+  rescue_from Rotas::Errors::AuthorisationError do
+    redirect_to new_session_path, alert: Rotas::Errors::AuthorisationError.message
   end
 
 private

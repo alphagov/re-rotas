@@ -18,6 +18,17 @@
 
     <div class="govuk-width-container">
       <%= render partial: 'layouts/phase' %>
+
+      <% if flash[:alert] %>
+        <div class="govuk-warning-text">
+          <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+          <strong class="govuk-warning-text__text">
+            <span class="govuk-warning-text__assistive">Warning</span>
+            <%= flash[:alert] %>
+          </strong>
+        </div>
+      <% end %>
+
       <main class="govuk-main-wrapper app-main-class" id="main-content" role="main">
         <%= yield %>
       </main>

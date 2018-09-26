@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
     code  = params[:code]
 
     unless state == session[:state]
-      raise ActionController::RoutingError.new('Forbidden')
+      raise Rotas::Errors::AuthorisationError
     end
 
     payload = {
@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
     email     = me_parsed['email']
 
     unless Rotas::Authorisation.email_authorised?(email)
-      raise ActionController::RoutingError.new('Forbidden')
+      raise Rotas::Errors::AuthorisationError
     end
 
     session[:email]        = email
