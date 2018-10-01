@@ -58,3 +58,7 @@ exports which are long salted URLs (they are supposed to be "public").
 ```
 gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/9.6/bin/pg_config
 ```
+
+## Deployment
+
+This is continuously deployed by the reliability engineering autom8 team.
