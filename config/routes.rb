@@ -1,8 +1,9 @@
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   root 'pages#home'
 
   resources :teams, only: %i(index show new create edit update)
-  get 'team/:id/conflicts',
+  get 'teams/:id/conflicts',
     as: 'team_conflicts',
     controller: :teams,
     action: :conflicts
@@ -24,7 +25,20 @@ Rails.application.routes.draw do
       action: :callback,
       as: 'callback_session'
 
+  get 'calendars/:id/edit',
+      id: /pagerduty:.*/,
+      controller: :pager_duty_calendars,
+      action: :edit,
+      as: 'edit_pager_duty_calendar'
+
+  patch 'calendars/:id',
+        id: /pagerduty:.*/,
+        controller: :pager_duty_calendars,
+        action: :update,
+        as: 'pager_duty_calendar'
+
   if %w(test development).include? Rails.env
     post 'test_session_create', to: 'test_session#create', as: :test_session_create
   end
 end
+# rubocop:enable Metrics/BlockLength
