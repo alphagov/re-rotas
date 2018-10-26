@@ -1,0 +1,59 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to teams_path, class: 'govuk-breadcrumbs__link' do %>
+        Teams
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to team_path(@calendar.team), class: 'govuk-breadcrumbs__link' do %>
+        <%= @calendar.team.name %>
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to edit_pager_duty_calendar_path(@calendar),
+                  class: 'govuk-breadcrumbs__link' do %>
+        Edit calendar
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">
+  Edit calendar
+</h1>
+
+<%= form_tag pager_duty_calendar_path(@calendar), method: :patch do %>
+  <% unless @calendar.errors.empty? %>
+    <ul class="govuk-list govuk-list--bullet">
+      <% @calendar.errors.full_messages.each do |message| %>
+        <li><span class="govuk-error-message"><%= message %></span></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+      <div class="govuk-form-group">
+        <%= label_tag :name, class: 'govuk-label' do %>
+          Calendar name
+        <% end %>
+        <%= text_field_tag :name, @calendar.name, class: 'govuk-input' %>
+      </div>
+
+      <div class="govuk-form-group">
+        <%= label_tag :url, class: 'govuk-label' do %>
+          Calendar URL
+        <% end %>
+        <%= text_field_tag :url, @calendar.url, class: 'govuk-input' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="govuk-form-group">
+    <%= submit_tag 'Update calendar', class: 'govuk-button' %>
+  </div>
+<% end %>

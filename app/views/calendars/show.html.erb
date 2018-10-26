@@ -30,6 +30,10 @@
     <%= link_to manual_calendar_events_path(@calendar.id), class: 'govuk-button' do %>
       View, add, and edit events
     <% end %>
+  <% else %>
+    <%= link_to edit_pager_duty_calendar_path(@calendar), class: 'govuk-button' do %>
+      Edit calendar
+    <% end %>
   <% end %>
 </div>
 

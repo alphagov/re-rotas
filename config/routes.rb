@@ -24,6 +24,18 @@ Rails.application.routes.draw do
       action: :callback,
       as: 'callback_session'
 
+  get 'calendars/:id/edit',
+      id: /pagerduty:.*/,
+      controller: :pager_duty_calendars,
+      action: :edit,
+      as: 'edit_pager_duty_calendar'
+
+  patch 'calendars/:id',
+        id: /pagerduty:.*/,
+        controller: :pager_duty_calendars,
+        action: :update,
+        as: 'pager_duty_calendar'
+
   if %w(test development).include? Rails.env
     post 'test_session_create', to: 'test_session#create', as: :test_session_create
   end
