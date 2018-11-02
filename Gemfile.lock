@@ -81,6 +81,8 @@ GEM
     erubi (1.7.1)
     execjs (2.7.0)
     ffi (1.9.25)
+    friendly_id (5.2.4)
+      activerecord (>= 4.0.0)
     gds_metrics (0.1.0)
       prometheus-client-mmap (= 0.9.1)
     globalid (0.4.1)
@@ -245,6 +247,7 @@ DEPENDENCIES
   cf-app-utils
   chromedriver-helper
   coffee-rails (~> 4.2)
+  friendly_id
   gds_metrics
   govuk-lint
   http
@@ -268,4 +271,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.4
+   1.17.0

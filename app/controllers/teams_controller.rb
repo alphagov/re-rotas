@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
   end
 
   def edit
-    @team = Team.find(params[:id])
+    @team = Team.friendly.find(params[:id])
   end
 
   def create
@@ -21,7 +21,7 @@ class TeamsController < ApplicationController
   end
 
   def update
-    @team = Team.find(params[:id])
+    @team = Team.friendly.find(params[:id])
     @team.assign_attributes(params.permit(:name, :description))
 
     return render :edit unless @team.valid?
@@ -31,7 +31,7 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find(params[:id])
+    @team = Team.friendly.find(params[:id])
 
     @events_by_calendar = {}
     @team_members = []
@@ -59,7 +59,7 @@ class TeamsController < ApplicationController
   end
 
   def conflicts
-    @team               = Team.find(params[:id])
+    @team               = Team.friendly.find(params[:id])
     annual_leave_events = AnnualLeaveEvent.all
     calendars           = @team.calendars
 

@@ -14,7 +14,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :success
     assert_select "h1", "Currently on rotas"
-    assert_select("a:match('href', ?)", %r{/teams/\d+}) do |result|
+    assert_select("a:match('href', ?)", %r{/teams/biscuits}) do |result|
         assert_match /Biscuits/, result.text, "No biscuits found, check your cookies!"
     end
     assert_select "p.govuk-body", "There is currently no one on a rota for Biscuits"
