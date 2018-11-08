@@ -3,6 +3,7 @@ class Team < ApplicationRecord
   friendly_id :name, use: :slugged
   has_many :pagerduty_calendars, class_name: :PagerDutyCalendar
   has_many :manual_calendars,    class_name: :ManualCalendar
+  attr_accessor :slug
 
   validates :name, presence: true
 
