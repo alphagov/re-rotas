@@ -20,11 +20,11 @@ class CalendarsController < ApplicationController
   end
 
   def new
-    @team = Team.find(params[:team_id])
+    @team = Team.friendly.find(params[:team_id])
   end
 
   def create
-    team = Team.find(params[:team_id])
+    team = Team.friendly.find(params[:team_id])
 
     name           = params[:name]
     type           = params[:type].to_sym
