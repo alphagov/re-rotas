@@ -5,8 +5,6 @@ export RAILS_ENV='test'
 export DB_USER='postgres'
 DB_CONTAINER_NAME='rotas-pre-commit-postgres'
 
-echo '🕵️   checking your horrible code'
-
 function precommit_fail {
     echo '‼️   pre-commit fail'
 }
@@ -29,13 +27,14 @@ docker run --name "$DB_CONTAINER_NAME" \
 bundle check || bundle install
 npm install
 
+echo '🕵️   checking your horrible code'
 rake db:create db:migrate
 rake
 
 if command -v shellcheck >/dev/null 2>&1; then
- shellcheck ./*.sh
+  shellcheck ./*.sh
 else
- echo "‼️    no shellcheck install, skipping test"
+  echo "‼️    no shellcheck install, skipping test"
 fi
 
 echo '✅   pre-commit success!'
