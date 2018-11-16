@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   helper_method :email_fmt
   helper_method :current_user_is_email
   helper_method :current_user
+  helper_method :people_finder_url
 
   before_action :maybe_expire_session
   before_action :maybe_redirect_if_not_signed_in
@@ -26,6 +27,11 @@ private
     return short unless email&.casecmp(current_user)&.zero?
 
     '<strong class="govuk-tag">You</strong>'.html_safe
+  end
+
+  def people_finder_url(email)
+    slug = email.split('@').first.downcase.tr('.', '-')
+    "https://peoplefinder.cabinetoffice.gov.uk/people/#{slug}"
   end
 
   def current_user_is_email(email)
