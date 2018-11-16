@@ -18,6 +18,7 @@ private
     short = email
       .split('@')
       .first.tr('.', ' ')
+      .gsub(/[0-9]/, '')
       .split(' ')
       .map(&:capitalize)
       .join(' ')
