@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2018_11_08_174953) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description", default: ""
-    t.string "slug", default: ""
+    t.string "slug"
   end
 
   add_foreign_key "manual_calendars", "teams"
