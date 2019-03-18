@@ -82,7 +82,7 @@ GEM
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.9.25)
-    friendly_id (5.2.4)
+    friendly_id (5.2.5)
       activerecord (>= 4.0.0)
     gds_metrics (0.1.0)
       prometheus-client-mmap (= 0.9.1)
