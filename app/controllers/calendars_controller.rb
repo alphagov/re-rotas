@@ -8,7 +8,8 @@ class CalendarsController < ApplicationController
 
     person_day_events = @calendar.person_day_events
 
-    @team_members = person_day_events.flat_map(&:email).uniq
+    @team_members = @calendar.members
+
     @events_by_date = person_day_events
       .group_by(&:date)
 
