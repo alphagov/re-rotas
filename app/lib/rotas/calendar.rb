@@ -15,5 +15,12 @@ module Rotas
         emails.map { |e| Rotas::PersonDayEvent.new(self, e, date) }
       end
     end
+
+    def members
+      person_day_events
+        .reject { |event| event.date < Date.today }
+        .flat_map(&:email)
+        .uniq
+    end
   end
 end

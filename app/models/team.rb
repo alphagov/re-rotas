@@ -17,4 +17,8 @@ class Team < ApplicationRecord
   def should_generate_new_friendly_id?
     true
   end
+
+  def members
+    calendars.flat_map(&:members).uniq
+  end
 end
