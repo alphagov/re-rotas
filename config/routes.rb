@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     action: :conflicts
 
   resources :icalendars, only: %i(show), id: /.*/
-  resources :calendars, only: %i(index show new create)
+  resources :calendars, only: %i(index show new create destroy)
   resources :manual_calendars, only: %i() do
     resources :events,
               only: %i(index new create edit update destroy),

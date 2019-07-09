@@ -26,20 +26,28 @@
 </h1>
 
 <div>
-  <% if @calendar.events_editable? %>
-    <%= link_to manual_calendar_events_path(@calendar.id), class: 'govuk-button' do %>
-      View, add, and edit events
-    <% end %>
-  <% else %>
-    <%= link_to edit_pager_duty_calendar_path(@calendar), class: 'govuk-button' do %>
-      Edit calendar
-    <% end %>
+  <p>Are you sure you want to delete <%= @calendar.name %>?</p>
+  <%= delete_calendar_path(@calendar.id), class: 'govuk-button' do %>
+  Delete <%= @calendar.name %>
   <% end %>
 </div>
 <div>
-  <%= link_to delete_calendar_path(@calendar.id), class: 'govuk-button' do %>
-  Delete calendar
+  <%= link_to manual_calendar_events_path(@calendar.id), class: 'govuk-button' do %>
+  View, add, and edit events
   <% end %>
+</div>
+
+<div>
+  <h2 class="govuk-heading-l">Calendar members</h2>
+  <ul class="govuk-list govuk-list--bullet">
+    <% @team_members.each do |email| %>
+      <li>
+        <%= link_to user_path(email), class: 'govuk-link' do %>
+          <%= email_fmt(email) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
 <div>
@@ -74,17 +82,4 @@
       <% end %>
     </tbody>
   </table>
-</div>
-
-<div>
-  <h2 class="govuk-heading-l">Calendar members</h2>
-  <ul class="govuk-list govuk-list--bullet">
-    <% @team_members.each do |email| %>
-      <li>
-        <%= link_to user_path(email), class: 'govuk-link' do %>
-          <%= email_fmt(email) %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
 </div>

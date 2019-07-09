@@ -52,4 +52,12 @@ class CalendarsController < ApplicationController
 
     redirect_to team_path(team)
   end
+
+  def delete
+    @calendar = Calendar.find(params[:id])
+  end
+
+  def confirm_delete
+    @calendar = Calendar.find(params[:id])
+  end
 end
