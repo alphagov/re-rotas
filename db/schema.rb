@@ -14,6 +14,8 @@ ActiveRecord::Schema.define(version: 2018_11_08_174953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
+  enable_extension "uuid-ossp"
 
   create_table "annual_leave_events", force: :cascade do |t|
     t.string "email"
@@ -51,6 +53,13 @@ ActiveRecord::Schema.define(version: 2018_11_08_174953) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_pager_duty_calendars_on_team_id"
+  end
+
+  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
+    t.string "auth_name", limit: 256
+    t.integer "auth_srid"
+    t.string "srtext", limit: 2048
+    t.string "proj4text", limit: 2048
   end
 
   create_table "teams", force: :cascade do |t|
