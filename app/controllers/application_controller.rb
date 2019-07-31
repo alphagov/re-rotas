@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper_method :name_fmt
   helper_method :email_fmt
   helper_method :current_user_is_email
   helper_method :current_user
@@ -12,6 +13,13 @@ class ApplicationController < ActionController::Base
   end
 
 private
+  def name_fmt(email)
+    short = email.split('.').first.capitalize
+
+    return short unless email&.casecmp(current_user)&.zero?
+
+    '<strong class="govuk-tag">You</strong>'.html_safe
+  end
 
   def email_fmt(email)
     return email unless email.end_with?('digital.cabinet-office.gov.uk')

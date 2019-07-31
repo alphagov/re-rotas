@@ -15,6 +15,18 @@ class ApplicationControllerTest < ActionController::TestCase
     end
   end
 
+  test 'name_fmt works' do
+    emails = %w[
+      firstname.lastname1@digital.cabinet-office.gov.uk
+      firstname.middlenamelastname-lastname@digital.cabinet-office.gov.uk
+    ]
+    nices = ['Firstname', 'Firstname']
+
+    emails.zip(nices).each do |email, nice|
+      assert_equal @controller.send(:name_fmt, email), nice
+    end
+  end
+
   test 'email_fmt works' do
     emails = %w[
       firstname.lastname1@digital.cabinet-office.gov.uk
