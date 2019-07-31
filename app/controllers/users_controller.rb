@@ -39,5 +39,7 @@ class UsersController < ApplicationController
         message: "Viewed #{@email}",
       }
     ).save!
+
+    @contact_details = Rotas::PagerdutyAPI.contact_details_for_email(@email)
   end
 end
