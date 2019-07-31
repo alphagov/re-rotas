@@ -47,6 +47,7 @@ private
   end
 
   def current_user
+    return 'disable@auth.user' if ENV.fetch('DISABLE_AUTH', nil)
     session.fetch(:email, nil)
   end
 
