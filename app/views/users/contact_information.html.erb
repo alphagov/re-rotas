@@ -1,0 +1,28 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      Users
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to user_path(@email), class: 'govuk-breadcrumbs__link' do %>
+        <%= @email %>
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to user_contact_information_path(@email), class: 'govuk-breadcrumbs__link' do %>
+        Contact information
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-l">
+  Contact details
+</h1>
+
+<p class="govuk-body">
+  This has been logged in the audit log
+</p>

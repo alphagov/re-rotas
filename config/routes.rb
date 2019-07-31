@@ -17,7 +17,12 @@ Rails.application.routes.draw do
   end
   resources :annual_leave_events, only: %i(index new create edit update destroy)
 
-  resources :users, only: %i(show), id: /.*/
+  resources :users, only: %i(show), id: /[^\/]*/
+  get 'users/:id/contact-info',
+      id: /[^\/]*/,
+      controller: :users,
+      action: :contact_information,
+      as: :user_contact_information
 
   resource :session, only: %i(new create destroy)
   get 'session/callback',
