@@ -5,7 +5,7 @@ class ManualCalendarEvent < ApplicationRecord
   validates :end_date,   presence: true
   validate :end_date_after_start_date?
 
-  serialize :emails_text, Array
+  serialize :emails, Array
 
 private
 
