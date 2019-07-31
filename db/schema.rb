@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_174953) do
+ActiveRecord::Schema.define(version: 2019_07_31_081757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2018_11_08_174953) do
     t.string "emails", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "emails_text"
   end
 
   create_table "manual_calendars", id: false, force: :cascade do |t|
