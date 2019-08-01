@@ -18,11 +18,25 @@
   Contact details
 </h1>
 
+<p class="govuk-body">
+  Click the button below to fetch contact information from PagerDuty.
+</p>
+
+<%= link_to user_contact_information_path(@email), class: 'govuk-button' do %>
+  Get contact information from PagerDuty
+<% end %>
 
 <p class="govuk-body">
-  <%= email_fmt(@email) %> may or may not have contact details available on
-  <%= link_to 'People Finder', people_finder_url(@email) %>, otherwise
-  check <%= link_to 'Google Contacts', 'https://contacts.google.com' %>.
+  Accessing contact information is recorded in the audit log.
+</p>
+
+<p class="govuk-body">
+  Alternatively,
+  <%= name_fmt(@email) %>
+  may have contact details available on
+  <%= link_to 'People Finder', people_finder_url(@email) %>,
+  or
+  <%= link_to 'Google Contacts', 'https://contacts.google.com' %>.
 </p>
 
 <h1 class="govuk-heading-l">

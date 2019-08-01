@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_31_083807) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-  enable_extension "postgis"
-  enable_extension "uuid-ossp"
+ActiveRecord::Schema.define(version: 2019_07_31_211302) do
 
   create_table "annual_leave_events", force: :cascade do |t|
     t.string "email"
     t.date "start_date"
     t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "audit_events", force: :cascade do |t|
+    t.string "email"
+    t.text "event"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,7 +57,7 @@ ActiveRecord::Schema.define(version: 2019_07_31_083807) do
     t.index ["team_id"], name: "index_pager_duty_calendars_on_team_id"
   end
 
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
+  create_table "spatial_ref_sys", primary_key: "srid", force: :cascade do |t|
     t.string "auth_name", limit: 256
     t.integer "auth_srid"
     t.string "srtext", limit: 2048
@@ -70,6 +72,4 @@ ActiveRecord::Schema.define(version: 2019_07_31_083807) do
     t.string "slug"
   end
 
-  add_foreign_key "manual_calendars", "teams"
-  add_foreign_key "pager_duty_calendars", "teams"
 end

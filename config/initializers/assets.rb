@@ -15,7 +15,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 # This is to get govuk-frontend fonts
 Rails.application.config.assets.paths << Rails.root.join(
-  'node_modules/govuk-frontend/assets/'
+  'node_modules/govuk-frontend/govuk/assets/'
 )
 
 # Rails needs to know about the file extensions for our fonts

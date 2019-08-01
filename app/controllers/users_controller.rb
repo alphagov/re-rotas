@@ -29,4 +29,17 @@ class UsersController < ApplicationController
       @days_until_rota = @next_rota_date - Date.today
     end
   end
+
+  def contact_information
+    @email = params[:id]
+
+    AuditEvent.new(
+      email: current_user,
+      event: {
+        message: "Viewed the contact details of #{@email} from PagerDuty",
+      }
+    ).save!
+
+    @contact_details = Rotas::PagerDutyAPI.contact_details_for_email(@email)
+  end
 end
