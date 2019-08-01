@@ -32,7 +32,7 @@ correct person if there is a problem.
 
 ## How this works
 
-This is a monolithic rails app with a postgres database.
+This is a monolithic rails app.
 
 It periodically pulls data from PagerDuty calendars and caches them.
 
@@ -52,13 +52,3 @@ exports which are long salted URLs (they are supposed to be "public").
 
 ## How to test it locally
 `./pre-commit.sh`
-
-## How to install `pg` gem on Mac OS X using Postgres.app
-
-```
-gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/9.6/bin/pg_config
-```
-
-## Deployment
-
-This is continuously deployed by the reliability engineering autom8 team.
