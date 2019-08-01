@@ -38,7 +38,7 @@ module Rotas::PagerDutyAPI
     if ENV.key?('VCAP_SERVICES')
       CF::App::Credentials
           .find_by_service_name('rotas-secrets')
-          .find_by_service_name('pagerduty-api-key')
+          &.fetch('pagerduty-api-key', nil)
     else
       ENV.fetch('PAGERDUTY_API_KEY')
     end
