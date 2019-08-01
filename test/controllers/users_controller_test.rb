@@ -4,7 +4,7 @@ require 'helpers/auth_helper'
 require 'helpers/teams_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  test 'should log an audit event' do
+  test 'should log an audit event and show contact details correctly' do
     Rotas::PagerdutyAPI.stub(
       :contact_details_for_email, [
         {
@@ -74,6 +74,25 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         count: 0,
       }, 'Hide push address as it is meaningless'
       assert_select 'td', /Work push/
+    end
+  end
+
+  test 'should log an audit event and show a helpful msg when no details' do
+    Rotas::PagerdutyAPI.stub(:contact_details_for_email, nil) do
+      create_test_session_with_fake_auth
+
+      email = 'log-an-audit-event-404@test'
+
+      get user_contact_information_path(id: email)
+      assert_response :success
+
+      audit_event = AuditEvent.last
+
+      assert_equal audit_event.email, test_session_email
+
+      assert_equal audit_event.event[:message], "Viewed #{email}"
+
+      assert_select 'p', /There are no contact details in Pagerduty/
     end
   end
 end
