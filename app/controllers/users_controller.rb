@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     AuditEvent.new(
       email: current_user,
       event: {
-        message: "Viewed #{@email}",
+        message: "Viewed the contact details of #{@email} from PagerDuty",
       }
     ).save!
 
