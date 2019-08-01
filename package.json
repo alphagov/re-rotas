@@ -2,6 +2,6 @@
   "name": "gds-rotas",
   "private": true,
   "dependencies": {
-    "govuk-frontend": "^1.2.0"
+    "govuk-frontend": "^3.0.0"
   }
 }
