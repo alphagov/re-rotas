@@ -1,4 +1,4 @@
-module Rotas::PagerdutyAPI
+module Rotas::PagerDutyAPI
   def self.contact_details_for_email(email)
     users_url = "#{api_url}/users"
 

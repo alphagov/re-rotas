@@ -40,6 +40,6 @@ class UsersController < ApplicationController
       }
     ).save!
 
-    @contact_details = Rotas::PagerdutyAPI.contact_details_for_email(@email)
+    @contact_details = Rotas::PagerDutyAPI.contact_details_for_email(@email)
   end
 end
