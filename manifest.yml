@@ -1,7 +1,7 @@
 ---
 applications:
   - name: rotas
-    buildpack: ruby_buildpack
+    buildpacks: [ruby_buildpack]
     services:
       - rotas-db
       - rotas-metrics
