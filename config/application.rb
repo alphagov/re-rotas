@@ -1,6 +1,10 @@
 require_relative 'boot'
 
 require 'rails/all'
+require 'prometheus/middleware/collector'
+require 'prometheus/middleware/exporter'
+require 'prometheus/client'
+require 'prometheus/client/data_stores/direct_file_store'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -40,5 +44,9 @@ module GdsRotas
       max_threads: 4,
       idletime: 600.seconds,
     )
+
+    config.middleware.use Prometheus::Middleware::Collector
+    config.middleware.use Prometheus::Middleware::Exporter
+    Prometheus::Client.config.data_store = Prometheus::Client::DataStores::DirectFileStore.new(dir: 'tmp/metrics')
   end
 end

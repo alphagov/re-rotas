@@ -61,7 +61,7 @@ group :test do
 end
 
 group :production do
-  gem 'gds_metrics'
+  gem 'prometheus-client', '~> 1.0'
   gem 'pg'
 end
 
