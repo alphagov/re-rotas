@@ -17,27 +17,30 @@ class PagesController < ApplicationController
   def org_map
     g = GraphViz.new(:G, type: :digraph)
 
+    node_styles = { shape: :rect, fontname: 'Helvetica-Bold', penwidth: 1.5 }
+    edge_styles = { penwidth: 1.5 }
+
     Service.all.each do |s|
-      g.add_nodes("S:#{s.name}", label: s.name, shape: :rect)
+      g.add_nodes("S:#{s.name}", label: s.name, shape: :rect, **node_styles)
     end
 
     Team.all.each do |t|
-      g.add_nodes("T:#{t.name}", label: t.name, shape: :rect)
+      g.add_nodes("T:#{t.name}", label: t.name, **node_styles)
     end
 
     OrgUnit.all.each do |ou|
-      g.add_nodes("OU:#{ou.name}", label: ou.name, shape: :rect)
+      g.add_nodes("OU:#{ou.name}", label: ou.name, **node_styles)
     end
 
     OrgUnit.all.each do |ou|
       ou.teams.each do |t|
-        g.add_edges("OU:#{ou.name}", "T:#{t.name}")
+        g.add_edges("OU:#{ou.name}", "T:#{t.name}", **edge_styles)
       end
     end
 
     Team.all.each do |t|
       t.services.each do |s|
-        g.add_edges("T:#{t.name}", "S:#{s.name}")
+        g.add_edges("T:#{t.name}", "S:#{s.name}", **edge_styles)
       end
     end
 
