@@ -1,0 +1,48 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to org_units_path, class: 'govuk-breadcrumbs__link' do %>
+        Organisational units
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to org_unit_path(@org_unit), class: 'govuk-breadcrumbs__link' do %>
+        <%= @org_unit.name %>
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">
+  <%= @org_unit.name %>
+</h1>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-l">Teams</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <% @org_unit.teams.each do |team| %>
+        <li>
+          <%= link_to team_path(team), class: 'govuk-link' do %>
+            <%= team.name %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="govuk-grid-column-one-half">
+    <h2 class="govuk-heading-l">Services</h2>
+    <ul class="govuk-list govuk-list--bullet">
+      <% @org_unit.services.each do |service| %>
+        <li>
+          <%= link_to service_path(service), class: 'govuk-link' do %>
+            <%= service.name %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

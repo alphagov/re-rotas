@@ -2,6 +2,8 @@
 Rails.application.routes.draw do
   root 'pages#home'
 
+  resources :org_units, only: %i(index show), path: '/org-units'
+
   resources :services, only: %i(index show new create edit update)
 
   resources :teams, only: %i(index show new create edit update)

@@ -1,0 +1,41 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to org_units_path, class: 'govuk-breadcrumbs__link' do %>
+        Organisational units
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">Organisational units</h1>
+
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header">Organisational unit</th>
+      <th class="govuk-table__header">Teams</th>
+      <th class="govuk-table__header">Services</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <% @org_units.sort_by(&:name).each do |org_unit| %>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <%= link_to org_unit_path(org_unit), class: 'govuk-link' do %>
+            <%= org_unit.name %>
+          <% end %>
+        </td>
+        <td class="govuk-table__cell">
+          <%= org_unit.teams.length %>
+        </td>
+        <td class="govuk-table__cell">
+          <%= org_unit.services.length %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
