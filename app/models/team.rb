@@ -1,8 +1,10 @@
 class Team < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
+
   has_many :pagerduty_calendars, class_name: :PagerDutyCalendar
   has_many :manual_calendars,    class_name: :ManualCalendar
+  has_and_belongs_to_many :services
 
   validates :name, presence: true
 

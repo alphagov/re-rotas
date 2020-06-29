@@ -1,0 +1,62 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to services_path, class: 'govuk-breadcrumbs__link' do %>
+        Services
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">Services</h1>
+
+<div>
+  <%= link_to new_service_path, class: 'govuk-button' do %>
+    New service
+  <% end %>
+</div>
+
+<details class="govuk-details" data-module="govuk-details">
+  <summary class="govuk-details__summary">
+    <span class="govuk-details__summary-text">
+      How are services scored?
+    </span>
+  </summary>
+  <div class="govuk-details__text">
+    <p>The maxmium score is 5, the minimum score is 0.</p>
+    <p>
+      To achieve the maximum score, a service must have a description,
+      documentation, and be associated with at least one team.
+    </p>
+  </div>
+</details>
+
+<table class="govuk-table">
+  <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+      <th class="govuk-table__header">Service</th>
+      <th class="govuk-table__header">Teams</th>
+      <th class="govuk-table__header">Score</th>
+    </tr>
+  </thead>
+  <tbody class="govuk-table__body">
+    <% @services.sort_by(&:score).reverse.each do |service| %>
+      <tr class="govuk-table__row">
+        <td class="govuk-table__cell">
+          <%= link_to service_path(service), class: 'govuk-link' do %>
+            <%= service.name %>
+          <% end %>
+        </td>
+        <td class="govuk-table__cell">
+            <%= service.teams.length %>
+        </td>
+        <td class="govuk-table__cell">
+            <%= service.score.round(1) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

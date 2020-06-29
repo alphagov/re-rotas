@@ -1,0 +1,41 @@
+<% unless @service.errors.empty? %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% @service.errors.full_messages.each do |message| %>
+      <li><span class="govuk-error-message"><%= message %></span></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <div class="govuk-form-group">
+      <%= f.label :name, class: 'govuk-label' do %>
+        Service name
+      <% end %>
+      <%= f.text_field :name, class: 'govuk-input' %>
+    </div>
+    <div class="govuk-form-group">
+      <%= label_tag :description, class: 'govuk-label' do %>
+        Description
+      <% end %>
+      <%= f.text_area :description, rows: 5, class: 'govuk-textarea' %>
+    </div>
+    <div class="govuk-form-group">
+      <%= label_tag :documentation, class: 'govuk-label' do %>
+        Documentation
+      <% end %>
+      <%= f.text_area :documentation, rows: 5, class: 'govuk-textarea' %>
+    </div>
+    <div class="govuk-form-group">
+      <%= label_tag :teams, class: 'govuk-label' do %>
+        Teams
+      <% end %>
+      <%= f.collection_check_boxes(:team_ids, @teams, :id, :name) do |b| %>
+        <div class="govuk-checkboxes__item">
+          <%= b.check_box class: 'govuk-checkboxes__input'%>
+          <%= b.label class: 'govuk-label govuk-checkboxes__label' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

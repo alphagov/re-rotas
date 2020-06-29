@@ -1,0 +1,34 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to services_path, class: 'govuk-breadcrumbs__link' do %>
+        Services
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to service_path(@service), class: 'govuk-breadcrumbs__link' do %>
+        <%= @service.name %>
+      <% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to edit_service_path(@service), class: 'govuk-breadcrumbs__link' do %>
+        Edit service
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">
+  Edit service
+</h1>
+
+<%= form_for @service, method: :patch do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+
+  <div class="govuk-form-group">
+    <%= f.submit 'Update service', class: 'govuk-button' %>
+  </div>
+<% end %>

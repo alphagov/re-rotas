@@ -2,6 +2,8 @@
 Rails.application.routes.draw do
   root 'pages#home'
 
+  resources :services, only: %i(index show new create edit update)
+
   resources :teams, only: %i(index show new create edit update)
   get 'teams/:id/conflicts',
     as: 'team_conflicts',
