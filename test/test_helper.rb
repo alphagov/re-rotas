@@ -6,5 +6,7 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  setup do
+    (ActiveJob::Base.descendants << ActiveJob::Base).each(&:disable_test_adapter)
+  end
 end
