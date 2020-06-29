@@ -22,7 +22,7 @@ module GdsRotas
       'X-Content-Type-Options' => 'nosniff',
       'Content-Security-Policy' => "default-src 'self'; " +
         "font-src 'self' data:; " +
-        "img-src 'self'; " +
+        "img-src 'self' data:; " +
         "object-src 'none'; " +
         # the script digests are for the inline script in govuk-frontend/template.njk
         # if the scripts in that file change, or more are added, use a command similar to

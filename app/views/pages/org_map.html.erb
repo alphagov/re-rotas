@@ -1,0 +1,16 @@
+<div class="govuk-breadcrumbs">
+  <ol class="govuk-breadcrumbs__list">
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to '/', class: 'govuk-breadcrumbs__link' do %>Home<% end %>
+    </li>
+    <li class="govuk-breadcrumbs__list-item">
+      <%= link_to org_map_path, class: 'govuk-breadcrumbs__link' do %>
+        Organisational map
+      <% end %>
+    </li>
+  </ol>
+</div>
+
+<h1 class="govuk-heading-xl">Organisational map</h1>
+
+<%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@org_map_image)}" %>
