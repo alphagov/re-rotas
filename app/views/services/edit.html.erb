@@ -25,10 +25,10 @@
   Edit service
 </h1>
 
-<%= form_tag service_path(@service), method: :patch do %>
-  <%= render partial: 'form' %>
+<%= form_for @service, method: :patch do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
 
   <div class="govuk-form-group">
-    <%= submit_tag 'Update service', class: 'govuk-button' %>
+    <%= f.submit 'Update service', class: 'govuk-button' %>
   </div>
 <% end %>

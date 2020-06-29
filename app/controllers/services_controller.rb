@@ -15,19 +15,25 @@ class ServicesController < ApplicationController
 
   def new
     @service = Service.new
+    @teams = Team.all
   end
 
   def edit
     @service = Service.friendly.find(params[:id])
+    @teams = Team.all
   end
 
   def create
-    @service = Service.new(params.permit(
+    @service = Service.new(params.require(:service).permit(
       :name,
       :description, :documentation,
+      { team_ids: [] },
     ))
 
-    return render :new unless @service.valid?
+    unless @service.valid?
+      @teams = Team.all
+      return render :new
+    end
 
     @service.save
     redirect_to service_path(@service)
@@ -35,12 +41,16 @@ class ServicesController < ApplicationController
 
   def update
     @service = Service.friendly.find(params[:id])
-    @service.assign_attributes(params.permit(
+    @service.assign_attributes(params.require(:service).permit(
       :name,
       :description, :documentation,
+      { team_ids: [] },
     ))
 
-    return render :edit unless @service.valid?
+    unless @service.valid?
+      @teams = Team.all
+      return render :edit
+    end
 
     @service.save
     redirect_to service_path(@service)

@@ -20,10 +20,10 @@
   New service
 </h1>
 
-<%= form_tag action: :create, method: :post do %>
-  <%= render partial: 'form' %>
+<%= form_for @service, method: :post do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
 
   <div class="govuk-form-group">
-    <%= submit_tag 'Create service', class: 'govuk-button' %>
+    <%= f.submit 'Create service', class: 'govuk-button' %>
   </div>
 <% end %>
