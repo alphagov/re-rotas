@@ -1,0 +1,95 @@
+---
+resource_types:
+  - name: pull-request
+    type: docker-image
+    source:
+      repository: teliaoss/github-pr-resource
+
+resources:
+  - name: re-rotas-src
+    type: git
+    icon: git
+    source:
+      uri: https://github.com/alphagov/re-rotas.git
+      branch: master
+
+  - name: re-rotas-pr
+    type: pull-request
+    icon: github
+    source:
+      repository: alphagov/re-rotas
+      access_token: ((pr-builds-status-github-token))
+      disable_forks: true
+
+jobs:
+  - name: self-update
+    serial: true
+    plan:
+      - get: re-rotas-src
+        trigger: true
+
+      - set_pipeline: rotas
+        file: re-rotas-src/ci/pipeline.yml
+
+  - name: pr
+    public: true
+    serial: true
+    plan:
+      - get: re-rotas-pr
+        trigger: true
+        version: every
+
+      - put: re-rotas-pr
+        params:
+          status: pending
+          path: re-rotas-pr
+
+      - task: run-tests
+        timeout: 15m
+        config:
+          platform: linux
+
+          image_resource:
+            type: docker-image
+            source:
+              repository: ruby
+              tag: 2.7.1
+
+          inputs:
+            - name: re-rotas-pr
+              path: repo
+
+          run:
+            path: sh
+            dir: repo
+            args:
+              - -c
+              - |
+                apt-get update
+                apt-get install -y sqlite3
+
+                VERSION=v12.16.3
+                mkdir -p /usr/local/lib/nodejs
+                wget "https://nodejs.org/dist/v12.16.3/node-$VERSION-linux-x64.tar.xz"
+                tar -xJvf "node-$VERSION-linux-x64.tar.xz" -C /usr/local/lib/nodejs
+                export PATH="/usr/local/lib/nodejs/node-$VERSION-linux-x64/bin:$PATH"
+                npm install -g yarn
+
+                yarn install
+                bundle install
+
+                bundle exec rake db:create
+                bundle exec rake db:schema:load
+                bundle exec rails test
+
+        on_success:
+          put: re-rotas-pr
+          params:
+            path: re-rotas-pr
+            status: success
+
+        on_failure:
+          put: re-rotas-pr
+          params:
+            path: re-rotas-pr
+            status: failure
