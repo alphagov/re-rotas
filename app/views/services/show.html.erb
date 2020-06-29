@@ -20,18 +20,44 @@
   <%= @service.name %>
 </h1>
 
-<p class="govuk-body">Score: <%= @service.score.round(1) %></p>
-
-<% unless @service.description.blank? %>
-  <%= @description.html_safe %>
-<% end %>
-
-<% unless @service.documentation.blank? %>
-  <%= @documentation.html_safe %>
-<% end %>
-
 <div>
   <%= link_to edit_service_path(@service), class: 'govuk-button' do %>
     Edit service
   <% end %>
 </div>
+
+<hr class="govuk-section-break govuk-section-break--visible">
+
+<% if @service.teams.empty? %>
+  <p class="govuk-body">
+    <%= @service.name %> is not associated with any teams
+  </p>
+<% else %>
+  <p class="govuk-body">
+    <%= @service.name %> is associated with the following teams:
+  </p>
+
+  <ul class="govuk-list govuk-list--bullet">
+    <% @service.teams.each do |team| %>
+      <li><%= link_to team_path(team), class: 'govuk-link' do %>
+          <%= team.name %>
+      <% end %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<hr class="govuk-section-break govuk-section-break--visible">
+
+<% if @service.description.blank? %>
+  <p class="govuk-body"><%= @service.name %> has no description</p>
+<% else %>
+  <%= @description.html_safe %>
+<% end %>
+
+<hr class="govuk-section-break govuk-section-break--visible">
+
+<% if @service.documentation.blank? %>
+  <p class="govuk-body"><%= @service.name %> has no documentation</p>
+<% else %>
+  <%= @documentation.html_safe %>
+<% end %>
