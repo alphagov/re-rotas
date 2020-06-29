@@ -24,7 +24,7 @@
   <div class="govuk-grid-column-one-half">
     <h2 class="govuk-heading-l">Teams</h2>
     <ul class="govuk-list govuk-list--bullet">
-      <% @org_unit.teams.each do |team| %>
+      <% @org_unit.teams.sort_by(&:name).each do |team| %>
         <li>
           <%= link_to team_path(team), class: 'govuk-link' do %>
             <%= team.name %>
@@ -36,7 +36,7 @@
   <div class="govuk-grid-column-one-half">
     <h2 class="govuk-heading-l">Services</h2>
     <ul class="govuk-list govuk-list--bullet">
-      <% @org_unit.services.each do |service| %>
+      <% @org_unit.services.sort_by(&:name).each do |service| %>
         <li>
           <%= link_to service_path(service), class: 'govuk-link' do %>
             <%= service.name %>
