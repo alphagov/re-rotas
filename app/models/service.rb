@@ -2,6 +2,8 @@ class Service < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
+  has_and_belongs_to_many :teams
+
   validates :name, presence: true
 
   def score
