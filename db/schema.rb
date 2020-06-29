@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_193259) do
+ActiveRecord::Schema.define(version: 2020_06_29_194654) do
 
   create_table "annual_leave_events", force: :cascade do |t|
     t.string "email"
@@ -93,6 +93,9 @@ ActiveRecord::Schema.define(version: 2020_06_29_193259) do
     t.datetime "updated_at", null: false
     t.string "description", default: ""
     t.string "slug"
+    t.integer "org_unit_id"
+    t.index ["org_unit_id"], name: "index_teams_on_org_unit_id"
   end
 
+  add_foreign_key "teams", "org_units"
 end

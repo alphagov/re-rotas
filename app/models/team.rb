@@ -5,6 +5,7 @@ class Team < ApplicationRecord
   has_many :pagerduty_calendars, class_name: :PagerDutyCalendar
   has_many :manual_calendars,    class_name: :ManualCalendar
   has_and_belongs_to_many :services
+  belongs_to :org_unit, optional: true
 
   validates :name, presence: true
 
