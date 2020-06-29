@@ -32,7 +32,7 @@ module Rotas
   URL_CACHE = UrlCache.new
 end
 
-unless $0.match?(/rake/)
+if Rails.const_defined? 'Server'
   PagerDutyCalendar.all.each do |calendar|
     Rails.logger.info "Starting url fetcher job for #{calendar.url}"
     Rotas::URL_CACHE.watch(calendar.url)

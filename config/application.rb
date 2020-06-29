@@ -13,7 +13,7 @@ Bundler.require(*Rails.groups)
 module GdsRotas
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 6.0
 
     # Add recommended security headers and apply a basic lenient Content Security Policy
     config.action_dispatch.default_headers = {
@@ -39,11 +39,7 @@ module GdsRotas
     #
     config.autoload_paths << config.root.join('lib')
 
-    config.active_job.queue_adapter = ActiveJob::QueueAdapters::AsyncAdapter.new(
-      min_threads: 1,
-      max_threads: 4,
-      idletime: 600.seconds,
-    )
+    config.active_job.queue_adapter = :async
 
     config.middleware.use Prometheus::Middleware::Collector
     config.middleware.use Prometheus::Middleware::Exporter
