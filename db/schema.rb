@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_132755) do
+ActiveRecord::Schema.define(version: 2020_06_29_135554) do
 
   create_table "annual_leave_events", force: :cascade do |t|
     t.string "email"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2020_06_29_132755) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "documentation"
+    t.string "slug"
   end
 
   create_table "spatial_ref_sys", primary_key: "srid", force: :cascade do |t|
