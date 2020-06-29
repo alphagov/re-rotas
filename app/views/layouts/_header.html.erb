@@ -33,13 +33,18 @@
       <nav>
         <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
           <li class="govuk-header__navigation-item">
-            <%= link_to(teams_path, class: 'govuk-header__link') do %>
-              Teams
+            <%= link_to(calendars_path, class: 'govuk-header__link') do %>
+              Calendars
             <% end %>
           </li>
           <li class="govuk-header__navigation-item">
-            <%= link_to(calendars_path, class: 'govuk-header__link') do %>
-              Calendars
+            <%= link_to(services_path, class: 'govuk-header__link') do %>
+              Services
+            <% end %>
+          </li>
+          <li class="govuk-header__navigation-item">
+            <%= link_to(teams_path, class: 'govuk-header__link') do %>
+              Teams
             <% end %>
           </li>
           <li class="govuk-header__navigation-item">

@@ -1,0 +1,30 @@
+<% unless @service.errors.empty? %>
+  <ul class="govuk-list govuk-list--bullet">
+    <% @service.errors.full_messages.each do |message| %>
+      <li><span class="govuk-error-message"><%= message %></span></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-one-half">
+    <div class="govuk-form-group">
+      <%= label_tag :name, class: 'govuk-label' do %>
+        Service name
+      <% end %>
+      <%= text_field_tag :name, @service.name, class: 'govuk-input' %>
+    </div>
+    <div class="govuk-form-group">
+      <%= label_tag :description, class: 'govuk-label' do %>
+        Description
+      <% end %>
+      <%= text_area_tag :description, @service.description, rows: 5, class: 'govuk-textarea' %>
+    </div>
+    <div class="govuk-form-group">
+      <%= label_tag :documentation, class: 'govuk-label' do %>
+        Documentation
+      <% end %>
+      <%= text_area_tag :documentation, @service.documentation, rows: 5, class: 'govuk-textarea' %>
+    </div>
+  </div>
+</div>
