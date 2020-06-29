@@ -23,11 +23,14 @@ class ServiceTest < ActiveSupport::TestCase
     assert_equal s.score, 0
   end
 
-  test 'service with documentation and description receives a score of 5' do
+  test 'service with docs and description and team receives a score of 5' do
+    t = Team.new(name: 'my-team')
+
     s = Service.new(
       name: 'my-happy-service',
       description: 'my-happy-service is described',
       documentation: 'my-happy-service is documented',
+      teams: [t],
     )
 
     assert_equal s.score, 5
