@@ -42,7 +42,7 @@
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-    <% @services.sort_by(&:name).each do |service| %>
+    <% @services.sort_by(&:score).reverse.each do |service| %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
           <%= link_to service_path(service), class: 'govuk-link' do %>
