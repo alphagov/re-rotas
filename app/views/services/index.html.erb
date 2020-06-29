@@ -37,13 +37,13 @@
 <table class="govuk-table">
   <thead class="govuk-table__head">
     <tr class="govuk-table__row">
-      <th class="govuk-table__header">Service</th>
-      <th class="govuk-table__header">Teams</th>
-      <th class="govuk-table__header">Score</th>
+      <th class="govuk-table__header"><a href="?sort=name" class="govuk-link">Service</a></th>
+      <th class="govuk-table__header"><a href="?sort=teams" class="govuk-link">Teams</a></th>
+      <th class="govuk-table__header"><a href="?sort=score" class="govuk-link">Score</a></th>
     </tr>
   </thead>
   <tbody class="govuk-table__body">
-    <% @services.sort_by(&:score).reverse.each do |service| %>
+    <% @services.each do |service| %>
       <tr class="govuk-table__row">
         <td class="govuk-table__cell">
           <%= link_to service_path(service), class: 'govuk-link' do %>

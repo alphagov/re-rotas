@@ -1,6 +1,15 @@
 class ServicesController < ApplicationController
   def index
-    @services = Service.all
+    @services = Service.all.sort_by(&:name)
+
+    case params[:sort]
+    when 'name'
+      @services = @services.sort_by(&:name)
+    when 'teams'
+      @services = @services.sort_by { |s| s.teams.length }.reverse
+    when 'score'
+      @services = @services.sort_by(&:score).reverse
+    end
   end
 
   def show
