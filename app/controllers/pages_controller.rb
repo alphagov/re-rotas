@@ -20,16 +20,28 @@ class PagesController < ApplicationController
     node_styles = { shape: :rect, fontname: 'Helvetica-Bold', penwidth: 1.5 }
     edge_styles = { penwidth: 1.5 }
 
-    Service.all.each do |s|
-      g.add_nodes("S:#{s.name}", label: s.name, shape: :rect, **node_styles)
+    g.subgraph do |c|
+      c[:rank] = :same
+
+      Service.all.each do |s|
+        c.add_nodes("S:#{s.name}", label: s.name, shape: :rect, **node_styles)
+      end
     end
 
-    Team.all.each do |t|
-      g.add_nodes("T:#{t.name}", label: t.name, **node_styles)
+    g.subgraph do |c|
+      c[:rank] = :same
+
+      Team.all.each do |t|
+        c.add_nodes("T:#{t.name}", label: t.name, **node_styles)
+      end
     end
 
-    OrgUnit.all.each do |ou|
-      g.add_nodes("OU:#{ou.name}", label: ou.name, **node_styles)
+    g.subgraph do |c|
+      c[:rank] = :same
+
+      OrgUnit.all.each do |ou|
+        c.add_nodes("OU:#{ou.name}", label: ou.name, **node_styles)
+      end
     end
 
     OrgUnit.all.each do |ou|
