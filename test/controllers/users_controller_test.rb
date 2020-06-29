@@ -5,7 +5,7 @@ require 'helpers/teams_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   test 'should log an audit event and show contact details correctly' do
-    Rotas::PagerDutyAPI.stub(
+    Rotas::PagerDutyApi.stub(
       :contact_details_for_email, [
         {
           'type'    => 'email_contact_method',
@@ -79,7 +79,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should log an audit event and show a helpful msg when no details' do
-    Rotas::PagerDutyAPI.stub(:contact_details_for_email, nil) do
+    Rotas::PagerDutyApi.stub(:contact_details_for_email, nil) do
       create_test_session_with_fake_auth
 
       email = 'log-an-audit-event-404@test'
