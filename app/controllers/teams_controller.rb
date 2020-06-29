@@ -5,16 +5,21 @@ class TeamsController < ApplicationController
 
   def new
     @team = Team.new
+    @org_units = OrgUnit.all
   end
 
   def edit
     @team = Team.friendly.find(params[:id])
+    @org_units = OrgUnit.all
   end
 
   def create
-    @team = Team.new(params.permit(:name, :description))
+    @team = Team.new(params.permit(:name, :description, :org_unit_id))
 
-    return render :new unless @team.valid?
+    unless @team.valid?
+      @org_units = OrgUnit.all
+      return render :new
+    end
 
     @team.save
     redirect_to team_path(@team)
@@ -22,9 +27,12 @@ class TeamsController < ApplicationController
 
   def update
     @team = Team.friendly.find(params[:id])
-    @team.assign_attributes(params.permit(:name, :description))
+    @team.assign_attributes(params.permit(:name, :description, :org_unit_id))
 
-    return render :edit unless @team.valid?
+    unless @team.valid?
+      @org_units = OrgUnit.all
+      return render :edit
+    end
 
     @team.save
     redirect_to team_path(@team)

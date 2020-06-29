@@ -15,6 +15,18 @@
       <%= text_field_tag :name, @team.name, class: 'govuk-input' %>
     </div>
     <div class="govuk-form-group">
+      <label class="govuk-label" for="sort">
+      </label>
+      <%= label_tag :org_unit, class: 'govuk-label' do %>
+        Organisational unit
+      <% end %>
+      <%= select_tag :org_unit_id,
+        options_from_collection_for_select(@org_units, :id, :name, @team.org_unit_id),
+        include_blank: true,
+        class: 'govuk-select'
+      %>
+    </div>
+    <div class="govuk-form-group">
       <%= label_tag :description, class: 'govuk-label' do %>
         Description
       <% end %>

@@ -20,6 +20,17 @@
   <%= @team.name %>
 </h1>
 
+<p class="govuk-body">
+  <% if @team.org_unit.nil? %>
+    <% @team.name %> is not associated with an organisional unit.
+  <% else %>
+    <% @team.name %> is part of
+    <%= link_to org_unit_path(@team.org_unit), class: 'govuk-link' do %>
+      <%= @team.org_unit.name %>
+    <% end %>.
+  <% end %>
+</p>
+
 <% unless @team.description.blank? %>
   <%= @desc.html_safe %>
 <% end %>
