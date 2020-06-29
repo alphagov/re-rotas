@@ -8,4 +8,8 @@ class ServiceTest < ActiveSupport::TestCase
   test 'service can have empty description' do
     assert Service.new(name: 'my-service', description: '').valid?
   end
+
+  test 'service can have empty documentation' do
+    assert Service.new(name: 'my-service', documentation: '').valid?
+  end
 end
