@@ -20,7 +20,7 @@
   <%= @service.name %>
 </h1>
 
-<p class="govuk-body">Score: <%= @service.score %></p>
+<p class="govuk-body">Score: <%= @service.score.round(1) %></p>
 
 <% unless @service.description.blank? %>
   <%= @description.html_safe %>
