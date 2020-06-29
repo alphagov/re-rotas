@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_142842) do
+ActiveRecord::Schema.define(version: 2020_06_29_193259) do
 
   create_table "annual_leave_events", force: :cascade do |t|
     t.string "email"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 2020_06_29_142842) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_manual_calendars_on_team_id"
+  end
+
+  create_table "org_units", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
   end
 
   create_table "pager_duty_calendars", id: false, force: :cascade do |t|
