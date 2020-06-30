@@ -22,7 +22,7 @@ resources:
       disable_forks: true
 
 jobs:
-  - name: self-update
+  - name: set-pipeline
     serial: true
     plan:
       - get: re-rotas-src
@@ -30,6 +30,86 @@ jobs:
 
       - set_pipeline: rotas
         file: re-rotas-src/ci/pipeline.yml
+
+  - name: deploy
+    serial: true
+    plan:
+      - get: re-rotas-src
+        passed: [set-pipeline]
+        trigger: true
+
+      - task: build
+        timeout: 15m
+        config:
+          platform: linux
+
+          image_resource:
+            type: docker-image
+            source:
+              repository: ruby
+              tag: 2.7.1
+
+          inputs:
+            - name: re-rotas-src
+          outputs:
+            - name: re-rotas-src
+
+          run:
+            path: sh
+            dir: re-rotas-src
+            args:
+              - -c
+              - |
+                apt-get update
+                apt-get install -y sqlite3
+
+                VERSION=v12.16.3
+                mkdir -p /usr/local/lib/nodejs
+                wget "https://nodejs.org/dist/v12.16.3/node-$VERSION-linux-x64.tar.xz"
+                tar -xJvf "node-$VERSION-linux-x64.tar.xz" -C /usr/local/lib/nodejs
+                export PATH="/usr/local/lib/nodejs/node-$VERSION-linux-x64/bin:$PATH"
+                npm install -g yarn
+
+                yarn install
+                bundle install
+                bundle exec rake assets:precompile
+
+      - task: deploy
+        timeout: 15m
+        config:
+          platform: linux
+
+          image_resource:
+            type: docker-image
+            source:
+              repository: governmentpaas/cf-cli
+              tag: 864e80c4793e4fca17a2374e8075af119dd03162
+
+          inputs:
+            - name: re-rotas-src
+
+          params:
+            CF_API: https://api.cloud.service.gov.uk
+            CF_ORG: gds-tech-ops
+            CF_SPACE: re-internal-apps
+            CF_USERNAME: ((cf_user))
+            CF_PASSWORD: ((cf_password))
+
+          run:
+            path: sh
+            dir: re-rotas-src
+            args:
+              - -c
+              - |
+                set -ue
+                cf api "$CF_API"
+                cf auth
+                cf target -o "${CF_ORG}" -s "${CF_SPACE}"
+
+                cf cancel-deployment rotas || true
+                cf push --strategy=rolling
+                cf ssh rotas \
+                  -c '/tmp/lifecycle/launcher app "rake db:migrate" ""'
 
   - name: pr
     public: true
