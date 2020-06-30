@@ -26,8 +26,6 @@
   <% end %>
 </div>
 
-<hr class="govuk-section-break govuk-section-break--visible">
-
 <% if @service.teams.empty? %>
   <p class="govuk-body">
     <%= @service.name %> is not associated with any teams
@@ -46,15 +44,11 @@
   </ul>
 <% end %>
 
-<hr class="govuk-section-break govuk-section-break--visible">
-
 <% if @service.description.blank? %>
   <p class="govuk-body"><%= @service.name %> has no description</p>
 <% else %>
   <%= @description.html_safe %>
 <% end %>
-
-<hr class="govuk-section-break govuk-section-break--visible">
 
 <% if @service.documentation.blank? %>
   <p class="govuk-body"><%= @service.name %> has no documentation</p>
