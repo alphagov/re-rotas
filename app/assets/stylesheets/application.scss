@@ -18,3 +18,11 @@
 .govuk-table.govuk-table--small {
   font-size: 12px;
 }
+
+.org-chart svg .node:hover polygon {
+  fill: black;
+}
+
+.org-chart svg .node:hover text {
+  fill: white;
+}
