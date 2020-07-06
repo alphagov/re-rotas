@@ -32,16 +32,13 @@
   </p>
 <% else %>
   <p class="govuk-body">
-    <%= @service.name %> is associated with the following teams:
-  </p>
-
-  <ul class="govuk-list govuk-list--bullet">
+    <%= @service.name %> is associated with:
     <% @service.teams.each do |team| %>
-      <li><%= link_to team_path(team), class: 'govuk-link' do %>
-          <%= team.name %>
-      <% end %></li>
+      <%= link_to team_path(team), class: 'govuk-link' do %>
+        <%= team.name %>
+      <% end %><%= ',' unless team == @service.teams.last %>
     <% end %>
-  </ul>
+  </p>
 <% end %>
 
 <% if @service.description.blank? %>
