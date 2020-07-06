@@ -45,4 +45,7 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+
+  # https://github.com/alphagov/govuk-frontend/issues/1350
+  config.assets.css_compressor = nil
 end

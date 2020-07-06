@@ -52,6 +52,13 @@
               Annual leave
             <% end %>
           </li>
+          <% if current_user_is_admin %>
+            <li class="govuk-header__navigation-item">
+              <%= link_to(admin_root_path, class: 'govuk-header__link') do %>
+                Admin
+              <% end %>
+            </li>
+          <% end %>
           <% if current_user %>
             <li class="govuk-header__navigation-item">
               <%= link_to(session_path, class: 'govuk-header__link', method: :delete) do %>

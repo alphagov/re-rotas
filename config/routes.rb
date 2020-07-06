@@ -1,5 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
+
   root 'pages#home'
   get 'org-map', controller: :pages, action: :org_map, as: :org_map
 

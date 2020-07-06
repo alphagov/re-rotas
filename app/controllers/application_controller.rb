@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   helper_method :name_fmt
   helper_method :email_fmt
   helper_method :current_user_is_email
+  helper_method :current_user_is_admin
   helper_method :current_user
   helper_method :people_finder_url
 
@@ -44,6 +45,10 @@ private
 
   def current_user_is_email(email)
     current_user&.casecmp(email)&.zero?
+  end
+
+  def current_user_is_admin
+    Rotas::Authorisation.is_admin?(current_user)
   end
 
   def current_user
