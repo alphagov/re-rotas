@@ -24,7 +24,7 @@ class PagesController < ApplicationController
       c[:rank] = :same
 
       Service.all.each do |s|
-        c.add_nodes("S:#{s.name}", label: s.name, shape: :rect, **node_styles)
+        c.add_nodes("S:#{s.name}", label: s.name, **node_styles)
       end
     end
 
