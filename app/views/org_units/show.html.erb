@@ -36,7 +36,7 @@
   <div class="govuk-grid-column-one-half">
     <h2 class="govuk-heading-l">Services</h2>
     <ul class="govuk-list govuk-list--bullet">
-      <% @org_unit.services.sort_by(&:name).each do |service| %>
+      <% @org_unit.services.uniq(&:id).sort_by(&:name).each do |service| %>
         <li>
           <%= link_to service_path(service), class: 'govuk-link' do %>
             <%= service.name %>
