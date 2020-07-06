@@ -53,7 +53,7 @@ group :test do
 end
 
 group :production do
-  gem 'prometheus-client', '~> 1.0'
+  gem 'prometheus-client', '~> 2.1'
   gem 'pg'
 end
 
