@@ -38,14 +38,14 @@ jobs:
       - set_pipeline: rotas
         file: re-rotas-src/ci/pipeline.yml
 
-  - name: test
+  - name: deploy
     serial: true
     plan:
       - get: re-rotas-src
         passed: [set-pipeline]
         trigger: true
 
-      - task: run-tests
+      - task: test-and-build
         timeout: 15m
         config:
           platform: linux
@@ -55,8 +55,11 @@ jobs:
           inputs:
             - name: re-rotas-src
               path: repo
+          outputs:
+            - name: re-rotas-src
+              path: repo
 
-          run: &run-tests
+          run: &run-tests-and-build-assets
             path: sh
             dir: repo
             args:
@@ -79,43 +82,6 @@ jobs:
                 bundle exec rake db:schema:load
                 bundle exec rails test
 
-  - name: deploy
-    serial: true
-    plan:
-      - get: re-rotas-src
-        passed: [test]
-        trigger: true
-
-      - task: build
-        timeout: 15m
-        config:
-          platform: linux
-
-          image_resource: *ruby-docker-image
-
-          inputs:
-            - name: re-rotas-src
-          outputs:
-            - name: re-rotas-src
-
-          run:
-            path: sh
-            dir: re-rotas-src
-            args:
-              - -c
-              - |
-                apt-get update
-                apt-get install -y sqlite3
-
-                VERSION=v12.16.3
-                mkdir -p /usr/local/lib/nodejs
-                wget "https://nodejs.org/dist/v12.16.3/node-$VERSION-linux-x64.tar.xz"
-                tar -xJvf "node-$VERSION-linux-x64.tar.xz" -C /usr/local/lib/nodejs
-                export PATH="/usr/local/lib/nodejs/node-$VERSION-linux-x64/bin:$PATH"
-                npm install -g yarn
-
-                yarn install
-                bundle install
                 bundle exec rake assets:precompile
 
       - task: deploy
@@ -179,7 +145,7 @@ jobs:
             - name: re-rotas-pr
               path: repo
 
-          run: *run-tests
+          run: *run-tests-and-build-assets
 
         on_success:
           put: re-rotas-pr
