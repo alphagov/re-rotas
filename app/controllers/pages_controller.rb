@@ -24,7 +24,8 @@ class PagesController < ApplicationController
       c[:rank] = :same
 
       Service.all.each do |s|
-        c.add_nodes("S:#{s.name}", label: s.name, **node_styles)
+        href = service_path(s)
+        c.add_nodes("S:#{s.name}", label: s.name, href: href, **node_styles)
       end
     end
 
@@ -32,7 +33,8 @@ class PagesController < ApplicationController
       c[:rank] = :same
 
       Team.all.each do |t|
-        c.add_nodes("T:#{t.name}", label: t.name, **node_styles)
+        href = team_path(t)
+        c.add_nodes("T:#{t.name}", label: t.name, href: href, **node_styles)
       end
     end
 
@@ -40,7 +42,8 @@ class PagesController < ApplicationController
       c[:rank] = :same
 
       OrgUnit.all.each do |ou|
-        c.add_nodes("OU:#{ou.name}", label: ou.name, **node_styles)
+        href = org_unit_path(ou)
+        c.add_nodes("OU:#{ou.name}", label: ou.name, href: href, **node_styles)
       end
     end
 
