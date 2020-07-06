@@ -56,9 +56,9 @@ class PagesController < ApplicationController
       end
     end
 
-    tmp = Tempfile.new('org-map-png')
+    tmp = Tempfile.new('org-map-svg')
     begin
-      g.output(png: tmp.path)
+      g.output(svg: tmp.path)
       @org_map_image = tmp.read
     ensure
       tmp.delete

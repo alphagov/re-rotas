@@ -13,4 +13,4 @@
 
 <h1 class="govuk-heading-xl">Organisational map</h1>
 
-<%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@org_map_image)}" %>
+<%= @org_map_image.html_safe %>
