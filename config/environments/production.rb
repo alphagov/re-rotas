@@ -24,6 +24,8 @@ Rails.application.configure do
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
+  # https://github.com/alphagov/govuk-frontend/issues/1350
+  config.assets.css_compressor = nil
   # config.assets.css_compressor = :sass
 
   config.assets.compile = true
