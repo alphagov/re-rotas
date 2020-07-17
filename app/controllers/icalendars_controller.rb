@@ -17,7 +17,6 @@ class IcalendarsController < ApplicationController
       PagerDutyCalendar.all.flat_map(&:person_day_events),
     )
       .select { |e| e.email == email }
-      .select { |e| e.date >= Date.today }
       .each do |e|
         calendar.event do |event|
           desc = "Rota #{e.calendar.team.name} | #{e.calendar.name}"
