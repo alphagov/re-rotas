@@ -17,6 +17,12 @@ class PagerDutyCalendar < ApplicationRecord
             presence: true,
             inclusion: { in: %w[in_hours out_of_hours in_and_out_of_hours] }
 
+  validate :url_is_http
+
+  def url_is_http
+    errors.add(:url, 'expected http(s) calendar address') unless (/^https?:/i).match?(url)
+  end
+
   def events
     calendar = Icalendar::Calendar.parse(
       StringIO.new(Rotas::URL_CACHE.fetch(url))

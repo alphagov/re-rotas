@@ -18,6 +18,15 @@ class PagerDutyCalendarTest < ActiveSupport::TestCase
     ).valid?
   end
 
+  test 'calendar must reject webcal urls' do
+    assert_not PagerDutyCalendar.new(
+      name: 'calendar',
+      team: @stub_team,
+      url:  'webcal://govukpay.pagerduty.com/private/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/feed/AAAAAAA',
+      clock_type: 'out_of_hours',
+    ).valid?
+  end
+
   test 'calendar must have valid clock type' do
     assert_not PagerDutyCalendar.new(
       name: 'calendar',
