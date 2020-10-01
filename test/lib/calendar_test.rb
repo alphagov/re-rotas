@@ -3,7 +3,6 @@ require "minitest/mock"
 
 class RotasCalendarTest < ActiveSupport::TestCase
   test "calendar shows current team members only" do
-
     class Calendar
       include Rotas::Calendar
 
