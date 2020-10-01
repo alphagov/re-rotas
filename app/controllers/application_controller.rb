@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
   def name_fmt(email)
     short = email.split(".").first.capitalize
 
