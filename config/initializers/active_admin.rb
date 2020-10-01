@@ -18,7 +18,7 @@ ActiveAdmin.setup do |config|
   config.comments = false
   config.batch_actions = true
 
-  config.filter_attributes = [:encrypted_password, :password, :password_confirmation]
+  config.filter_attributes = %i[encrypted_password password password_confirmation]
   config.localize_format = :long
 end
 
