@@ -92,7 +92,7 @@ class RotasConflictTest < ActiveSupport::TestCase
           ],
         },
       }
-), {
+    ), {
   "cal" => {
     Date.parse("2018-01-01") => %w[email],
   },
