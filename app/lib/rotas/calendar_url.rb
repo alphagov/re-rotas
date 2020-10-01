@@ -16,7 +16,7 @@ module Rotas::CalendarUrl
     salt = Rails.application.config.calendar_url_salt
 
     email, hash = JSON.parse(
-      Base64.urlsafe_decode64(url_fragment)
+      Base64.urlsafe_decode64(url_fragment),
     ).values_at("email", "hash")
 
     hash == Digest::SHA2.new(256).hexdigest("#{salt}:#{email}") ? email : nil

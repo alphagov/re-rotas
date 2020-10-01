@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       email: current_user,
       event: {
         message: "Viewed the contact details of #{@email} from PagerDuty",
-      }
+      },
     ).save!
 
     @contact_details = Rotas::PagerDutyApi.contact_details_for_email(@email)

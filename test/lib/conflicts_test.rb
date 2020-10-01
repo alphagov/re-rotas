@@ -43,7 +43,7 @@ class RotasConflictTest < ActiveSupport::TestCase
         Date.parse("2018-01-01") => [
           Rotas::PersonDayEvent.new(nil, "email", Date.parse("2018-01-01")),
         ]
-      }
+      },
     ), {
       Date.parse("2018-01-01") => %w[email]
     }
@@ -65,7 +65,7 @@ class RotasConflictTest < ActiveSupport::TestCase
         Date.parse("2018-01-03") => [
           Rotas::PersonDayEvent.new(nil, "email", Date.parse("2018-01-03")),
         ],
-      }
+      },
     ), {
       Date.parse("2018-01-01") => %w[email],
       Date.parse("2018-01-02") => %w[another],

@@ -36,7 +36,7 @@ class ServicesController < ApplicationController
     @service = Service.new(params.require(:service).permit(
       :name,
       :description, :documentation,
-      { team_ids: [] },
+      { team_ids: [] }
     ))
 
     unless @service.valid?
@@ -53,7 +53,7 @@ class ServicesController < ApplicationController
     @service.assign_attributes(params.require(:service).permit(
       :name,
       :description, :documentation,
-      { team_ids: [] },
+      { team_ids: [] }
     ))
 
     unless @service.valid?

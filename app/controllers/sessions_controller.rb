@@ -40,7 +40,7 @@ class SessionsController < ApplicationController
 
     oauth_response = HTTP.post(
       "https://www.googleapis.com/oauth2/v4/token",
-      form: payload
+      form: payload,
     )
     oauth_parsed = JSON.parse(oauth_response.body)
 
@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
     id_token     = oauth_parsed["id_token"]
 
     me_response = HTTP.get(
-      "https://www.googleapis.com/userinfo/v2/me?access_token=#{access_token}"
+      "https://www.googleapis.com/userinfo/v2/me?access_token=#{access_token}",
     )
     me_parsed = JSON.parse(me_response)
     email     = me_parsed["email"]

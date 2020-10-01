@@ -71,7 +71,7 @@ class TeamsController < ApplicationController
 
     @conflicts = Rotas::Conflicts.find(
       annual_leave_events,
-      calendars.map { |c| [c, c.person_day_events.group_by(&:date)] }
+      calendars.map { |c| [c, c.person_day_events.group_by(&:date)] },
     ).reject { |_, c| c.empty? }
   end
 end

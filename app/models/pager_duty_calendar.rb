@@ -25,7 +25,7 @@ class PagerDutyCalendar < ApplicationRecord
 
   def events
     calendar = Icalendar::Calendar.parse(
-      StringIO.new(Rotas::URL_CACHE.fetch(url))
+      StringIO.new(Rotas::URL_CACHE.fetch(url)),
     )
 
     calendar
