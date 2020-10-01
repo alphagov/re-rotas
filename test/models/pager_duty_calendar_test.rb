@@ -14,7 +14,7 @@ class PagerDutyCalendarTest < ActiveSupport::TestCase
       name: "",
       team: @stub_team,
       url:  "https://govukpay.pagerduty.com/private/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/feed/AAAAAAA",
-			clock_type: "in_hours",
+      clock_type: "in_hours",
     ).valid?
   end
 
@@ -32,28 +32,28 @@ class PagerDutyCalendarTest < ActiveSupport::TestCase
       name: "calendar",
       team: @stub_team,
       url:  "https://govukpay.pagerduty.com/private/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/feed/AAAAAAA",
-			clock_type: :something,
+      clock_type: :something,
     ).valid?
 
     assert PagerDutyCalendar.new(
       name: "calendar",
       team: @stub_team,
       url:  "https://govukpay.pagerduty.com/private/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/feed/AAAAAAA",
-			clock_type: "in_hours",
+      clock_type: "in_hours",
     ).valid?
 
     assert PagerDutyCalendar.new(
       name: "calendar",
       team: @stub_team,
       url:  "https://govukpay.pagerduty.com/private/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/feed/AAAAAAA",
-			clock_type: "out_of_hours",
+      clock_type: "out_of_hours",
     ).valid?
 
     assert PagerDutyCalendar.new(
       name: "calendar",
       team: @stub_team,
       url:  "https://govukpay.pagerduty.com/private/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/feed/AAAAAAA",
-			clock_type: "in_and_out_of_hours",
+      clock_type: "in_and_out_of_hours",
     ).valid?
   end
 end
