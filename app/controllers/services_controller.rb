@@ -37,7 +37,7 @@ class ServicesController < ApplicationController
                              :name,
       :description, :documentation,
       { team_ids: [] }
-    ))
+                           ))
 
     unless @service.valid?
       @teams = Team.all
@@ -54,7 +54,7 @@ class ServicesController < ApplicationController
                                  :name,
       :description, :documentation,
       { team_ids: [] }
-    ))
+                               ))
 
     unless @service.valid?
       @teams = Team.all
