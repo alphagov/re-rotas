@@ -20,15 +20,15 @@ module GdsRotas
       "X-Frame-Options" => "DENY",
       "X-XSS-Protection" => "1; mode=block",
       "X-Content-Type-Options" => "nosniff",
-      "Content-Security-Policy" => "default-src 'self'; " +
-        "font-src 'self' data:; " +
-        "img-src 'self' data:; " +
+      "Content-Security-Policy" => "default-src 'self'; " \
+        "font-src 'self' data:; " \
+        "img-src 'self' data:; " \
         "object-src 'none'; " +
         # the script digests are for the inline script in govuk-frontend/template.njk
         # if the scripts in that file change, or more are added, use a command similar to
         # this to generate the digests:
         # `echo "'sha256-"$(echo -n "document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');" | openssl dgst -sha256 -binary | openssl enc -base64)"'"`
-        "script-src 'self' 'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=' 'unsafe-inline'; " +
+        "script-src 'self' 'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=' 'unsafe-inline'; " \
         "style-src 'self' 'unsafe-inline'",
     }
 
