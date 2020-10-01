@@ -1,10 +1,10 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails/all'
-require 'prometheus/middleware/collector'
-require 'prometheus/middleware/exporter'
-require 'prometheus/client'
-require 'prometheus/client/data_stores/direct_file_store'
+require "rails/all"
+require "prometheus/middleware/collector"
+require "prometheus/middleware/exporter"
+require "prometheus/client"
+require "prometheus/client/data_stores/direct_file_store"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -17,10 +17,10 @@ module GdsRotas
 
     # Add recommended security headers and apply a basic lenient Content Security Policy
     config.action_dispatch.default_headers = {
-      'X-Frame-Options' => 'DENY',
-      'X-XSS-Protection' => '1; mode=block',
-      'X-Content-Type-Options' => 'nosniff',
-      'Content-Security-Policy' => "default-src 'self'; " +
+      "X-Frame-Options" => "DENY",
+      "X-XSS-Protection" => "1; mode=block",
+      "X-Content-Type-Options" => "nosniff",
+      "Content-Security-Policy" => "default-src 'self'; " +
         "font-src 'self' data:; " +
         "img-src 'self' data:; " +
         "object-src 'none'; " +
@@ -37,12 +37,12 @@ module GdsRotas
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     #
-    config.autoload_paths << config.root.join('lib')
+    config.autoload_paths << config.root.join("lib")
 
     config.active_job.queue_adapter = :async
 
     config.middleware.use Prometheus::Middleware::Collector
     config.middleware.use Prometheus::Middleware::Exporter
-    Prometheus::Client.config.data_store = Prometheus::Client::DataStores::DirectFileStore.new(dir: 'tmp/metrics')
+    Prometheus::Client.config.data_store = Prometheus::Client::DataStores::DirectFileStore.new(dir: "tmp/metrics")
   end
 end

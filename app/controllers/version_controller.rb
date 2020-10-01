@@ -1,5 +1,5 @@
 # rubocop:disable Style/ClassVars
-require 'English'
+require "English"
 
 class VersionController < ApplicationController
   skip_before_action :maybe_redirect_if_not_signed_in, only: %i(version)

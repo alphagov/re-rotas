@@ -1,10 +1,10 @@
-require 'http'
-require 'icalendar'
-require 'securerandom'
-require 'set'
+require "http"
+require "icalendar"
+require "securerandom"
+require "set"
 
 class PagerDutyCalendar < ApplicationRecord
-  self.primary_key = 'id'
+  self.primary_key = "id"
 
   belongs_to :team
 
@@ -20,7 +20,7 @@ class PagerDutyCalendar < ApplicationRecord
   validate :url_is_http
 
   def url_is_http
-    errors.add(:url, 'expected http(s) calendar address') unless (/^https?:/i).match?(url)
+    errors.add(:url, "expected http(s) calendar address") unless (/^https?:/i).match?(url)
   end
 
   def events

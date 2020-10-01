@@ -42,7 +42,7 @@ class TeamsController < ApplicationController
     @team = Team.friendly.find(params[:id])
 
     @events_by_calendar = {}
-    @desc = Rotas::MarkdownRenderer.render(@team.description || '')
+    @desc = Rotas::MarkdownRenderer.render(@team.description || "")
 
     @team.calendars.each do |calendar|
       events = calendar.person_day_events

@@ -1,8 +1,8 @@
-require 'test_helper'
+require "test_helper"
 
 # class ApplicationControllerTest < ActionDispatch::IntegrationTest
 class ApplicationControllerTest < ActionController::TestCase
-  test 'people finder links are approximately okay' do
+  test "people finder links are approximately okay" do
     emails = %w[
       firstname.lastname1@digital.cabinet-office.gov.uk
       firstname.middlenamelastname-lastname@digital.cabinet-office.gov.uk
@@ -15,24 +15,24 @@ class ApplicationControllerTest < ActionController::TestCase
     end
   end
 
-  test 'name_fmt works' do
+  test "name_fmt works" do
     emails = %w[
       firstname.lastname1@digital.cabinet-office.gov.uk
       firstname.middlenamelastname-lastname@digital.cabinet-office.gov.uk
     ]
-    nices = ['Firstname', 'Firstname']
+    nices = ["Firstname", "Firstname"]
 
     emails.zip(nices).each do |email, nice|
       assert_equal @controller.send(:name_fmt, email), nice
     end
   end
 
-  test 'email_fmt works' do
+  test "email_fmt works" do
     emails = %w[
       firstname.lastname1@digital.cabinet-office.gov.uk
       firstname.middlenamelastname-lastname@digital.cabinet-office.gov.uk
     ]
-    nices = ['Firstname Lastname', 'Firstname Middlenamelastname-lastname']
+    nices = ["Firstname Lastname", "Firstname Middlenamelastname-lastname"]
 
     emails.zip(nices).each do |email, nice|
       assert_equal @controller.send(:email_fmt, email), nice

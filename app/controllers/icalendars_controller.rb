@@ -8,7 +8,7 @@ class IcalendarsController < ApplicationController
     fragment = params[:id]
     email    = Rotas::CalendarUrl.email_from_url_fragment(fragment)
 
-    raise ActionController::RoutingError.new('Not Found') if email.blank?
+    raise ActionController::RoutingError.new("Not Found") if email.blank?
 
     calendar = Icalendar::Calendar.new
 
@@ -34,11 +34,11 @@ class IcalendarsController < ApplicationController
         calendar.event do |event|
           event.dtstart = e.start_date
           event.dtend   = e.end_date
-          event.summary = 'Annual leave'
-          event.description = 'Annual leave'
+          event.summary = "Annual leave"
+          event.description = "Annual leave"
         end
       end
 
-    send_data calendar.to_ical, filename: 'rotas.ics', type: 'text/calendar', disposition: 'attachment'
+    send_data calendar.to_ical, filename: "rotas.ics", type: "text/calendar", disposition: "attachment"
   end
 end

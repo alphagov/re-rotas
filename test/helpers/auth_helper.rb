@@ -3,5 +3,5 @@ def create_test_session_with_fake_auth
 end
 
 def test_session_email
-  'emailyemail.emailyemail@digital.cabinet-office.gov.uk'
+  "emailyemail.emailyemail@digital.cabinet-office.gov.uk"
 end

@@ -6,7 +6,7 @@ module Rotas::PagerDutyApi
       .headers(default_headers)
       .get(users_url, params: {query: email})
 
-    user = JSON.parse(user_response).dig('users').first
+    user = JSON.parse(user_response).dig("users").first
 
     return nil if user.nil?
 
@@ -18,29 +18,29 @@ module Rotas::PagerDutyApi
 
     contact_methods = JSON
       .parse(contact_methods_response)
-      .dig('contact_methods')
+      .dig("contact_methods")
   end
 
   private
 
   def self.api_url
-    'https://api.pagerduty.com/'
+    "https://api.pagerduty.com/"
   end
 
   def self.default_headers
     {
-      accept: 'application/vnd.pagerduty+json;version=2',
+      accept: "application/vnd.pagerduty+json;version=2",
       authorization: "Token token=#{api_key}",
     }
   end
 
   def self.api_key
-    if ENV.key?('VCAP_SERVICES')
+    if ENV.key?("VCAP_SERVICES")
       CF::App::Credentials
-          .find_by_service_name('rotas-secrets')
-          &.fetch('pagerduty-api-key', nil)
+          .find_by_service_name("rotas-secrets")
+          &.fetch("pagerduty-api-key", nil)
     else
-      ENV.fetch('PAGERDUTY_API_KEY')
+      ENV.fetch("PAGERDUTY_API_KEY")
     end
   end
 end

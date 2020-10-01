@@ -1,6 +1,6 @@
-require 'test_helper'
-require 'helpers/auth_helper'
-require 'time'
+require "test_helper"
+require "helpers/auth_helper"
+require "time"
 
 class CookiesTest < ActionDispatch::IntegrationTest
   test "cookies are secure" do

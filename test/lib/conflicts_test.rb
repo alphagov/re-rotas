@@ -1,35 +1,35 @@
-require 'test_helper'
+require "test_helper"
 
 class RotasConflictTest < ActiveSupport::TestCase
-  test 'annual_leave_emails_by_day' do
+  test "annual_leave_emails_by_day" do
     assert_equal Rotas::Conflicts.annual_leave_emails_by_day([
       AnnualLeaveEvent.new(
-        email: 'email',
-        start_date: Date.parse('2018-01-01'),
-        end_date: Date.parse('2018-01-01'),
+        email: "email",
+        start_date: Date.parse("2018-01-01"),
+        end_date: Date.parse("2018-01-01"),
       )
     ]), {
-      Date.parse('2018-01-01') => ['email'],
+      Date.parse("2018-01-01") => ["email"],
     }
 
     assert_equal Rotas::Conflicts.annual_leave_emails_by_day([
       AnnualLeaveEvent.new(
-        email: 'email',
-        start_date: Date.parse('2018-01-01'),
-        end_date: Date.parse('2018-01-02'),
+        email: "email",
+        start_date: Date.parse("2018-01-01"),
+        end_date: Date.parse("2018-01-02"),
       ),
       AnnualLeaveEvent.new(
-        email: 'another',
-        start_date: Date.parse('2018-01-02'),
-        end_date: Date.parse('2018-01-02'),
+        email: "another",
+        start_date: Date.parse("2018-01-02"),
+        end_date: Date.parse("2018-01-02"),
       )
     ]), {
-      Date.parse('2018-01-01') => ['email'],
-      Date.parse('2018-01-02') => ['email', 'another'],
+      Date.parse("2018-01-01") => ["email"],
+      Date.parse("2018-01-02") => ["email", "another"],
     }
   end
 
-  test 'calculate_conflicts_given_calendar' do
+  test "calculate_conflicts_given_calendar" do
     assert_equal Rotas::Conflicts.conflicts_for_calendar(
       Hash.new,
       Hash.new,
@@ -37,43 +37,43 @@ class RotasConflictTest < ActiveSupport::TestCase
 
     assert_equal Rotas::Conflicts.conflicts_for_calendar(
       {
-        Date.parse('2018-01-01') => ['email']
+        Date.parse("2018-01-01") => ["email"]
       },
       {
-        Date.parse('2018-01-01') => [
-          Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-01')),
+        Date.parse("2018-01-01") => [
+          Rotas::PersonDayEvent.new(nil, "email", Date.parse("2018-01-01")),
         ]
       }
     ), {
-      Date.parse('2018-01-01') => ['email']
+      Date.parse("2018-01-01") => ["email"]
     }
 
     assert_equal Rotas::Conflicts.conflicts_for_calendar(
       {
-        Date.parse('2018-01-01') => ['email'],
-        Date.parse('2018-01-02') => ['another'],
-        Date.parse('2018-01-03') => ['email'],
+        Date.parse("2018-01-01") => ["email"],
+        Date.parse("2018-01-02") => ["another"],
+        Date.parse("2018-01-03") => ["email"],
       },
       {
-        Date.parse('2018-01-01') => [
-          Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-01')),
+        Date.parse("2018-01-01") => [
+          Rotas::PersonDayEvent.new(nil, "email", Date.parse("2018-01-01")),
         ],
-        Date.parse('2018-01-02') => [
-          Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-02')),
-          Rotas::PersonDayEvent.new(nil, 'another', Date.parse('2018-01-02')),
+        Date.parse("2018-01-02") => [
+          Rotas::PersonDayEvent.new(nil, "email", Date.parse("2018-01-02")),
+          Rotas::PersonDayEvent.new(nil, "another", Date.parse("2018-01-02")),
         ],
-        Date.parse('2018-01-03') => [
-          Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-03')),
+        Date.parse("2018-01-03") => [
+          Rotas::PersonDayEvent.new(nil, "email", Date.parse("2018-01-03")),
         ],
       }
     ), {
-      Date.parse('2018-01-01') => ['email'],
-      Date.parse('2018-01-02') => ['another'],
-      Date.parse('2018-01-03') => ['email'],
+      Date.parse("2018-01-01") => ["email"],
+      Date.parse("2018-01-02") => ["another"],
+      Date.parse("2018-01-03") => ["email"],
     }
   end
 
-  test 'find' do
+  test "find" do
     assert_equal Rotas::Conflicts.find(
       Hash.new, Hash.new
     ), Hash.new
@@ -81,19 +81,19 @@ class RotasConflictTest < ActiveSupport::TestCase
     assert_equal Rotas::Conflicts.find(
       [
         AnnualLeaveEvent.new(
-          email: 'email',
-          start_date: Date.parse('2018-01-01'),
-          end_date: Date.parse('2018-01-01'),
+          email: "email",
+          start_date: Date.parse("2018-01-01"),
+          end_date: Date.parse("2018-01-01"),
         )
       ], {
-        'cal' => {
-          Date.parse('2018-01-01') => [
-            Rotas::PersonDayEvent.new(nil, 'email', Date.parse('2018-01-01')),
+        "cal" => {
+          Date.parse("2018-01-01") => [
+            Rotas::PersonDayEvent.new(nil, "email", Date.parse("2018-01-01")),
           ]
         },
      }), {
-      'cal' => {
-        Date.parse('2018-01-01') => ['email']
+      "cal" => {
+        Date.parse("2018-01-01") => ["email"]
       },
     }
   end

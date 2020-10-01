@@ -1,6 +1,6 @@
-require 'base64'
-require 'digest'
-require 'json'
+require "base64"
+require "digest"
+require "json"
 
 module Rotas::CalendarUrl
   def self.generate_url(email)
@@ -17,7 +17,7 @@ module Rotas::CalendarUrl
 
     email, hash = JSON.parse(
       Base64.urlsafe_decode64(url_fragment)
-    ).values_at('email', 'hash')
+    ).values_at("email", "hash")
 
     hash == Digest::SHA2.new(256).hexdigest("#{salt}:#{email}") ? email : nil
   rescue # rubocop:disable Style/RescueStandardError

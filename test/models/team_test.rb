@@ -1,12 +1,12 @@
-require 'test_helper'
-require 'minitest/mock'
+require "test_helper"
+require "minitest/mock"
 
 class TeamTest < ActiveSupport::TestCase
-  test 'team has non-empty name' do
-    assert_not Team.new(name: '').valid?
+  test "team has non-empty name" do
+    assert_not Team.new(name: "").valid?
   end
 
-  test 'team has members' do
+  test "team has members" do
     team = Team.new
 
     class CalendarMock
@@ -26,11 +26,11 @@ class TeamTest < ActiveSupport::TestCase
 
     team.stub(
       :calendars, [
-        CalendarMock.new('cal1'),
-        CalendarMock.new('cal2')
+        CalendarMock.new("cal1"),
+        CalendarMock.new("cal2")
       ]
     ) do
-      assert_equal team.members, ['current@cal1', 'current@cal2']
+      assert_equal team.members, ["current@cal1", "current@cal2"]
     end
   end
 end
