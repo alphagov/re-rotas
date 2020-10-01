@@ -7,7 +7,7 @@ module Rotas::Conflicts
           conflicts_for_calendar(
             annual_leave_emails_by_day(annual_leave_events),
             events_by_date,
-          )
+          ),
         ]
       }
       .to_h

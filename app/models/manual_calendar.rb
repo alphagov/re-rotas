@@ -1,7 +1,7 @@
-require 'securerandom'
+require "securerandom"
 
 class ManualCalendar < ApplicationRecord
-  self.primary_key = 'id'
+  self.primary_key = "id"
 
   has_many :manual_calendar_events, class_name: :ManualCalendarEvent
   belongs_to :team

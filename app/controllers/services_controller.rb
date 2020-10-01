@@ -3,11 +3,11 @@ class ServicesController < ApplicationController
     @services = Service.all.sort_by(&:name)
 
     case params[:sort]
-    when 'name'
+    when "name"
       @services = @services.sort_by(&:name)
-    when 'teams'
+    when "teams"
       @services = @services.sort_by { |s| s.teams.length }.reverse
-    when 'score'
+    when "score"
       @services = @services.sort_by(&:score).reverse
     end
   end
@@ -15,10 +15,10 @@ class ServicesController < ApplicationController
   def show
     @service = Service.friendly.find(params[:id])
 
-    description = @service.description || ''
+    description = @service.description || ""
     @description = Rotas::MarkdownRenderer.render(description)
 
-    documentation = @service.documentation || ''
+    documentation = @service.documentation || ""
     @documentation = Rotas::MarkdownRenderer.render(documentation)
   end
 
@@ -34,10 +34,10 @@ class ServicesController < ApplicationController
 
   def create
     @service = Service.new(params.require(:service).permit(
-      :name,
+                             :name,
       :description, :documentation,
-      { team_ids: [] },
-    ))
+      { team_ids: [] }
+                           ))
 
     unless @service.valid?
       @teams = Team.all
@@ -51,10 +51,10 @@ class ServicesController < ApplicationController
   def update
     @service = Service.friendly.find(params[:id])
     @service.assign_attributes(params.require(:service).permit(
-      :name,
+                                 :name,
       :description, :documentation,
-      { team_ids: [] },
-    ))
+      { team_ids: [] }
+                               ))
 
     unless @service.valid?
       @teams = Team.all

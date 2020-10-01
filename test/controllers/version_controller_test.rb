@@ -1,5 +1,5 @@
-require 'English'
-require 'test_helper'
+require "English"
+require "test_helper"
 
 class VersionControllerTest < ActionDispatch::IntegrationTest
   test "should show the git sha" do
@@ -10,5 +10,4 @@ class VersionControllerTest < ActionDispatch::IntegrationTest
 
     assert_match git_sha, response.body
   end
-
 end

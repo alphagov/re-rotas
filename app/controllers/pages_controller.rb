@@ -1,5 +1,5 @@
-require 'tempfile'
-require 'ruby-graphviz'
+require "tempfile"
+require "ruby-graphviz"
 
 class PagesController < ApplicationController
   def home
@@ -17,7 +17,7 @@ class PagesController < ApplicationController
   def org_map
     g = GraphViz.new(:G, type: :digraph)
 
-    node_styles = { shape: :rect, fontname: 'Helvetica-Bold', penwidth: 1.5 }
+    node_styles = { shape: :rect, fontname: "Helvetica-Bold", penwidth: 1.5 }
     edge_styles = { penwidth: 1.5 }
 
     g.subgraph do |c|
@@ -59,7 +59,7 @@ class PagesController < ApplicationController
       end
     end
 
-    tmp = Tempfile.new('org-map-svg')
+    tmp = Tempfile.new("org-map-svg")
     begin
       g.output(svg: tmp.path)
       @org_map_image = tmp.read

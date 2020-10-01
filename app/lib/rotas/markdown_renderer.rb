@@ -41,13 +41,13 @@ module Rotas
       tag  = "h#{heading_level}"
       size = case heading_level
              when 1
-               'xl'
+               "xl"
              when 2
-               'l'
+               "l"
              when 3
-               'm'
+               "m"
              else
-               's'
+               "s"
              end
 
       <<~HTML

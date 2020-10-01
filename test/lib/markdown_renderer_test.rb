@@ -1,12 +1,12 @@
-require 'test_helper'
+require "test_helper"
 
-def assert_same_no_ws(a, b)
-  assert_equal a.lines.map(&:strip).join(''),
-               b.lines.map(&:strip).join('')
+def assert_same_no_ws(one, other)
+  assert_equal one.lines.map(&:strip).join(""),
+               other.lines.map(&:strip).join("")
 end
 
 class RotasMarkdownRendererTest < ActiveSupport::TestCase
-  test 'ul' do
+  test "ul" do
     markdown = <<~MD
       - item
       - item
@@ -24,7 +24,7 @@ class RotasMarkdownRendererTest < ActiveSupport::TestCase
     assert_same_no_ws(html, expected_html)
   end
 
-  test 'ol' do
+  test "ol" do
     markdown = <<~MD
       1. item
       1. item
@@ -42,7 +42,7 @@ class RotasMarkdownRendererTest < ActiveSupport::TestCase
     assert_same_no_ws(html, expected_html)
   end
 
-  test 'link' do
+  test "link" do
     markdown = <<~MD
       [link](https://href)
     MD
@@ -56,15 +56,15 @@ class RotasMarkdownRendererTest < ActiveSupport::TestCase
     assert_same_no_ws(html, expected_html)
   end
 
-  test 'script safe' do
+  test "script safe" do
     markdown = <<~MD
       <script>alert(1);</script>
     MD
     html = Rotas::MarkdownRenderer.render(markdown)
-    assert_equal '', html
+    assert_equal "", html
   end
 
-  test 'h1' do
+  test "h1" do
     markdown = <<~MD
       # hello
     MD
@@ -72,7 +72,7 @@ class RotasMarkdownRendererTest < ActiveSupport::TestCase
     assert_same_no_ws('<h1 class="govuk-heading-xl">hello</h1>', html)
   end
 
-  test 'h2' do
+  test "h2" do
     markdown = <<~MD
       ## hello
     MD
@@ -80,7 +80,7 @@ class RotasMarkdownRendererTest < ActiveSupport::TestCase
     assert_same_no_ws('<h2 class="govuk-heading-l">hello</h2>', html)
   end
 
-  test 'h3' do
+  test "h3" do
     markdown = <<~MD
       ### hello
     MD
@@ -88,7 +88,7 @@ class RotasMarkdownRendererTest < ActiveSupport::TestCase
     assert_same_no_ws('<h3 class="govuk-heading-m">hello</h3>', html)
   end
 
-  test 'h4' do
+  test "h4" do
     markdown = <<~MD
       #### hello
     MD
@@ -96,7 +96,7 @@ class RotasMarkdownRendererTest < ActiveSupport::TestCase
     assert_same_no_ws('<h4 class="govuk-heading-s">hello</h4>', html)
   end
 
-  test 'h5' do
+  test "h5" do
     markdown = <<~MD
       ##### hello
     MD
@@ -104,7 +104,7 @@ class RotasMarkdownRendererTest < ActiveSupport::TestCase
     assert_same_no_ws('<h5 class="govuk-heading-s">hello</h5>', html)
   end
 
-  test 'h6' do
+  test "h6" do
     markdown = <<~MD
       ###### hello
     MD

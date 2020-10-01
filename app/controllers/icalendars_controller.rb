@@ -1,14 +1,15 @@
+# rubocop:disable Style/RaiseArgs
 class IcalendarsController < ApplicationController
   skip_before_action :maybe_redirect_if_not_signed_in,
-                     only: %i(show)
+                     only: %i[show]
   skip_before_action :maybe_expire_session,
-                     only: %i(show)
+                     only: %i[show]
 
   def show
     fragment = params[:id]
     email    = Rotas::CalendarUrl.email_from_url_fragment(fragment)
 
-    raise ActionController::RoutingError.new('Not Found') if email.blank?
+    raise ActionController::RoutingError.new("Not Found") if email.blank?
 
     calendar = Icalendar::Calendar.new
 
@@ -34,11 +35,12 @@ class IcalendarsController < ApplicationController
         calendar.event do |event|
           event.dtstart = e.start_date
           event.dtend   = e.end_date
-          event.summary = 'Annual leave'
-          event.description = 'Annual leave'
+          event.summary = "Annual leave"
+          event.description = "Annual leave"
         end
       end
 
-    send_data calendar.to_ical, filename: 'rotas.ics', type: 'text/calendar', disposition: 'attachment'
+    send_data calendar.to_ical, filename: "rotas.ics", type: "text/calendar", disposition: "attachment"
   end
 end
+# rubocop:enable Style/RaiseArgs

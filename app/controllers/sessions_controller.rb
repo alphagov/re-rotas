@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
   skip_before_action :maybe_redirect_if_not_signed_in,
-                     only: %i(new create callback)
+                     only: %i[new create callback]
   skip_before_action :maybe_expire_session,
-                     only: %i(new create callback)
+                     only: %i[new create callback]
 
   def new; end
 
@@ -10,8 +10,8 @@ class SessionsController < ApplicationController
     session[:state] = SecureRandom.hex
 
     query = {
-      scope:         'email',
-      response_type: 'code',
+      scope:         "email",
+      response_type: "code",
       state:         session[:state],
       redirect_uri:  callback_url,
       client_id:     google_client_id,
@@ -35,23 +35,23 @@ class SessionsController < ApplicationController
       code:          code,
       state:         state,
       redirect_uri:  callback_url,
-      grant_type:    'authorization_code'
+      grant_type:    "authorization_code",
     }
 
     oauth_response = HTTP.post(
-      'https://www.googleapis.com/oauth2/v4/token',
-      form: payload
+      "https://www.googleapis.com/oauth2/v4/token",
+      form: payload,
     )
     oauth_parsed = JSON.parse(oauth_response.body)
 
-    access_token = oauth_parsed['access_token']
-    id_token     = oauth_parsed['id_token']
+    access_token = oauth_parsed["access_token"]
+    id_token     = oauth_parsed["id_token"]
 
     me_response = HTTP.get(
-      "https://www.googleapis.com/userinfo/v2/me?access_token=#{access_token}"
+      "https://www.googleapis.com/userinfo/v2/me?access_token=#{access_token}",
     )
     me_parsed = JSON.parse(me_response)
-    email     = me_parsed['email']
+    email     = me_parsed["email"]
 
     unless Rotas::Authorisation.email_authorised?(email)
       raise Rotas::Errors::AuthorisationError
@@ -79,25 +79,25 @@ class SessionsController < ApplicationController
 private
 
   def callback_url
-    case ENV['RAILS_ENV']
-    when 'production'
-      'https://rotas.cloudapps.digital/session/callback'
+    case ENV["RAILS_ENV"]
+    when "production"
+      "https://rotas.cloudapps.digital/session/callback"
     else
-      'http://localhost:3000/session/callback'
+      "http://localhost:3000/session/callback"
     end
   end
 
   def google_client_id
-    ENV.fetch('GOOGLE_AUTH_CLIENT_ID') do
+    ENV.fetch("GOOGLE_AUTH_CLIENT_ID") do
       CF::App::Credentials
-        .find_by_service_name('rotas-secrets')['google-client-id']
+        .find_by_service_name("rotas-secrets")["google-client-id"]
     end
   end
 
   def google_client_secret
-    ENV.fetch('GOOGLE_AUTH_CLIENT_SECRET') do
+    ENV.fetch("GOOGLE_AUTH_CLIENT_SECRET") do
       CF::App::Credentials
-        .find_by_service_name('rotas-secrets')['google-client-secret']
+        .find_by_service_name("rotas-secrets")["google-client-secret"]
     end
   end
 end

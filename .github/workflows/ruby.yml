@@ -19,7 +19,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
@@ -27,7 +29,22 @@ jobs:
       uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
       with:
         ruby-version: 2.7.1
+
     - name: Install dependencies
       run: bundle install
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.14.0
+
+    - name: Install node deps
+      run: |
+        npm install -g yarn
+        yarn install
+
     - name: Run tests
       run: bundle exec rake
+
+    - name: Lint
+      run: bundle exec rubocop
