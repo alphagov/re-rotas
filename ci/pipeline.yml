@@ -18,7 +18,7 @@ resources:
     icon: git
     source:
       uri: https://github.com/alphagov/re-rotas.git
-      branch: master
+      branch: main
 
   - name: re-rotas-pr
     type: pull-request
