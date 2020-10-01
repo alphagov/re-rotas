@@ -42,28 +42,28 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem "web-console", ">= 3.3.0"
   gem "listen", "~> 3.2"
+  gem "web-console", ">= 3.3.0"
 end
 
 group :test do
   gem "capybara", ">= 2.15", "< 4.0"
-  gem "webdrivers"
   gem "rubocop-govuk"
+  gem "webdrivers"
 end
 
 group :production do
-  gem "prometheus-client", "~> 2.1"
   gem "pg"
+  gem "prometheus-client", "~> 2.1"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem "activeadmin"
+gem "cf-app-utils"
+gem "friendly_id"
 gem "http"
 gem "icalendar"
-gem "cf-app-utils"
 gem "redcarpet"
-gem "friendly_id"
 gem "ruby-graphviz"
-gem "activeadmin"
