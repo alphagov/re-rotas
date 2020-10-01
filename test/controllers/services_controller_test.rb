@@ -23,7 +23,6 @@ class ServicesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update a team with name and teams" do
     name = "my service"
-    expected_slug = ActiveSupport::Inflector.parameterize(name)
 
     service = Service.create(name: name)
     assert_equal service.name, name
