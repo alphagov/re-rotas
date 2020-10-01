@@ -91,7 +91,8 @@ class RotasConflictTest < ActiveSupport::TestCase
             Rotas::PersonDayEvent.new(nil, "email", Date.parse("2018-01-01")),
           ],
         },
-      }), {
+      }
+), {
         "cal" => {
           Date.parse("2018-01-01") => %w[email],
         },
