@@ -12,7 +12,7 @@ class VersionController < ApplicationController
     render plain: version
   end
 
-  private
+private
 
   def _version
     version = `git rev-parse HEAD`
