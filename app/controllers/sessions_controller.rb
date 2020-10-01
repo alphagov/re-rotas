@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
   skip_before_action :maybe_redirect_if_not_signed_in,
-                     only: %i(new create callback)
+                     only: %i[new create callback]
   skip_before_action :maybe_expire_session,
-                     only: %i(new create callback)
+                     only: %i[new create callback]
 
   def new; end
 
