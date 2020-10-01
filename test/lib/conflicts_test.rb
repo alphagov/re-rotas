@@ -9,7 +9,7 @@ class RotasConflictTest < ActiveSupport::TestCase
         end_date: Date.parse("2018-01-01"),
       )
     ]), {
-      Date.parse("2018-01-01") => ["email"],
+      Date.parse("2018-01-01") => %w[email],
     }
 
     assert_equal Rotas::Conflicts.annual_leave_emails_by_day([
@@ -24,8 +24,8 @@ class RotasConflictTest < ActiveSupport::TestCase
         end_date: Date.parse("2018-01-02"),
       )
     ]), {
-      Date.parse("2018-01-01") => ["email"],
-      Date.parse("2018-01-02") => ["email", "another"],
+      Date.parse("2018-01-01") => %w[email],
+      Date.parse("2018-01-02") => %w[email another],
     }
   end
 
@@ -37,7 +37,7 @@ class RotasConflictTest < ActiveSupport::TestCase
 
     assert_equal Rotas::Conflicts.conflicts_for_calendar(
       {
-        Date.parse("2018-01-01") => ["email"]
+        Date.parse("2018-01-01") => %w[email]
       },
       {
         Date.parse("2018-01-01") => [
@@ -45,14 +45,14 @@ class RotasConflictTest < ActiveSupport::TestCase
         ]
       }
     ), {
-      Date.parse("2018-01-01") => ["email"]
+      Date.parse("2018-01-01") => %w[email]
     }
 
     assert_equal Rotas::Conflicts.conflicts_for_calendar(
       {
-        Date.parse("2018-01-01") => ["email"],
-        Date.parse("2018-01-02") => ["another"],
-        Date.parse("2018-01-03") => ["email"],
+        Date.parse("2018-01-01") => %w[email],
+        Date.parse("2018-01-02") => %w[another],
+        Date.parse("2018-01-03") => %w[email],
       },
       {
         Date.parse("2018-01-01") => [
@@ -67,9 +67,9 @@ class RotasConflictTest < ActiveSupport::TestCase
         ],
       }
     ), {
-      Date.parse("2018-01-01") => ["email"],
-      Date.parse("2018-01-02") => ["another"],
-      Date.parse("2018-01-03") => ["email"],
+      Date.parse("2018-01-01") => %w[email],
+      Date.parse("2018-01-02") => %w[another],
+      Date.parse("2018-01-03") => %w[email],
     }
   end
 
@@ -93,7 +93,7 @@ class RotasConflictTest < ActiveSupport::TestCase
         },
      }), {
       "cal" => {
-        Date.parse("2018-01-01") => ["email"]
+        Date.parse("2018-01-01") => %w[email]
       },
     }
   end

@@ -20,7 +20,7 @@ class ApplicationControllerTest < ActionController::TestCase
       firstname.lastname1@digital.cabinet-office.gov.uk
       firstname.middlenamelastname-lastname@digital.cabinet-office.gov.uk
     ]
-    nices = ["Firstname", "Firstname"]
+    nices = %w[Firstname Firstname]
 
     emails.zip(nices).each do |email, nice|
       assert_equal @controller.send(:name_fmt, email), nice
