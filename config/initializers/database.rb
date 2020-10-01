@@ -1,4 +1,6 @@
-if ENV["RAILS_ENV"] == "production" && !$0.match(/rake/)
+require 'English'
+
+if ENV["RAILS_ENV"] == "production" && !$PROGRAM_NAME.match(/rake/)
   creds = CF::App::Credentials.find_by_service_name("rotas-db")
 
   # BODGE
