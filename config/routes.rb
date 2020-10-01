@@ -53,4 +53,3 @@ Rails.application.routes.draw do
     post "test_session_create", to: "test_session#create", as: :test_session_create
   end
 end
-# rubocop:enable Metrics/BlockLength
