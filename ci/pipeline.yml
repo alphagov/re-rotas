@@ -81,6 +81,7 @@ jobs:
                 bundle exec rake db:create
                 bundle exec rake db:schema:load
                 bundle exec rails test
+                bundle exec rubocop
 
                 bundle exec rake assets:precompile
 
