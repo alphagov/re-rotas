@@ -16,8 +16,9 @@ class VersionController < ApplicationController
 
   def _version
     version = `git rev-parse HEAD`
+    version = `cd "#{Rails.application.root}" && git rev-parse HEAD`
     raise version unless $CHILD_STATUS.success?
 
-    @@version = version
+    @@version = version.chomp
   end
 end
