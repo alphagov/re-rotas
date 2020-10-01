@@ -12,7 +12,8 @@ class UsersController < ApplicationController
       .select { |e| e.date >= Date.today }
       .select { |e| e.email.casecmp(@email).zero? }
       .reduce({}) do |acc, e|
-        acc[e.date] ||= Set.new; acc[e.date].add(e.calendar)
+        acc[e.date] ||= Set.new
+        acc[e.date].add(e.calendar)
         acc
       end
 
