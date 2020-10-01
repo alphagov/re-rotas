@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
       code:          code,
       state:         state,
       redirect_uri:  callback_url,
-      grant_type:    "authorization_code"
+      grant_type:    "authorization_code",
     }
 
     oauth_response = HTTP.post(

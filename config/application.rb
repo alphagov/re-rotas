@@ -29,7 +29,7 @@ module GdsRotas
         # this to generate the digests:
         # `echo "'sha256-"$(echo -n "document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');" | openssl dgst -sha256 -binary | openssl enc -base64)"'"`
         "script-src 'self' 'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=' 'unsafe-inline'; " +
-        "style-src 'self' 'unsafe-inline'"
+        "style-src 'self' 'unsafe-inline'",
     }
 
     # Settings in config/environments/* take precedence over those specified here.

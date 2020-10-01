@@ -5,7 +5,7 @@ class AuditEventTest < ActiveSupport::TestCase
     assert_empty AuditEvent.new(
       email: "foo@bar.com",
       event: {
-        message: "did a thing"
+        message: "did a thing",
       },
     ).errors
   end
@@ -13,7 +13,7 @@ class AuditEventTest < ActiveSupport::TestCase
   test "email cannot be empty" do
     assert_empty AuditEvent.new(
       event: {
-        message: "did a thing"
+        message: "did a thing",
       },
     ).errors
   end
