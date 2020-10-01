@@ -49,7 +49,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'webdrivers'
-  gem 'govuk-lint'
+  gem 'rubocop-govuk'
 end
 
 group :production do

@@ -1,4 +1,33 @@
-Layout/MultilineMethodCallIndentation:
+inherit_gem:
+  rubocop-govuk:
+    - config/default.yml
+    - config/rspec.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
+Layout/ArgumentAlignment:
   Enabled: false
-Style/MultilineBlockChain:
+Layout/HeredocIndentation:
+  Enabled: false
+Layout/HashAlignment:
+  Enabled: false
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Naming/MethodParameterName:
+  AllowedNames:
+    - ca
+    - id
+    - sg
+    - tf
+
+RSpec/DescribedClass:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+Style/NumericPredicate:
   Enabled: false
