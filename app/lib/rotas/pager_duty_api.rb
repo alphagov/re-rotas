@@ -16,12 +16,8 @@ module Rotas::PagerDutyApi
       .headers(default_headers)
       .get(contact_methods_url)
 
-    contact_methods = JSON
-      .parse(contact_methods_response)
-      .dig("contact_methods")
+    JSON.parse(contact_methods_response).dig("contact_methods")
   end
-
-  private
 
   def self.api_url
     "https://api.pagerduty.com/"
