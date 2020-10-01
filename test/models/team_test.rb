@@ -27,7 +27,7 @@ class TeamTest < ActiveSupport::TestCase
     team.stub(
       :calendars, [
         CalendarMock.new("cal1"),
-        CalendarMock.new("cal2")
+        CalendarMock.new("cal2"),
       ]
     ) do
       assert_equal team.members, ["current@cal1", "current@cal2"]

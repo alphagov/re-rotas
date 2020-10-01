@@ -7,7 +7,7 @@ class RotasConflictTest < ActiveSupport::TestCase
         email: "email",
         start_date: Date.parse("2018-01-01"),
         end_date: Date.parse("2018-01-01"),
-      )
+      ),
     ]), {
       Date.parse("2018-01-01") => %w[email],
     }
@@ -22,7 +22,7 @@ class RotasConflictTest < ActiveSupport::TestCase
         email: "another",
         start_date: Date.parse("2018-01-02"),
         end_date: Date.parse("2018-01-02"),
-      )
+      ),
     ]), {
       Date.parse("2018-01-01") => %w[email],
       Date.parse("2018-01-02") => %w[email another],
@@ -84,7 +84,7 @@ class RotasConflictTest < ActiveSupport::TestCase
           email: "email",
           start_date: Date.parse("2018-01-01"),
           end_date: Date.parse("2018-01-01"),
-        )
+        ),
       ], {
         "cal" => {
           Date.parse("2018-01-01") => [
