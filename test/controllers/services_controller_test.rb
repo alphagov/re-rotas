@@ -13,7 +13,7 @@ class ServicesControllerTest < ActionDispatch::IntegrationTest
     post services_path, params: { service: {
       name: name,
       team_ids: [team1.id, team2.id],
-    }}
+    } }
     assert_redirected_to service_path(id: expected_slug)
 
     service = Service.find_by_name(name)
@@ -36,7 +36,7 @@ class ServicesControllerTest < ActionDispatch::IntegrationTest
     patch service_path(service), params: { service: {
       name: name,
       team_ids: [team1.id, team2.id],
-    }}
+    } }
 
     service = Service.find_by_name(name)
     assert_equal service.name, name

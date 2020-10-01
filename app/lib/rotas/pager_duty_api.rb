@@ -4,7 +4,7 @@ module Rotas::PagerDutyApi
 
     user_response = HTTP
       .headers(default_headers)
-      .get(users_url, params: {query: email})
+      .get(users_url, params: { query: email })
 
     user = JSON.parse(user_response).dig("users").first
 
