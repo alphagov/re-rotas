@@ -1,3 +1,4 @@
+# rubocop:disable Style/RaiseArgs
 class IcalendarsController < ApplicationController
   skip_before_action :maybe_redirect_if_not_signed_in,
                      only: %i[show]
@@ -42,3 +43,4 @@ class IcalendarsController < ApplicationController
     send_data calendar.to_ical, filename: "rotas.ics", type: "text/calendar", disposition: "attachment"
   end
 end
+# rubocop:enable Style/RaiseArgs
