@@ -1,8 +1,8 @@
 require "test_helper"
 
-def assert_same_no_ws(a, b)
-  assert_equal a.lines.map(&:strip).join(""),
-               b.lines.map(&:strip).join("")
+def assert_same_no_ws(one, other)
+  assert_equal one.lines.map(&:strip).join(""),
+               other.lines.map(&:strip).join("")
 end
 
 class RotasMarkdownRendererTest < ActiveSupport::TestCase
