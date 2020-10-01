@@ -13,6 +13,8 @@ Layout/HeredocIndentation:
   Enabled: false
 Layout/HashAlignment:
   Enabled: false
+Layout/MultilineArrayLineBreaks:
+  Enabled: false
 
 Naming/HeredocDelimiterNaming:
   Enabled: false
