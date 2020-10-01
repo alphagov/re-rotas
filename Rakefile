@@ -4,8 +4,3 @@
 require_relative "config/application"
 
 Rails.application.load_tasks
-
-desc "Lint ruby and sass"
-task spec: ["lint:ruby", "lint:sass"]
-
-task default: [:spec]
