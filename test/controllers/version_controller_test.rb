@@ -10,5 +10,4 @@ class VersionControllerTest < ActionDispatch::IntegrationTest
 
     assert_match git_sha, response.body
   end
-
 end
