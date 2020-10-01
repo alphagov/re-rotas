@@ -24,6 +24,9 @@ Naming/MethodParameterName:
     - sg
     - tf
 
+Rake/MethodDefinitionInTask:
+  Enabled: false
+
 RSpec/DescribedClass:
   Enabled: false
 
