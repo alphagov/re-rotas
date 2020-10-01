@@ -32,6 +32,8 @@ Rake/MethodDefinitionInTask:
 RSpec/DescribedClass:
   Enabled: false
 
+Style/EachWithObject:
+  Enabled: false
 Style/HashEachMethods:
   Enabled: false
 Style/NumericPredicate:
