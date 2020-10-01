@@ -34,7 +34,7 @@ class ServicesController < ApplicationController
 
   def create
     @service = Service.new(params.require(:service).permit(
-      :name,
+                             :name,
       :description, :documentation,
       { team_ids: [] }
     ))
@@ -51,7 +51,7 @@ class ServicesController < ApplicationController
   def update
     @service = Service.friendly.find(params[:id])
     @service.assign_attributes(params.require(:service).permit(
-      :name,
+                                 :name,
       :description, :documentation,
       { team_ids: [] }
     ))
