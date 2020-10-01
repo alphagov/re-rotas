@@ -20,7 +20,7 @@ class PagerDutyCalendar < ApplicationRecord
   validate :url_is_http
 
   def url_is_http
-    errors.add(:url, "expected http(s) calendar address") unless (/^https?:/i).match?(url)
+    errors.add(:url, "expected http(s) calendar address") unless /^https?:/i.match?(url)
   end
 
   def events
