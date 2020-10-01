@@ -31,9 +31,9 @@ class RotasConflictTest < ActiveSupport::TestCase
 
   test "calculate_conflicts_given_calendar" do
     assert_equal Rotas::Conflicts.conflicts_for_calendar(
-      Hash.new,
-      Hash.new,
-    ), Hash.new
+      {},
+      {},
+    ), {}
 
     assert_equal Rotas::Conflicts.conflicts_for_calendar(
       {
@@ -75,8 +75,8 @@ class RotasConflictTest < ActiveSupport::TestCase
 
   test "find" do
     assert_equal Rotas::Conflicts.find(
-      Hash.new, Hash.new
-    ), Hash.new
+      {}, {}
+    ), {}
 
     assert_equal Rotas::Conflicts.find(
       [
