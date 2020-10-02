@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root "pages#home"
   get "org-map", controller: :pages, action: :org_map, as: :org_map
-  get "version", controller: :version, action: :version, as: :version
+  get "version", controller: :version, action: :version, as: :version, defaults: { format: "txt" }
 
   resources :org_units, only: %i[index show], path: "/org-units"
 
