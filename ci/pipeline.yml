@@ -85,6 +85,8 @@ jobs:
 
                 bundle exec rake assets:precompile
 
+                git rev-parse HEAD > app/views/version.txt
+
       - task: deploy
         timeout: 15m
         config:
