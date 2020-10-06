@@ -36,15 +36,24 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: 12.14.0
+        node-version: 12.16.3
 
     - name: Install node deps
       run: |
         npm install -g yarn
         yarn install
+        sudo apt-get install libsqlite3-dev
 
     - name: Run tests
-      run: bundle exec rake
+      run: |
+        bundle exec rake
+
+        bundle exec rake db:create
+        bundle exec rake db:schema:load
+        bundle exec rails test
+        bundle exec rubocop
+
+        bundle exec rake assets:precompile
 
     - name: Lint
       run: bundle exec rubocop

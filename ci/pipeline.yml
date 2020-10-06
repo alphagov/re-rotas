@@ -6,12 +6,6 @@ meta:
       repository: ruby
       tag: 2.7.1
 
-resource_types:
-  - name: pull-request
-    type: docker-image
-    source:
-      repository: teliaoss/github-pr-resource
-
 resources:
   - name: re-rotas-src
     type: git
@@ -19,14 +13,6 @@ resources:
     source:
       uri: https://github.com/alphagov/re-rotas.git
       branch: main
-
-  - name: re-rotas-pr
-    type: pull-request
-    icon: github
-    source:
-      repository: alphagov/re-rotas
-      access_token: ((pr-builds-status-github-token))
-      disable_forks: true
 
 jobs:
   - name: set-pipeline
@@ -123,41 +109,3 @@ jobs:
                 cf push --strategy=rolling
                 cf ssh rotas \
                   -c '/tmp/lifecycle/launcher app "rake db:migrate" ""'
-
-  - name: pr
-    public: true
-    serial: true
-    plan:
-      - get: re-rotas-pr
-        trigger: true
-        version: every
-
-      - put: re-rotas-pr
-        params:
-          status: pending
-          path: re-rotas-pr
-
-      - task: run-tests
-        timeout: 15m
-        config:
-          platform: linux
-
-          image_resource: *ruby-docker-image
-
-          inputs:
-            - name: re-rotas-pr
-              path: repo
-
-          run: *run-tests-and-build-assets
-
-        on_success:
-          put: re-rotas-pr
-          params:
-            path: re-rotas-pr
-            status: success
-
-        on_failure:
-          put: re-rotas-pr
-          params:
-            path: re-rotas-pr
-            status: failure
