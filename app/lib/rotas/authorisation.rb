@@ -7,6 +7,8 @@ module Rotas::Authorisation
     case email
     when "toby.lornewelch-richards@digital.cabinet-office.gov.uk"
       true
+    when "alex.monk@digital.cabinet-office.gov.uk"
+      true
     when "philip.potter@digital.cabinet-office.gov.uk"
       true
     else
