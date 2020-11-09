@@ -4,15 +4,13 @@ module Rotas::Authorisation
   end
 
   def self.is_admin?(email)
-    case email
-    when "toby.lornewelch-richards@digital.cabinet-office.gov.uk"
-      true
-    when "alex.monk@digital.cabinet-office.gov.uk"
-      true
-    when "philip.potter@digital.cabinet-office.gov.uk"
-      true
-    else
-      false
-    end
+    admins = %w[
+      alex.monk@digital.cabinet-office.gov.uk
+      philip.potter@digital.cabinet-office.gov.uk
+      richard.towers@digital.cabinet-office.gov.uk
+      toby.lornewelch-richards@digital.cabinet-office.gov.uk
+    ]
+
+    admins.include?(email.downcase)
   end
 end

@@ -16,4 +16,9 @@ class RotasAuthorisationTest < ActiveSupport::TestCase
   test "invalid random" do
     assert_not Rotas::Authorisation.email_authorised?("asdf")
   end
+
+  test "is_admin?" do
+    assert Rotas::Authorisation.is_admin?("ALEX.MONK@digital.cabinet-office.gov.uk")
+    assert_not Rotas::Authorisation.is_admin?("bad.person@suspicious.com")
+  end
 end
