@@ -8,7 +8,6 @@ module Rotas::Authorisation
       alex.monk@digital.cabinet-office.gov.uk
       philip.potter@digital.cabinet-office.gov.uk
       richard.towers@digital.cabinet-office.gov.uk
-      toby.lornewelch-richards@digital.cabinet-office.gov.uk
     ]
 
     admins.include?(email.downcase)
